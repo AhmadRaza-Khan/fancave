@@ -1204,7 +1204,7 @@ interface GeneratedQueryTypes {
     return: FooterQuery;
     variables: FooterQueryVariables;
   };
-  '#graphql\n  query GetAllCollections {\n    collections(first: 10) {\n      nodes {\n        id\n        handle\n        title\n      }\n    }\n  }\n': {
+  '#graphql\n  query GetAllCollections {\n    collections(first: 100) {\n      nodes {\n        id\n        handle\n        title\n      }\n    }\n  }\n': {
     return: GetAllCollectionsQuery;
     variables: GetAllCollectionsQueryVariables;
   };
