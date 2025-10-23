@@ -1,5 +1,14 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": null
+  "framework": null,
+  "outputDirectory": "dist/client",
+  "functions": {
+    "api/index.js": {
+      "runtime": "nodejs18.x",
+      "handler": "dist/server/index.js"
+    }
+  },
+  "routes": [
+    { "src": "/.*", "dest": "/api/index.js" }
+  ]
 }
