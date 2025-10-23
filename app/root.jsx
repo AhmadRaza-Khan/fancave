@@ -15,6 +15,7 @@ import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
 import {PageLayout} from './components/PageLayout';
+import { getAllCollections } from './lib/getCollections';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -98,17 +99,17 @@ export async function loader(args) {
 async function loadCriticalData({context}) {
   const {storefront} = context;
 
-  const [header] = await Promise.all([
+  const [header, collections] = await Promise.all([
     storefront.query(HEADER_QUERY, {
       cache: storefront.CacheLong(),
       variables: {
-        headerMenuHandle: 'main-menu', // Adjust to your header menu handle
+        headerMenuHandle: 'main-menu', // Adjust this handle if needed
       },
     }),
-    // Add other queries here, so that they are loaded in parallel
+    getAllCollections(storefront), // 👈 Fetch collections here
   ]);
 
-  return {header};
+  return { header, collections };
 }
 
 /**

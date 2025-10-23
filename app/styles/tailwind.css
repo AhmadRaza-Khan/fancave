@@ -3,4 +3,7 @@
  * https://tailwindcss.com/docs/v4-beta#css-first-configuration
  */
 
-@import 'tailwindcss';
+  @import "tailwindcss";
+ @plugin "daisyui" {
+   themes: light --default;
+ }

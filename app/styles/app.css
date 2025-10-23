@@ -164,14 +164,15 @@ button.reset:hover:not(:has(> *)) {
 */
 .header {
   align-items: center;
-  background: #fff;
+  background: #000;
   display: flex;
   height: var(--header-height);
-  padding: 0 1rem;
+  padding: 2rem 10rem;
+  padding-left: 20rem;
   position: sticky;
   top: 0;
   z-index: 1;
-}
+  }
 
 .header-menu-mobile-toggle {
   @media (min-width: 48em) {
