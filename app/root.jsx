@@ -15,7 +15,7 @@ import resetStyles from '~/styles/reset.css?url';
 import appStyles from '~/styles/app.css?url';
 import tailwindCss from './styles/tailwind.css?url';
 import {PageLayout} from './components/PageLayout';
-import { getAllCollections } from './lib/getCollections';
+import { getAllCollectionsWithProducts } from './lib/getCollections';
 
 /**
  * This is important to avoid re-fetching root queries on sub-navigations
@@ -106,7 +106,7 @@ async function loadCriticalData({context}) {
         headerMenuHandle: 'main-menu', // Adjust this handle if needed
       },
     }),
-    getAllCollections(storefront), // 👈 Fetch collections here
+    getAllCollectionsWithProducts(storefront), // 👈 Fetch collections here
   ]);
 
   return { header, collections };

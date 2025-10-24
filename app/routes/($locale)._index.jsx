@@ -2,12 +2,15 @@ import {Await, useLoaderData, Link} from 'react-router';
 import {Suspense} from 'react';
 import {Image} from '@shopify/hydrogen';
 import {ProductItem} from '~/components/ProductItem';
+import { Hero } from '~/components/Hero';
+import Section from '~/components/Section';
+import { getAllCollectionsWithProducts } from '~/lib/getCollections';
 
 /**
  * @type {Route.MetaFunction}
  */
 export const meta = () => {
-  return [{title: 'Hydrogen | Home'}];
+  return [{title: 'Fancave | Home'}];
 };
 
 /**
@@ -29,6 +32,7 @@ export async function loader(args) {
  * @param {Route.LoaderArgs}
  */
 async function loadCriticalData({context}) {
+  const allCollections = await getAllCollectionsWithProducts(context.storefront);
   const [{collections}] = await Promise.all([
     context.storefront.query(FEATURED_COLLECTION_QUERY),
     // Add other queries here, so that they are loaded in parallel
@@ -36,6 +40,7 @@ async function loadCriticalData({context}) {
 
   return {
     featuredCollection: collections.nodes[0],
+    allCollections: allCollections,
   };
 }
 
@@ -60,12 +65,44 @@ function loadDeferredData({context}) {
 }
 
 export default function Homepage() {
+  const autographs = [
+      'autographed-baseball', 
+      'autographed-basketball', 
+      'autographed-bat', 
+      'autographed-framed-item', 
+      'autographed-funko', 
+      'game-used', 
+      'autographed-helmets', 
+      'autographed-jersey', 
+      'autographed-photo', 
+      'autographed-puck'
+    ]
+  const cards = [
+  "trading-cards",
+  "bgs-graded-cards",
+  "pokemon",
+  "graded-cards",
+  "sgc-graded-cards",
+  "single-packs",
+  "singles",
+];
+
+  const boxes = [
+  "blaster-boxes",
+  "sealed-boxes",
+  "retail-boxes",
+];
+
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
   return (
     <div className="home">
-      <FeaturedCollection collection={data.featuredCollection} />
-      <RecommendedProducts products={data.recommendedProducts} />
+      <Hero />
+      <Section collections={data.allCollections} allowedHandles={cards} title={"Trading Cards"} />
+      <Section collections={data.allCollections} allowedHandles={autographs} title={"Autographs"} />
+      <Section collections={data.allCollections} allowedHandles={boxes} title={"Boxes"} />
+      {/* <FeaturedCollection collection={data.featuredCollection} />
+      <RecommendedProducts products={data.recommendedProducts} /> */}
     </div>
   );
 }
@@ -100,6 +137,8 @@ function FeaturedCollection({collection}) {
  */
 function RecommendedProducts({products}) {
   return (
+
+    
     <div className="recommended-products">
       <h2>Recommended Products</h2>
       <Suspense fallback={<div>Loading...</div>}>

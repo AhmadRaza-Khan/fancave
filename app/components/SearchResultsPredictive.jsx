@@ -58,8 +58,8 @@ function SearchResultsPredictiveArticles({term, articles, closeSearch}) {
   if (!articles.length) return null;
 
   return (
-    <div className="predictive-search-result" key="articles">
-      <h5>Articles</h5>
+    <div className="predictive-search-result text-white px-7" key="articles">
+      <h5 className='text-blue-600'>Articles</h5>
       <ul>
         {articles.map((article) => {
           const articleUrl = urlWithTrackingParams({
@@ -69,7 +69,7 @@ function SearchResultsPredictiveArticles({term, articles, closeSearch}) {
           });
 
           return (
-            <li className="predictive-search-result-item" key={article.id}>
+            <li className="predictive-search-result-item text-white" key={article.id}>
               <Link onClick={closeSearch} to={articleUrl}>
                 {article.image?.url && (
                   <Image
@@ -98,8 +98,8 @@ function SearchResultsPredictiveCollections({term, collections, closeSearch}) {
   if (!collections.length) return null;
 
   return (
-    <div className="predictive-search-result" key="collections">
-      <h5>Collections</h5>
+    <div className="predictive-search-result text-white px-7" key="collections">
+      <h5 className='text-blue-600'>Collections</h5>
       <ul>
         {collections.map((collection) => {
           const collectionUrl = urlWithTrackingParams({
@@ -109,7 +109,7 @@ function SearchResultsPredictiveCollections({term, collections, closeSearch}) {
           });
 
           return (
-            <li className="predictive-search-result-item" key={collection.id}>
+            <li className="predictive-search-result-item text-white" key={collection.id}>
               <Link onClick={closeSearch} to={collectionUrl}>
                 {collection.image?.url && (
                   <Image
@@ -120,7 +120,7 @@ function SearchResultsPredictiveCollections({term, collections, closeSearch}) {
                   />
                 )}
                 <div>
-                  <span>{collection.title}</span>
+                  <span className='text-white hover:text-blue-600'>{collection.title}</span>
                 </div>
               </Link>
             </li>
@@ -138,8 +138,8 @@ function SearchResultsPredictivePages({term, pages, closeSearch}) {
   if (!pages.length) return null;
 
   return (
-    <div className="predictive-search-result" key="pages">
-      <h5>Pages</h5>
+    <div className="predictive-search-result text-white px-7" key="pages">
+      <h5 className='text-blue-600'>Pages</h5>
       <ul>
         {pages.map((page) => {
           const pageUrl = urlWithTrackingParams({
@@ -149,10 +149,10 @@ function SearchResultsPredictivePages({term, pages, closeSearch}) {
           });
 
           return (
-            <li className="predictive-search-result-item" key={page.id}>
+            <li className="predictive-search-result-item text-white" key={page.id}>
               <Link onClick={closeSearch} to={pageUrl}>
                 <div>
-                  <span>{page.title}</span>
+                  <span className='text-white hover:text-blue-600'>{page.title}</span>
                 </div>
               </Link>
             </li>
@@ -170,8 +170,8 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
   if (!products.length) return null;
 
   return (
-    <div className="predictive-search-result" key="products">
-      <h5>Products</h5>
+    <div className="predictive-search-result text-white px-10" key="products">
+      <h5 className='text-blue-600'>Products</h5>
       <ul>
         {products.map((product) => {
           const productUrl = urlWithTrackingParams({
@@ -183,7 +183,7 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
           const price = product?.selectedOrFirstAvailableVariant?.price;
           const image = product?.selectedOrFirstAvailableVariant?.image;
           return (
-            <li className="predictive-search-result-item" key={product.id}>
+            <li className="predictive-search-result-item text-white" key={product.id}>
               <Link to={productUrl} onClick={closeSearch}>
                 {image && (
                   <Image
@@ -194,7 +194,7 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
                   />
                 )}
                 <div>
-                  <p>{product.title}</p>
+                  <p className='text-white hover:text-blue-600'>{product.title}</p>
                   <small>{price && <Money data={price} />}</small>
                 </div>
               </Link>
@@ -213,16 +213,16 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
  */
 function SearchResultsPredictiveQueries({queries, queriesDatalistId}) {
   if (!queries.length) return null;
+return null;
+  // return (
+  //   <datalist id={queriesDatalistId}>
+  //     {queries.map((suggestion) => {
+  //       if (!suggestion) return null;
 
-  return (
-    <datalist id={queriesDatalistId}>
-      {queries.map((suggestion) => {
-        if (!suggestion) return null;
-
-        return <option key={suggestion.text} value={suggestion.text} />;
-      })}
-    </datalist>
-  );
+  //       return <option key={suggestion.text} value={suggestion.text} />;
+  //     })}
+  //   </datalist>
+  // );
 }
 
 /**
@@ -236,7 +236,7 @@ function SearchResultsPredictiveEmpty({term}) {
   }
 
   return (
-    <p>
+    <p className='text-white py-2 px-10'>
       No results found for <q>{term.current}</q>
     </p>
   );

@@ -1,17 +1,25 @@
-import {Suspense} from 'react';
-import {Await, NavLink, useAsyncValue} from 'react-router';
+import {Suspense, useId} from 'react';
+import {Await, Link, NavLink, useAsyncValue} from 'react-router';
 import {useAnalytics, useOptimisticCart} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
 import { useState, useRef } from "react";
-import { Search, ShoppingCart, UserRound } from 'lucide-react';
+import { ChevronDown, ChevronUp, Search, ShoppingCart, UserRound } from 'lucide-react';
+import SearchBar from './SearchBar';
 /**
  * @param {HeaderProps}
  */
 export function Header({header, isLoggedIn, cart, publicStoreDomain, collections}) {
+    const [openSearch, setOpenSearch] = useState(false);
   const {shop, menu} = header;
-  console.log(collections)
   return (
     <header className="navbar px-72 bg-black">
+      {
+        openSearch?  (
+          <SearchBar setOpenSearch={setOpenSearch} />
+        )
+          :
+        (
+      <>
       <NavLink prefetch="intent" to="/" className="navbar-start" style={activeLinkStyle} end>
         <img src="/logo.png" alt={shop.name} />
       </NavLink>
@@ -22,7 +30,10 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
         publicStoreDomain={publicStoreDomain}
         collections={collections}
       />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} />
+      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} openSearch={openSearch} setOpenSearch={setOpenSearch} />
+      </>
+          )
+      }
     </header>
   );
 }
@@ -36,6 +47,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
  * }}
  */
 
+
 export function HeaderMenu({ collections = [] }) {
   const { close } = useAside();
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -43,14 +55,27 @@ export function HeaderMenu({ collections = [] }) {
 
   // Categorize collections
   const autographs = collections.filter((c) =>
-    c.handle.includes("autograph")
-  );
-
-  const tradingCards = collections.filter((c) =>
-    ["card", "box", "pack", "singles", "slab", "graded", "ungraded"].some((kw) =>
+    ['autographed-baseball', 'autographed-basketball', 'autographed-bat', 'autographed-framed-item', 'autographed-funko', 'game-used', 'autographed-helmets', 'autographed-jersey', 'autographed-photo', 'autographed-puck'].some((kw) =>
       c.handle.includes(kw)
     )
   );
+
+  const allowedHandles = [
+  "trading-cards",
+  "bgs-graded-cards",
+  "blaster-boxes",
+  "sealed-boxes",
+  "pokemon",
+  "graded-cards",
+  "retail-boxes",
+  "sgc-graded-cards",
+  "single-packs",
+  "singles",
+];
+
+const tradingCards = collections.filter((c) => 
+  allowedHandles.includes(c.handle)
+);
 
   const otherCollections = collections.filter(
     (c) => !autographs.includes(c) && !tradingCards.includes(c)
@@ -74,8 +99,8 @@ export function HeaderMenu({ collections = [] }) {
       onMouseEnter={() => handleMouseEnter(name)}
       onMouseLeave={handleMouseLeave}
     >
-      <button className="font-medium text-white hover:text-gray-200">
-        {title} ▾
+      <button className="font-medium text-white hover:text-gray-200 flex items-center justify-center gap-1">
+        {title} <ChevronDown color="#969292" /> 
       </button>
 
       {openDropdown === name && (
@@ -120,13 +145,13 @@ export function HeaderMenu({ collections = [] }) {
 /**
  * @param {Pick<HeaderProps, 'isLoggedIn' | 'cart'>}
  */
-function HeaderCtas({ isLoggedIn, cart }) {
+function HeaderCtas({ isLoggedIn, cart , openSearch, setOpenSearch}) {
   return (
     <nav className="navbar-end" role="navigation">
       <HeaderMenuMobileToggle />
 
        {/* Search */}
-      <SearchToggle />
+      <SearchToggle setOpenSearch={setOpenSearch} openSearch={openSearch} />
 
       {/* Sign In / Account */}
       <NavLink
@@ -147,11 +172,11 @@ function HeaderCtas({ isLoggedIn, cart }) {
   );
 }
 
-function SearchToggle() {
+function SearchToggle({setOpenSearch}) {
   const { open } = useAside();
   return (
     <button
-      onClick={() => open('search')}
+      onClick={() => setOpenSearch(true)}
       className="px-4 py-2 transition font-medium"
     >
       <Search color="#969292" />
@@ -178,9 +203,12 @@ function CartBadge({ count }) {
       className="px-4 py-2 rounded-md relative transition font-medium flex items-center gap-2"
     >
       <ShoppingCart color="#969292" />
-      <span className="bg-blue-600 absolute top-0 right-1 h-4 w-4 font-bold rounded-sm text-[11px] -mt-1 -mr-1 ">
-        {count ?? 0}
+      {
+        count > 0 &&
+        <span className="bg-blue-600 absolute top-0 right-1 h-4 w-4 font-bold rounded-sm text-[11px] -mt-1 -mr-1 ">
+        {count}
       </span>
+      }
     </button>
   );
 }

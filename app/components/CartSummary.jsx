@@ -36,9 +36,9 @@ function CartCheckoutActions({checkoutUrl}) {
   if (!checkoutUrl) return null;
 
   return (
-    <div>
+    <div className='bg-blue-600 py-3 px-4 flex justify-center items-center mb-4 rounded-lg'>
       <a href={checkoutUrl} target="_self">
-        <p>Continue to Checkout &rarr;</p>
+        <p>Proceed to Checkout &rarr;</p>
       </a>
       <br />
     </div>
