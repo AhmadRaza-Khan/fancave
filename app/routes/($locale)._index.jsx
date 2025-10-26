@@ -5,6 +5,7 @@ import {ProductItem} from '~/components/ProductItem';
 import { Hero } from '~/components/Hero';
 import Section from '~/components/Section';
 import { getAllCollectionsWithProducts } from '~/lib/getCollections';
+import OnSaleProducts from '~/components/OnSaleProducts';
 
 /**
  * @type {Route.MetaFunction}
@@ -65,42 +66,23 @@ function loadDeferredData({context}) {
 }
 
 export default function Homepage() {
-  const autographs = [
-      'autographed-baseball', 
-      'autographed-basketball', 
-      'autographed-bat', 
-      'autographed-framed-item', 
-      'autographed-funko', 
-      'game-used', 
-      'autographed-helmets', 
-      'autographed-jersey', 
-      'autographed-photo', 
-      'autographed-puck'
-    ]
-  const cards = [
-  "trading-cards",
-  "bgs-graded-cards",
-  "pokemon",
-  "graded-cards",
-  "sgc-graded-cards",
-  "single-packs",
-  "singles",
-];
-
-  const boxes = [
-  "blaster-boxes",
-  "sealed-boxes",
-  "retail-boxes",
-];
 
   /** @type {LoaderReturnData} */
   const data = useLoaderData();
   return (
     <div className="home">
       <Hero />
-      <Section collections={data.allCollections} allowedHandles={cards} title={"Trading Cards"} />
-      <Section collections={data.allCollections} allowedHandles={autographs} title={"Autographs"} />
-      <Section collections={data.allCollections} allowedHandles={boxes} title={"Boxes"} />
+      <Section collections={data.allCollections} title={"Trading Cards"} />
+      <OnSaleProducts collections={data.allCollections} title={"Trading Cards on Sale"} image={'url("/trading.jpg")'} />
+      <Section collections={data.allCollections} title={"Autographs"} />
+      <OnSaleProducts collections={data.allCollections} title={"Autographs on Sale"} image={'url("/autographs.jpg")'} />
+      <Section collections={data.allCollections} title={"Singles"} />
+      <OnSaleProducts collections={data.allCollections} title={"Singles on Sale"} image={'url("/trading.jpg")'} />
+      <Section collections={data.allCollections} title={"Boxes"} />
+      <OnSaleProducts collections={data.allCollections} title={"Boxes on Sale"} image={'url("/boxes.jpg")'} />
+      <Section collections={data.allCollections} title={"Best Selling"} />
+      <OnSaleProducts collections={data.allCollections} title={"Items on Sale"} image={'url("/trading.jpg")'} />
+      {/* <OnSaleProducts collections={data.allCollections} allowedHandles={boxes} title={"Boxes on Sale"} image={'url("/boxes.jpg")'} /> */}
       {/* <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} /> */}
     </div>

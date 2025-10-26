@@ -104,6 +104,7 @@ export default function Product() {
   });
 
   const {title, descriptionHtml} = product;
+  console.log(selectedVariant)
 
   return (
     <div className="product">

@@ -5,6 +5,7 @@ import {useAside} from '~/components/Aside';
 import { useState, useRef } from "react";
 import { ChevronDown, ChevronUp, Search, ShoppingCart, UserRound } from 'lucide-react';
 import SearchBar from './SearchBar';
+import { filterCollections } from '~/lib/filterCollections';
 /**
  * @param {HeaderProps}
  */
@@ -12,7 +13,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
     const [openSearch, setOpenSearch] = useState(false);
   const {shop, menu} = header;
   return (
-    <header className="navbar px-72 bg-black">
+    <header className="navbar xs:px-10 sm:px-16 md:px-24 lg:px-40 xl:px-52 2xl:px-80 bg-black">
       {
         openSearch?  (
           <SearchBar setOpenSearch={setOpenSearch} />
@@ -20,8 +21,9 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
           :
         (
       <>
-      <NavLink prefetch="intent" to="/" className="navbar-start" style={activeLinkStyle} end>
-        <img src="/logo.png" alt={shop.name} />
+      <HeaderMenuMobileToggle />
+      <NavLink prefetch="intent" to="/" className="navbar-center lg:navbar-start w-fit" style={activeLinkStyle} end>
+        <img className='h-7 w-40 md:h-10 md:w-44' src="/logo.png" alt={shop.name} />
       </NavLink>
       <HeaderMenu
         menu={menu}
@@ -52,35 +54,8 @@ export function HeaderMenu({ collections = [] }) {
   const { close } = useAside();
   const [openDropdown, setOpenDropdown] = useState(null);
   const closeTimeout = useRef(null);
-
-  // Categorize collections
-  const autographs = collections.filter((c) =>
-    ['autographed-baseball', 'autographed-basketball', 'autographed-bat', 'autographed-framed-item', 'autographed-funko', 'game-used', 'autographed-helmets', 'autographed-jersey', 'autographed-photo', 'autographed-puck'].some((kw) =>
-      c.handle.includes(kw)
-    )
-  );
-
-  const allowedHandles = [
-  "trading-cards",
-  "bgs-graded-cards",
-  "blaster-boxes",
-  "sealed-boxes",
-  "pokemon",
-  "graded-cards",
-  "retail-boxes",
-  "sgc-graded-cards",
-  "single-packs",
-  "singles",
-];
-
-const tradingCards = collections.filter((c) => 
-  allowedHandles.includes(c.handle)
-);
-
-  const otherCollections = collections.filter(
-    (c) => !autographs.includes(c) && !tradingCards.includes(c)
-  );
-
+  const { autographs, tradingCards, otherCollections, boxes, singles } = filterCollections(collections);
+  
   // Helpers to control dropdown visibility with delay
   const handleMouseEnter = (dropdown) => {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
@@ -94,35 +69,39 @@ const tradingCards = collections.filter((c) =>
   };
 
   const Dropdown = ({ title, name, items }) => (
-    <div
-      className="relative"
-      onMouseEnter={() => handleMouseEnter(name)}
-      onMouseLeave={handleMouseLeave}
-    >
-      <button className="font-medium text-white hover:text-gray-200 flex items-center justify-center gap-1">
-        {title} <ChevronDown color="#969292" /> 
-      </button>
+  <div
+    className="relative"
+    onMouseEnter={() => handleMouseEnter(name)}
+    onMouseLeave={handleMouseLeave}
+  >
+    <button className="font-sm text-white hover:text-gray-200 flex items-center justify-center gap-1">
+      {title} <ChevronDown color="#969292" />
+    </button>
 
-      {openDropdown === name && (
-        <div className="absolute left-0 bg-white shadow-lg rounded-lg mt-2 w-56 z-50">
-          {items.map((col) => (
-            <a
-              key={col.id}
-              href={`/collections/${col.handle}`}
-              onClick={close}
-              className="block px-4 py-2 hover:bg-gray-100 text-gray-800"
-            >
-              {col.title}
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+    {openDropdown === name && (
+      <div
+        className="absolute left-0 bg-white shadow-lg rounded-lg mt-2 z-50 p-2
+                   grid grid-cols-1 sm:grid-cols-2 gap-1 w-64 max-h-80 overflow-auto"
+      >
+        {items.map((col) => (
+          <a
+            key={col.id}
+            href={`/collections/${col.handle}`}
+            onClick={close}
+            className="block px-3 py-2 text-gray-800 hover:bg-gray-100 hover:text-blue-500 rounded-md text-sm"
+          >
+            {col.title}
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+);
+
 
   return (
     <div className='navbar-center'>
-      <nav className="flex items-center gap-6 text-white" role="navigation">
+      <nav className="items-center gap-3 lg:gap-6 text-white lg:mx-10 md:mx-8 mx-5 hidden xl:flex 2xl:flex lg:flex" role="navigation">
       {autographs.length > 0 && (
         <Dropdown title="Autographs" name="autographs" items={autographs} />
       )}
@@ -130,6 +109,16 @@ const tradingCards = collections.filter((c) =>
       {tradingCards.length > 0 && (
         <Dropdown title="Trading Cards" name="tradingCards" items={tradingCards} />
       )}
+
+      {singles.length > 0 && (
+        <Dropdown title="Singles" name="singles" items={singles} />
+      )}
+
+      {boxes.length > 0 && (
+        <Dropdown title="Boxes" name="boxes" items={boxes} />
+      )}
+
+
 
       {otherCollections.length > 0 && (
         <Dropdown title="More" name="others" items={otherCollections} />
@@ -148,7 +137,6 @@ const tradingCards = collections.filter((c) =>
 function HeaderCtas({ isLoggedIn, cart , openSearch, setOpenSearch}) {
   return (
     <nav className="navbar-end" role="navigation">
-      <HeaderMenuMobileToggle />
 
        {/* Search */}
       <SearchToggle setOpenSearch={setOpenSearch} openSearch={openSearch} />
@@ -157,7 +145,7 @@ function HeaderCtas({ isLoggedIn, cart , openSearch, setOpenSearch}) {
       <NavLink
         prefetch="intent"
         to="/account"
-        className="px-4 py-2 transition font-medium"
+        className="px-2 lg:px-4 py-2 transition font-medium"
       >
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
@@ -177,7 +165,7 @@ function SearchToggle({setOpenSearch}) {
   return (
     <button
       onClick={() => setOpenSearch(true)}
-      className="px-4 py-2 transition font-medium"
+      className="px-2 lg:px-4 py-2 transition font-medium"
     >
       <Search color="#969292" />
     </button>
@@ -200,7 +188,7 @@ function CartBadge({ count }) {
           url: window.location.href || '',
         });
       }}
-      className="px-4 py-2 rounded-md relative transition font-medium flex items-center gap-2"
+      className="px-2 lg:px-4 py-2 rounded-md relative transition font-medium flex items-center gap-2"
     >
       <ShoppingCart color="#969292" />
       {
@@ -218,10 +206,10 @@ function HeaderMenuMobileToggle() {
   const {open} = useAside();
   return (
     <button
-      className="header-menu-mobile-toggle reset"
+      className="flex lg:hidden xl:hidden 2xl:hidden navbar-start"
       onClick={() => open('mobile')}
     >
-      <h3>☰</h3>
+      <h3 className='text-[#969292]'>☰</h3>
     </button>
   );
 }

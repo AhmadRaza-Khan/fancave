@@ -8,10 +8,6 @@
   --color-light: #fff;
 }
 
-img {
-  border-radius: 4px;
-}
-
 /*
 * --------------------------------------------------
 * Non anchor links
@@ -175,7 +171,7 @@ button.reset:hover:not(:has(> *)) {
   }
 
 .header-menu-mobile-toggle {
-  @media (min-width: 48em) {
+  @media (min-width: 26em) {
     display: none;
   }
 }

@@ -42,6 +42,7 @@ export function PageLayout({
         footer={footer}
         header={header}
         publicStoreDomain={publicStoreDomain}
+        collections={collections}
       />
     </Aside.Provider>
   );

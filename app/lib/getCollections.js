@@ -1,6 +1,5 @@
 export async function getAllCollectionsWithProducts(storefront) {
   try {
-    // 1️⃣ Get all collections (id, title, handle)
     const data = await storefront.query(`
       query {
         collections(first: 50) {
@@ -16,10 +15,10 @@ export async function getAllCollectionsWithProducts(storefront) {
 
     const collections = data?.collections?.nodes || [];
 
-    // 2️⃣ Fetch products for each collection
     const updatedCollections = await Promise.all(
       collections.map(async (col) => {
-        const productsData = await storefront.query(`
+        const productsData = await storefront.query(
+          `
           query ($handle: String!) {
             collection(handle: $handle) {
               products(first: 20) {
@@ -27,6 +26,9 @@ export async function getAllCollectionsWithProducts(storefront) {
                   id
                   handle
                   title
+                  description
+                  availableForSale
+                  tags
                   featuredImage {
                     url
                     altText
@@ -36,16 +38,50 @@ export async function getAllCollectionsWithProducts(storefront) {
                       amount
                       currencyCode
                     }
+                    maxVariantPrice {
+                      amount
+                      currencyCode
+                    }
+                  }
+                  options {
+                    name
+                    values
+                  }
+                  variants(first: 50) {
+                    nodes {
+                      id
+                      title
+                      availableForSale
+                      sku
+                      price {
+                        amount
+                        currencyCode
+                      }
+                      compareAtPrice {
+                        amount
+                        currencyCode
+                      }
+                      selectedOptions {
+                        name
+                        value
+                      }
+                      image {
+                        url
+                        altText
+                      }
+                    }
                   }
                 }
               }
             }
           }
-        `, { variables: { handle: col.handle } });
+        `,
+          { variables: { handle: col.handle } }
+        );
 
         return {
           ...col,
-          products: productsData?.collection?.products || { nodes: [] },
+          products: productsData?.collection?.products?.nodes || [],
         };
       })
     );

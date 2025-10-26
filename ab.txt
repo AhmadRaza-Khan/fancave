@@ -1,0 +1,1 @@
+<script src="https://cdn.shopify.com/extensions/f88b1bf2-73bf-40b2-b60e-16925bf652b0/inbox-1251/assets/inbox-chat-loader.js" type="text/javascript" defer="defer"></script>
