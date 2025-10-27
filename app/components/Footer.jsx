@@ -55,7 +55,7 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
       <div className='flex flex-col items-start justify-center mt-12 gap-2'>
         <p>Get notified about new releases, sales, and special events:</p>
         <div className='flex items-center justify-center gap-2'>
-          <input type="text" placeholder="Email Address" className="input w-full placeholder:text-[#969292]" />
+          <input type="text" placeholder="Email Address" className="input lg:min-w-[350px] xl:min-w-[350px] 2xl:min-w-[350px] placeholder:text-[#969292]" />
           <button className="btn btn-info text-white font-semibold">Signup</button>
         </div>
       </div>
