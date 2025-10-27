@@ -90,7 +90,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
           {canScrollLeft && (
             <button
               onClick={() => scroll("left")}
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 shadow-md rounded-full p-2"
+              className="absolute left-3 top-[183px] -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 shadow-md rounded-full p-2"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -112,7 +112,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
               return (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-5 bg-white rounded-xl shadow-sm snap-start min-w-[360px] max-w-[360px] flex-none"
+                  className="flex items-center justify-between p-5 bg-white rounded-xl shadow-sm snap-start min-w-[340px] max-w-[340px] flex-none"
                 >
                   {/* Left section */}
                   <div className="flex flex-col items-start gap-6 w-[55%]">
@@ -180,7 +180,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
           {canScrollRight && (
             <button
               onClick={() => scroll("right")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 shadow-md rounded-full p-2"
+              className="absolute right-3 top-[183px] -translate-y-1/2 z-10 bg-white/90 hover:bg-white text-gray-800 shadow-md rounded-full p-2"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
