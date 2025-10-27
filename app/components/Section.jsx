@@ -88,7 +88,7 @@ export default function Section({ collections, title }) {
   const displayedCollections = showAll ? remainingCollections : visibleCollections;
 
   return (
-    <div className="flex flex-col items-start w-[90vw]  mx-auto h-auto relative">
+    <div className="flex flex-col items-start w-[70vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw]  mx-auto h-auto relative">
       {/* Section Title */}
       <span className="2xl:text-2xl xl:text-2xl lg:text-2xl md:text-xl sm:text-lg xs:text-md text-sm font-bold my-5">{title}</span>
 
