@@ -11,6 +11,7 @@ import {
 import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
 import Section from './Section';
 import { Hero } from './Hero';
+import ProgressBar from './ProgressBar';
 
 /**
  * @param {PageLayoutProps}
@@ -26,6 +27,7 @@ export function PageLayout({
 }) {
   return (
     <Aside.Provider>
+      <ProgressBar />
       <CartAside cart={cart} />
       <MobileMenuAside header={header} publicStoreDomain={publicStoreDomain} />
       {header && (

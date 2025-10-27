@@ -56,7 +56,6 @@ export function HeaderMenu({ collections = [] }) {
   const closeTimeout = useRef(null);
   const { autographs, tradingCards, otherCollections, boxes, singles } = filterCollections(collections);
   
-  // Helpers to control dropdown visibility with delay
   const handleMouseEnter = (dropdown) => {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
     setOpenDropdown(dropdown);
@@ -65,7 +64,7 @@ export function HeaderMenu({ collections = [] }) {
   const handleMouseLeave = () => {
     closeTimeout.current = setTimeout(() => {
       setOpenDropdown(null);
-    }, 200); // delay to prevent flicker
+    }, 200);
   };
 
   const Dropdown = ({ title, name, items }) => (
@@ -84,14 +83,14 @@ export function HeaderMenu({ collections = [] }) {
                    grid grid-cols-1 sm:grid-cols-2 gap-1 w-64 max-h-80 overflow-auto"
       >
         {items.map((col) => (
-          <a
+          <NavLink
             key={col.id}
-            href={`/collections/${col.handle}`}
+            to={`/collections/${col.handle}`}
             onClick={close}
             className="block px-3 py-2 text-gray-800 hover:bg-gray-100 hover:text-blue-500 rounded-md text-sm"
           >
             {col.title}
-          </a>
+          </NavLink>
         ))}
       </div>
     )}

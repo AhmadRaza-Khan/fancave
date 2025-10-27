@@ -1,132 +1,273 @@
 import { Image } from "@shopify/hydrogen";
-import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router";
+import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router";
 import { AddToCartButton } from "./AddToCartButton";
 import { useAside } from "./Aside";
 import { filterCollections } from "~/lib/filterCollections";
+import { CircleArrowLeft, CirclePlus, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 
 export default function Section({ collections, title }) {
-  const { autographs, tradingCards, boxes, otherCollections, singles } = filterCollections(collections);
+  const scrollRef = useRef(null);
+  const [atStart, setAtStart] = useState(true);
+  const [openDrop , setOpenDrop] = useState(false)
+  const [atEnd, setAtEnd] = useState(false);
+  const { autographs, tradingCards, boxes, otherCollections, singles } =
+    filterCollections(collections);
 
+  // Determine which collection to show
   let initialState;
   let sortedCollection;
+  let width;
   switch (title) {
     case "Trading Cards":
       initialState = 7;
       sortedCollection = tradingCards;
+      width = "w-fit";
       break;
     case "Autographs":
-      initialState = 9;
-      sortedCollection = autographs;
+      initialState = 18;
+      sortedCollection = [...autographs].reverse();
+      width = "w-[60%]"
       break;
     case "Boxes":
       initialState = 29;
       sortedCollection = boxes;
+      width = "w-[80%]"
       break;
     case "Singles":
       initialState = 34;
       sortedCollection = singles;
+      width = "w-fit"
       break;
     case "Best Selling":
       initialState = 1;
       sortedCollection = otherCollections;
+      width = "w-[80%]"
       break;
     default:
       initialState = 0;
-      break;
+      sortedCollection = collections;
   }
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeHandle, setActiveHandle] = useState(
-    collections[initialState]?.handle
-  );
+  const [showAll, setShowAll] = useState(false);
+  const [activeHandle, setActiveHandle] = useState(collections[initialState]?.handle);
   const { open } = useAside();
 
-  const activeCollection = collections.find(
-    (col) => col.handle === activeHandle
-  );
+  // Scroll controls
+  const scroll = (direction) => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const scrollAmount = container.clientWidth * 0.8;
+    container.scrollBy({
+      left: direction === "left" ? -scrollAmount : scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
+  // Track scroll position
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      setAtStart(scrollLeft < 10);
+      setAtEnd(scrollLeft + clientWidth >= scrollWidth - 10);
+    };
+
+    handleScroll();
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const activeCollection = collections.find((col) => col.handle === activeHandle);
+
+  const visibleCollections = sortedCollection.slice(0, 5);
+  const remainingCollections = sortedCollection.slice(5);
+  const displayedCollections = showAll ? remainingCollections : visibleCollections;
 
   return (
-    <div className="flex flex-col items-start w-[90vw] md:w-[80vw] lg:w-[70vw] mx-auto h-auto">
-      <span className="2xl:text-5xl xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-lg  my-5">{title}</span>
+    <div className="flex flex-col items-start w-[90vw]  mx-auto h-auto relative">
+      {/* Section Title */}
+      <span className="2xl:text-2xl xl:text-2xl lg:text-2xl md:text-xl sm:text-lg xs:text-md text-sm font-bold my-5">{title}</span>
 
-      {/* Collection selector carousel */}
-      <div className="carousel rounded-box gap-5 w-[90vw] md:w-[70vw] lg:w-[50vw]">
-        {sortedCollection.map((col, index) => (
-          <div className="carousel-item p-2" key={index + 1}>
-            <button
-              onClick={() => {
-                setActiveIndex(index);
-                setActiveHandle(col.handle);
-              }}
-              className={`btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl border-black transition-all duration-200 ${
-                activeIndex === index
-                  ? "lg:shadow-[-4px_4px_0_0_rgba(0,0,0,0.8)] shadow-[-2px_2px_0_0_rgba(0,0,0,0.8)]"
-                  : "shadow-none"
-              }`}
-
-            >
-              {col.title}
-            </button>
-          </div>
+      {/* Button Group */}
+      <div className="lg:flex hidden gap-4 overflow-x-auto pb-3 px-2 w-full">
+        {displayedCollections.map((col, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setActiveIndex(index);
+              setActiveHandle(col.handle);
+            }}
+            className={`text-xs text-nowrap py-2 px-2 border font-semibold rounded-sm border-black transition-all duration-200 ${
+              activeIndex === index
+                ? "lg:shadow-[-4px_4px_0_0_rgba(0,0,0,0.8)] shadow-[-2px_2px_0_0_rgba(0,0,0,0.8)]"
+                : "shadow-none"
+            }`}
+          >
+            {col.title}
+          </button>
         ))}
+        {sortedCollection.length > 5 && (
+          <button
+            onClick={() => {
+              if (showAll) {
+                setShowAll(false);
+                setActiveHandle(sortedCollection[0].handle);
+                setActiveIndex(0);
+              } else {
+                setShowAll(true);
+                setActiveHandle(sortedCollection[5].handle);
+                setActiveIndex(0);
+              }
+            }}
+            className="text-xs text-nowrap py-2 px-2 border font-semibold rounded-sm border-black transition-all duration-200"
+          >
+            {showAll ? (
+              <div className="flex justify-center items-center gap-1">
+                <CircleArrowLeft color="#000" />
+                <p>Back</p>
+              </div>
+            ) : (
+              <div className="flex justify-center items-center gap-1">
+                <CirclePlus color="#000" />
+                <p>More</p>
+              </div>
+            )}
+          </button>
+        )}
       </div>
 
-      {/* Products carousel */}
-      <div className="carousel gap-10 rounded-box w-[90vw] md:w-[80vw] lg:w-[70vw]">
-        {activeCollection?.products?.map((item, index) => {
-          const selectedVariant = item?.variants?.nodes?.[0];
-          if (!item?.featuredImage?.url) return null;
+    <div className="relative inline-block w-full lg:hidden">
+          {/* Dropdown Button */}
+          <button
+            onClick={() => setOpenDrop(!openDrop)}
+            className="w-full flex justify-between items-center border border-gray-500 rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
+          >
+            {sortedCollection[activeIndex]?.title || "Select Collection"}
+            <ChevronDown
+              className={`w-4 h-4 ml-2 transition-transform duration-200 ${openDrop ? "rotate-180" : ""}`}
+            />
+          </button>
 
-          return (
-            <div
-  key={index + 1}
-  className="bg-base-100 w-96 shadow-sm flex items-center flex-col carousel-item group relative overflow-hidden"
->
-  <div className="relative rounded-2xl -mb-4">
-    <img
-      src={item.featuredImage?.url}
-      alt={item.title}
-      className="rounded-xl w-full h-full object-cover"
-    />
+          {/* Dropdown Menu */}
+          {openDrop && (
+            <div className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+              {sortedCollection.map((col, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setActiveIndex(index);
+                    setActiveHandle(col.handle);
+                    setOpenDrop(false);
+                  }}
+                  className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
+                    index === activeIndex ? "bg-gray-100 font-medium" : ""
+                  }`}
+                >
+                  {col.title}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        
 
-    {/* Hidden buttons (slide-up on hover, same as before) */}
-    <div className="absolute bottom-5 left-0 px-3 right-0 mx-auto max-w-52 translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-in-out bg-black/10 backdrop-blur-sm flex flex-col items-center justify-center py-4 gap-3 opacity-0 group-hover:opacity-100">
-      <a
-        href={`/products/${item.handle}`}
-        className="btn btn-wide bg-blue-600 text-white border-none hover:bg-blue-800 transition"
-      >
-        View Product
-      </a>
 
-      <button className="btn btn-wide bg-white text-black border-black hover:bg-primary/80 transition">
-        <AddToCartButton
-          disabled={!selectedVariant?.availableForSale}
-          onClick={() => open("cart")}
-          lines={[
-            {
-              merchandiseId: selectedVariant?.id,
-              quantity: 1,
-            },
-          ]}
+      {/* Product Carousel */}
+      <div className="relative w-full mt-4">
+        {/* Scrollable area */}
+        <div
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-auto pb-3 w-full scroll-smooth hide-scrollbar"
         >
-          {selectedVariant?.availableForSale ? "Add to Cart" : "Sold Out"}
-        </AddToCartButton>
-      </button>
-    </div>
-  </div>
+          {activeCollection?.products?.map((item, index) => {
+            const selectedVariant = item?.variants?.nodes?.[0];
+            if (!item?.featuredImage?.url) return null;
 
-  <div className="flex flex-col w-[209px] items-start">
-    <p className="text-[18px] leading-tight">{item.title}</p>
-    <p className="text-lg font-semibold text-[#374151]">
-      ${selectedVariant?.price?.amount || "—"}
-    </p>
-  </div>
-</div>
+            return (
+              <div
+                key={index}
+                className="min-w-[250px] sm:min-w-[280px] md:min-w-[320px] flex flex-col bg-white shadow-sm rounded-2xl overflow-hidden group relative"
+              >
+                {/* Image */}
+                <div className="relative w-full h-64 bg-white/90 overflow-hidden">
+                  <img
+                    src={item.featuredImage?.url}
+                    alt={item.title}
+                    className="w-full h-full object-contain rounded-t-2xl"
+                  />
+                  {/* Hover buttons */}
+                  <div className={`absolute bottom-0 left-0 ${width} mx-auto right-0 translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-in-out bg-white/50 backdrop-blur-xs flex flex-col items-center justify-center px-3 py-3 gap-3 opacity-0 group-hover:opacity-100`}>
+                    <NavLink
+                      to={`/products/${item.handle}`}
+                      className="w-full bg-blue-600 text-white py-2 px-6 text-nowrap text-center rounded-md text-sm font-medium hover:bg-blue-700 transition-all"
+                    >
+                      View Product
+                    </NavLink>
+                    <button className="w-full bg-white text-black border border-black py-2 rounded-md text-sm font-medium hover:bg-gray-100 transition-all">
+                      <AddToCartButton
+                        disabled={!selectedVariant?.availableForSale}
+                        onClick={() => open("cart")}
+                        lines={[
+                          {
+                            merchandiseId: selectedVariant?.id,
+                            quantity: 1,
+                          },
+                        ]}
+                      >
+                        {selectedVariant?.availableForSale
+                          ? "Add to Cart"
+                          : "Sold Out"}
+                      </AddToCartButton>
+                    </button>
+                  </div>
+                </div>
+                {/* Info */}
+                <div className="p-3 w-fit">
+                  <p className="text-sm font-semibold text-wrap leading-tight">
+                    {item.title}
+                  </p>
+                  <p className="text-md font-bold text-gray-700">
+                    ${selectedVariant?.price?.amount || "—"}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
-          );
-        })}
+        {/* Navigators */}
+        {!atStart && (
+          <button
+            onClick={() => scroll("left")}
+            className="absolute -left-2 top-1/3 -translate-y-1/2 bg-white/50 hover:bg-white shadow-md p-3 rounded-full z-10"
+          >
+            <ChevronLeft color="#000" size={22} />
+          </button>
+        )}
+
+        {!atEnd && (
+          <button
+            onClick={() => scroll("right")}
+            className="absolute -right-2 top-1/3 -translate-y-1/2 bg-white/50 hover:bg-white shadow-md p-3 rounded-full z-10"
+          >
+            <ChevronRight color="#000" size={22} />
+          </button>
+        )}
       </div>
     </div>
   );
 }
+
+/* Hide scrollbar globally (add to your globals.css)
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+*/
