@@ -243,7 +243,7 @@ export default function Section({ collections, title }) {
         {!atStart && (
           <button
             onClick={() => scroll("left")}
-            className="absolute -left-2 top-1/3 -translate-y-1/2 bg-white/50 hover:bg-white shadow-md p-3 rounded-full z-10"
+            className="absolute -left-3 top-1/3 -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-10"
           >
             <ChevronLeft color="#000" size={22} />
           </button>
@@ -252,7 +252,7 @@ export default function Section({ collections, title }) {
         {!atEnd && (
           <button
             onClick={() => scroll("right")}
-            className="absolute -right-2 top-1/3 -translate-y-1/2 bg-white/50 hover:bg-white shadow-md p-3 rounded-full z-10"
+            className="absolute -right-3 top-1/3 -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-10"
           >
             <ChevronRight color="#000" size={22} />
           </button>
