@@ -193,17 +193,17 @@ export default function Section({ collections, title }) {
                 className="min-w-[180px] max-w-[180px] flex flex-col bg-white shadow-sm rounded-2xl overflow-hidden group relative"
               >
                 {/* Image */}
-                <div className="relative w-full h-64 bg-white/50 overflow-hidden rounded-lg">
+                <div className="relative w-full bg-white/50 overflow-hidden rounded-lg">
                   <Image
                     src={item.featuredImage?.url}
                     alt={item.title}
-                    className={`max-w-[180px] max-h-64 h-full ${objectProp} rounded-t-2xl scale-110`}
+                    className={`max-w-[180px] rounded-t-2xl scale-110`}
                   />
                   {/* Hover buttons */}
                   <div className={`absolute bottom-0 left-0 w-fit mx-auto right-0 translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-in-out bg-white/50 backdrop-blur-xs flex flex-col items-center justify-center px-3 py-2 gap-3 opacity-0 group-hover:opacity-100`}>
                     <NavLink
                       to={`/products/${item.handle}`}
-                      className="w-full bg-blue-600 text-white py-2 px-7 text-nowrap text-center rounded-md text-sm font-medium hover:bg-blue-700 transition-all"
+                      className="w-full bg-blue-600 text-white py-2 px-3 text-nowrap text-center rounded-md text-sm font-medium hover:bg-blue-700 transition-all"
                     >
                       View Product
                     </NavLink>
