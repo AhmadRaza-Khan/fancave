@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 :root {
-  --font-lexend: 'Lexend', sans-serif;
   --aside-width: 400px;
   --cart-aside-summary-height-with-discount: 300px;
   --cart-aside-summary-height: 250px;
@@ -11,7 +10,7 @@
 }
 
 body {
-  font-family: var(--font-lexend);
+  font-family: "DM Sans", sans-serif;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
