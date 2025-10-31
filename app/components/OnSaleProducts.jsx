@@ -112,7 +112,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
               return (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-5 bg-white rounded-xl shadow-sm snap-start min-w-[340px] max-w-[340px] flex-none"
+                  className="flex items-center justify-between p-5 bg-white rounded-xl lg:h-auto xl:h-auto 2xl:h-auto md:h-auto min-h-[220px] shadow-sm snap-start min-w-[340px] max-w-[340px] flex-none"
                 >
                   
                   {/* Left section */}

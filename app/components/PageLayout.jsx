@@ -94,7 +94,7 @@ export function MobileMenuAside({header, publicStoreDomain, collections = []}) {
             publicStoreDomain={publicStoreDomain}
           />
 
-          <div className="mt-6 border-t border-gray-700 pt-4 overflow-y-auto gap-2 flex flex-col">
+          <div className="mt-6 border-t border-gray-700 pt-4 min-h-screen overflow-y-auto gap-2 flex flex-col">
             {autographs.length > 0 && (
               <CollectionSection title="Autographs" items={autographs} close={close} />
             )}
