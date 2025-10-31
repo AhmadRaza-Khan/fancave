@@ -193,7 +193,7 @@ export default function Section({ collections, title }) {
                 className="min-w-[180px] max-w-[180px] flex flex-col bg-white shadow-sm rounded-2xl overflow-hidden group relative"
               >
                 {/* Image */}
-                <div className="relative w-full bg-white/50 overflow-hidden rounded-lg">
+                <div className="relative w-full bg-white/10 overflow-hidden rounded-lg">
                   <Image
                     src={item.featuredImage?.url}
                     alt={item.title}
@@ -243,7 +243,7 @@ export default function Section({ collections, title }) {
         {!atStart && (
           <button
             onClick={() => scroll("left")}
-            className="absolute -left-3 top-[35%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-10"
+            className="absolute -left-5 top-[45%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-10"
           >
             <ChevronLeft color="#000" size={22} />
           </button>
@@ -252,7 +252,7 @@ export default function Section({ collections, title }) {
         {!atEnd && (
           <button
             onClick={() => scroll("right")}
-            className="absolute -right-3 top-[35%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-10"
+            className="absolute -right-5 top-[45%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-10"
           >
             <ChevronRight color="#000" size={22} />
           </button>
