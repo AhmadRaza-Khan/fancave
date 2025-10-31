@@ -1,9 +1,11 @@
 import {Await, Link} from 'react-router';
-import {Suspense, useId} from 'react';
-import {Aside} from '~/components/Aside';
+import {Suspense, useId, useState} from 'react';
+import {Aside, useAside} from '~/components/Aside';
 import {Footer} from '~/components/Footer';
 import {Header, HeaderMenu} from '~/components/Header';
 import {CartMain} from '~/components/CartMain';
+import {NavLink} from 'react-router';
+import {filterCollections} from '~/lib/filterCollections';
 import {
   SEARCH_ENDPOINT,
   SearchFormPredictive,
@@ -12,6 +14,7 @@ import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
 import Section from './Section';
 import { Hero } from './Hero';
 import ProgressBar from './ProgressBar';
+import { ChevronDown } from 'lucide-react';
 
 /**
  * @param {PageLayoutProps}
@@ -29,7 +32,7 @@ export function PageLayout({
     <Aside.Provider>
       <ProgressBar />
       <CartAside cart={cart} />
-      <MobileMenuAside header={header} publicStoreDomain={publicStoreDomain} />
+      <MobileMenuAside header={header} publicStoreDomain={publicStoreDomain} collections={collections} />
       {header && (
         <Header
           header={header}
@@ -73,21 +76,82 @@ function CartAside({cart}) {
  *   publicStoreDomain: PageLayoutProps['publicStoreDomain'];
  * }}
  */
-function MobileMenuAside({header, publicStoreDomain}) {
+
+
+export function MobileMenuAside({header, publicStoreDomain, collections = []}) {
+  const {close} = useAside();
+  const {autographs, tradingCards, otherCollections, boxes, singles} = filterCollections(collections);
+
   return (
     header.menu &&
     header.shop.primaryDomain?.url && (
       <Aside type="mobile" heading="MENU">
-        <HeaderMenu
-          menu={header.menu}
-          viewport="mobile"
-          primaryDomainUrl={header.shop.primaryDomain.url}
-          publicStoreDomain={publicStoreDomain}
-        />
+        <div className="p-6 text-white h-full space-y-6">
+          <HeaderMenu
+            menu={header.menu}
+            viewport="mobile"
+            primaryDomainUrl={header.shop.primaryDomain.url}
+            publicStoreDomain={publicStoreDomain}
+          />
+
+          <div className="mt-6 border-t border-gray-700 pt-4 overflow-y-auto gap-2 flex flex-col">
+            {autographs.length > 0 && (
+              <CollectionSection title="Autographs" items={autographs} close={close} />
+            )}
+            {tradingCards.length > 0 && (
+              <CollectionSection title="Trading Cards" items={tradingCards} close={close} />
+            )}
+            {singles.length > 0 && (
+              <CollectionSection title="Singles" items={singles} close={close} />
+            )}
+            {boxes.length > 0 && (
+              <CollectionSection title="Boxes" items={boxes} close={close} />
+            )}
+            {otherCollections.length > 0 && (
+              <CollectionSection title="More" items={otherCollections} close={close} />
+            )}
+          </div>
+        </div>
       </Aside>
     )
   );
 }
+
+function CollectionSection({title, items, close}) {
+    const [openDrop , setOpenDrop] = useState(false)
+  return (
+        <div className="relative inline-block w-full lg:hidden">
+          <button
+            onClick={() => setOpenDrop(!openDrop)}
+            className="w-full flex justify-between items-center border border-gray-500 rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-950 focus:outline-none focus:ring-2 focus:ring-gray-300"
+          >
+            {title}
+            <ChevronDown
+              className={`w-4 h-4 ml-2 transition-transform duration-200 ${openDrop ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          {openDrop && (
+            <div className="absolute left-0 mt-2 w-full text-black bg-white border border-gray-200 rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+              {items.map((col, index) => (
+                <NavLink
+                  to={`/collections/${col.handle}`}
+                  key={index}
+                  onClick={() => {
+                    setOpenDrop(false);
+                    close()
+                  }}
+                  className={`w-full text-left px-4 py-2 block text-sm hover:bg-gray-300 bg-gray-100 font-medium`}
+                >
+                  {col.title}
+                </NavLink>
+              ))}
+            </div>
+          )}
+        </div>
+  );
+}
+
 
 /**
  * @typedef {Object} PageLayoutProps

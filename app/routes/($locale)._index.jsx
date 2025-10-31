@@ -6,6 +6,10 @@ import { Hero } from '~/components/Hero';
 import Section from '~/components/Section';
 import { getAllCollectionsWithProducts } from '~/lib/getCollections';
 import OnSaleProducts from '~/components/OnSaleProducts';
+import VideoSection from '~/components/VideoSection';
+import CollectionsCarousel from '~/components/CollectionsCarousel';
+import HeroSection2 from '~/components/HeroSection2';
+import Icons from '~/components/Icons';
 
 /**
  * @type {Route.MetaFunction}
@@ -72,7 +76,10 @@ export default function Homepage() {
   return (
     <div className="home">
       <Hero />
+      <VideoSection />
       <Section collections={data.allCollections} title={"Trading Cards"} />
+      <CollectionsCarousel collections={data.allCollections} />
+      <HeroSection2 />
       <OnSaleProducts collections={data.allCollections} title={"Trading Cards on Sale"} image={'url("/trading.jpg")'} />
       <Section collections={data.allCollections} title={"Autographs"} />
       <OnSaleProducts collections={data.allCollections} title={"Autographs on Sale"} image={'url("/autographs.jpg")'} />
@@ -82,6 +89,7 @@ export default function Homepage() {
       <OnSaleProducts collections={data.allCollections} title={"Boxes on Sale"} image={'url("/boxes.jpg")'} />
       <Section collections={data.allCollections} title={"Best Selling"} />
       <OnSaleProducts collections={data.allCollections} title={"Items on Sale"} image={'url("/trading.jpg")'} />
+      <Icons />
       {/* <OnSaleProducts collections={data.allCollections} allowedHandles={boxes} title={"Boxes on Sale"} image={'url("/boxes.jpg")'} /> */}
       {/* <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} /> */}

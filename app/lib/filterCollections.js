@@ -71,6 +71,10 @@ export function filterCollections(collections){
         (c) => !autographs.includes(c) && !tradingCards.includes(c) && !boxes.includes(c) && !singles.includes(c) && !giftCards.includes(c)
     );
 
-    return {autographs, tradingCards, otherCollections, boxes, singles}
+    const filteredAllCollections = collections.filter(
+        (c) => !giftCards.includes(c)
+    );
+
+    return {autographs, tradingCards, otherCollections, boxes, singles, filteredAllCollections}
 
 }

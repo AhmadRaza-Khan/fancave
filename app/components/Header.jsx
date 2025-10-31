@@ -13,7 +13,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
     const [openSearch, setOpenSearch] = useState(false);
   const {shop, menu} = header;
   return (
-    <header className="navbar xs:px-10 sm:px-16 md:px-24 lg:px-40 xl:px-52 2xl:px-80 bg-black">
+    <header className="navbar px-8 xs:px-10 sm:px-16 md:px-24 lg:px-40 xl:px-52 2xl:px-80 bg-black">
       {
         openSearch?  (
           <SearchBar setOpenSearch={setOpenSearch} />

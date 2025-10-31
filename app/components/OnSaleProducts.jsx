@@ -82,7 +82,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
           }}
           className="relative flex flex-col items-center justify-center w-full h-auto py-5"
         >
-          <span className="2xl:text-5xl xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl xs:text-lg font-bold mb-5 text-center">
+          <span className="2xl:text-2xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl xs:text-lg font-bold mb-5 text-center">
             {title}
           </span>
 
@@ -90,7 +90,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
           {canScrollLeft && (
             <button
               onClick={() => scroll("left")}
-              className="absolute left-1 top-[175px] lg:top-[183px] -translate-y-1/2 z-10 bg-black/20 hover:bg-white text-gray-800 shadow-md rounded-full p-2"
+              className="absolute left-1 top-44 lg:top-[183px] -translate-y-1/2 z-10 bg-black/20 hover:bg-white text-gray-800 shadow-md rounded-full p-2"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -181,7 +181,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
           {canScrollRight && (
             <button
               onClick={() => scroll("right")}
-              className="absolute right-1 top-[175px] lg:top-[183px] -translate-y-1/2 z-10 bg-black/20 hover:bg-white text-gray-800 shadow-md rounded-full p-2"
+              className="absolute right-1 top-44 lg:top-[183px] -translate-y-1/2 z-10 bg-black/20 hover:bg-white text-gray-800 shadow-md rounded-full p-2"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

@@ -8,6 +8,10 @@ export async function getAllCollectionsWithProducts(storefront) {
             handle
             title
             description
+            image {
+              url
+              altText
+            }
           }
         }
       }

@@ -17,32 +17,32 @@ export default function Section({ collections, title }) {
   // Determine which collection to show
   let initialState;
   let sortedCollection;
-  let width;
+  let objectProp;
   switch (title) {
     case "Trading Cards":
       initialState = 7;
       sortedCollection = tradingCards;
-      width = "w-fit";
+      objectProp = "object-cover"
       break;
     case "Autographs":
       initialState = 18;
       sortedCollection = [...autographs].reverse();
-      width = "w-[60%]"
+      objectProp = "object-contain"
       break;
     case "Boxes":
       initialState = 29;
       sortedCollection = boxes;
-      width = "w-[80%]"
+      objectProp = "object-contain"
       break;
     case "Singles":
       initialState = 34;
       sortedCollection = singles;
-      width = "w-fit"
+      objectProp = "object-contain"
       break;
     case "Best Selling":
       initialState = 1;
       sortedCollection = otherCollections;
-      width = "w-[80%]"
+      objectProp = "object-contain"
       break;
     default:
       initialState = 0;
@@ -181,7 +181,7 @@ export default function Section({ collections, title }) {
         {/* Scrollable area */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-3 w-full scroll-smooth hide-scrollbar"
+          className="flex overflow-x-auto pb-3 gap-5 w-full scroll-smooth hide-scrollbar"
         >
           {activeCollection?.products?.map((item, index) => {
             const selectedVariant = item?.variants?.nodes?.[0];
@@ -190,20 +190,20 @@ export default function Section({ collections, title }) {
             return (
               <div
                 key={index}
-                className="min-w-[250px] sm:min-w-[280px] md:min-w-[320px] flex flex-col bg-white shadow-sm rounded-2xl overflow-hidden group relative"
+                className="min-w-[180px] max-w-[180px] flex flex-col bg-white shadow-sm rounded-2xl overflow-hidden group relative"
               >
                 {/* Image */}
-                <div className="relative w-full h-64 bg-white/90 overflow-hidden">
-                  <img
+                <div className="relative w-full h-64 bg-white/50 overflow-hidden rounded-lg">
+                  <Image
                     src={item.featuredImage?.url}
                     alt={item.title}
-                    className="w-full h-full object-contain rounded-t-2xl"
+                    className={`max-w-[180px] max-h-64 h-full ${objectProp} rounded-t-2xl scale-110`}
                   />
                   {/* Hover buttons */}
-                  <div className={`absolute bottom-0 left-0 ${width} mx-auto right-0 translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-in-out bg-white/50 backdrop-blur-xs flex flex-col items-center justify-center px-3 py-3 gap-3 opacity-0 group-hover:opacity-100`}>
+                  <div className={`absolute bottom-0 left-0 w-fit mx-auto right-0 translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-in-out bg-white/50 backdrop-blur-xs flex flex-col items-center justify-center px-3 py-2 gap-3 opacity-0 group-hover:opacity-100`}>
                     <NavLink
                       to={`/products/${item.handle}`}
-                      className="w-full bg-blue-600 text-white py-2 px-6 text-nowrap text-center rounded-md text-sm font-medium hover:bg-blue-700 transition-all"
+                      className="w-full bg-blue-600 text-white py-2 px-7 text-nowrap text-center rounded-md text-sm font-medium hover:bg-blue-700 transition-all"
                     >
                       View Product
                     </NavLink>
@@ -226,11 +226,11 @@ export default function Section({ collections, title }) {
                   </div>
                 </div>
                 {/* Info */}
-                <div className="p-3 w-fit">
-                  <p className="text-sm font-semibold text-wrap leading-tight">
+                <div className="max-w-[150px] mx-auto">
+                  <p className="text-xs font-semibold text-wrap leading-tight">
                     {item.title}
                   </p>
-                  <p className="text-md font-bold text-gray-700">
+                  <p className="text-sm font-bold text-gray-700">
                     ${selectedVariant?.price?.amount || "—"}
                   </p>
                 </div>
