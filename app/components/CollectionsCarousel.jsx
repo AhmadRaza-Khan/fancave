@@ -37,7 +37,7 @@ export default function CollectionsCarousel({ collections }) {
   const allCollections = filteredAllCollections.reverse();
 
   return (
-    <section className="w-full bg-white lg:py-12 xl:py-12 2xl:py-12 py-6 md:py-8 relative">
+    <section className="w-full bg-white lg:py-6 xl:py-6 2xl:py-6 py-3 md:py-4 relative">
       <div className="max-w-[95vw] mx-auto px-6 bg-linear-to-b from-white to-[#002F6C] from-50% to-50%">
         {/* Header */}
         <div className="flex items-center justify-between my-2">

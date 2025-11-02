@@ -13,7 +13,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
     const [openSearch, setOpenSearch] = useState(false);
   const {shop, menu} = header;
   return (
-    <header className="navbar px-8 xs:px-10 sm:px-16 md:px-24 lg:px-40 xl:px-52 2xl:px-80 bg-black">
+    <header className="navbar px-4 sm:px-10 md:px-16 lg:px-24 xl:px-40 2xl:px-60 border border-b-gray-300">
       {
         openSearch?  (
           <SearchBar setOpenSearch={setOpenSearch} />
@@ -22,8 +22,9 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
         (
       <>
       <HeaderMenuMobileToggle />
-      <NavLink prefetch="intent" to="/" className="navbar-center lg:navbar-start w-fit" style={activeLinkStyle} end>
-        <img className='h-7 w-40 md:h-10 md:w-44' src="/logo.png" alt={shop.name} />
+      <NavLink prefetch="intent" to="/" className="navbar-center lg:navbar-start w-fit flex flex-col items-center justify-center gap-1 xl:text-xs lg:text-xs md:text-[10px] sm:text-[8px] text-[8px] 2xl:text-xs font-thin " style={activeLinkStyle} end>
+        <img className='lg:w-60 xl:w-60 2xl:w-60 md:w-52 sm:w-40 w-40 aspect-auto' src="/logo.jpg" alt={shop.name} />
+        <p>Trading Cards & Autographed Collectibles</p>
       </NavLink>
       <HeaderMenu
         menu={menu}
@@ -73,21 +74,20 @@ export function HeaderMenu({ collections = [] }) {
     onMouseEnter={() => handleMouseEnter(name)}
     onMouseLeave={handleMouseLeave}
   >
-    <button className="font-sm text-white hover:text-gray-200 flex items-center justify-center gap-1">
+    <button className="font-sm flex items-center justify-center gap-1">
       {title} <ChevronDown color="#969292" />
     </button>
 
     {openDropdown === name && (
       <div
-        className="absolute left-0 bg-white shadow-lg rounded-lg mt-2 z-50 p-2
-                   grid grid-cols-1 sm:grid-cols-2 gap-1 w-64 max-h-80 overflow-auto"
+        className="absolute left-0 bg-white shadow-lg rounded-lg mt-2 z-50 p-2 flex flex-col gap-1 w-auto text-nowrap text-start max-h-80 overflow-auto"
       >
         {items.map((col) => (
           <NavLink
             key={col.id}
             to={`/collections/${col.handle}`}
             onClick={close}
-            className="block px-3 py-2 text-gray-800 hover:bg-gray-100 hover:text-blue-500 rounded-md text-sm"
+            className="block px-3 py-2 text-gray-800 font-semibold hover:bg-gray-100 hover:text-blue-500 rounded-md text-sm"
           >
             {col.title}
           </NavLink>
@@ -100,7 +100,7 @@ export function HeaderMenu({ collections = [] }) {
 
   return (
     <div className='navbar-center'>
-      <nav className="items-center gap-3 lg:gap-6 text-white lg:mx-10 md:mx-8 mx-5 hidden xl:flex 2xl:flex lg:flex" role="navigation">
+      <nav className="items-center gap-3 lg:gap-6 lg:mx-10 md:mx-8 mx-5 hidden xl:flex 2xl:flex lg:flex" role="navigation">
       {autographs.length > 0 && (
         <Dropdown title="Autographs" name="autographs" items={autographs} />
       )}

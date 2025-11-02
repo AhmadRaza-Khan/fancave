@@ -4,7 +4,7 @@ import { NavLink } from "react-router";
 const HeroSection2 = () => {
   return (
     <div
-      className="relative shadow-[0_8px_10px_-4px_rgba(0,0,0,0.3)] text-black lg:h-[70vh] xl:h-[70vh] 2xl:h-[70vh] h-[50vh] my-8 md:my-10 lg:my-16 xl:my-16 2xl:my-16 w-[80vw] mx-auto flex items-center justify-start bg-cover bg-center"
+      className="relative shadow-[0_8px_10px_-4px_rgba(0,0,0,0.3)] text-black lg:h-[70vh] xl:h-[70vh] 2xl:h-[70vh] h-[50vh] my-8 md:my-10 lg:my-16 xl:my-16 2xl:my-16 w-full mx-auto flex items-center justify-start bg-cover bg-center"
       style={{
         backgroundImage: "url('/dummyOverlay.jpg')",
         backgroundSize: "cover",
@@ -20,7 +20,7 @@ const HeroSection2 = () => {
         <p className="mb-6 lg:text-lg xl:text-lg 2xl:text-lg text-xs md:text-sm leading-relaxed max-w-[50vw] text-wrap">
           Step into a world of legendary trading cards, rare sealed boxes, and exclusive memorabilia — your one-stop destination to fuel your passion and expand your ultimate fan collection.
         </p>
-        <NavLink to={"/collections"} className="text-xs py-2 px-3 lg:py-3 lg:px-7 xk:py-3 xl:px-7 2xl:py-3 2xl:px-7 rounded-sm bg-[#091130] border border-[#162456] text-white">Get Started</NavLink>
+        <NavLink to={"/collections"} className="text-xs py-2 px-3 lg:py-4 lg:px-9 xk:py-4 xl:px-9 2xl:py-4 2xl:px-9 rounded-sm bg-[#091130] border border-[#162456] text-white">Get Started</NavLink>
       </div>
     </div>
   );

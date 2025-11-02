@@ -88,12 +88,14 @@ export default function Section({ collections, title }) {
   const displayedCollections = showAll ? remainingCollections : visibleCollections;
 
   return (
-    <div className="flex flex-col items-start w-[70vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw]  mx-auto h-auto relative">
+    <div className="flex flex-col items-start w-[70vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw] lg:my-12 xl:my-12 2xl:my-12 my-6 mx-auto h-auto">
       {/* Section Title */}
       <span className="2xl:text-2xl xl:text-2xl lg:text-2xl md:text-xl sm:text-lg xs:text-md text-sm font-bold mb-5">{title}</span>
 
-      {/* Button Group */}
-      <div className="lg:flex hidden gap-4 overflow-x-auto pb-3 px-2 w-full">
+      <div className="bg-black p-4 pr-0 pb-0">
+        <div className="bg-white rounded-tl-xl rounded-br-0 p-2 pb-0 flex flex-col items-start w-[70vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw]  mx-auto h-auto relative">
+        {/* Button Group */}
+      <div className="lg:flex hidden gap-4 overflow-x-auto pb-5 px-2 w-[70vw] mx-auto">
         {displayedCollections.map((col, index) => (
           <button
             key={index}
@@ -101,16 +103,16 @@ export default function Section({ collections, title }) {
               setActiveIndex(index);
               setActiveHandle(col.handle);
             }}
-            className={`text-xs text-nowrap py-2 px-2 border font-semibold rounded-sm border-black transition-all duration-200 ${
+            className={`inline-block px-4 py-2 skew-x-[-16deg] ${
               activeIndex === index
-                ? "lg:shadow-[-4px_4px_0_0_rgba(0,0,0,0.8)] shadow-[-2px_2px_0_0_rgba(0,0,0,0.8)]"
-                : "shadow-none"
+                ? "bg-black text-white"
+                : "bg-white text-black"
             }`}
           >
-            {col.title}
+            <span className="inline-block skew-x-16 font-semibold">{col.title}</span>
           </button>
         ))}
-        {sortedCollection.length > 5 && (
+        {/* {sortedCollection.length > 5 && (
           <button
             onClick={() => {
               if (showAll) {
@@ -123,21 +125,21 @@ export default function Section({ collections, title }) {
                 setActiveIndex(0);
               }
             }}
-            className="text-xs text-nowrap py-2 px-2 border font-semibold rounded-sm border-black transition-all duration-200"
+            className="bg-white text-black border border-black inline-block px-4 py-2 skew-x-[-14deg]"
           >
             {showAll ? (
-              <div className="flex justify-center items-center gap-1">
+              <div className="flex justify-center items-center gap-1 skew-x-14 font-semibold">
                 <CircleArrowLeft color="#000" />
                 <p>Back</p>
               </div>
             ) : (
-              <div className="flex justify-center items-center gap-1">
+              <div className="flex justify-center items-center gap-1 skew-x-14 font-semibold">
                 <CirclePlus color="#000" />
                 <p>More</p>
               </div>
             )}
           </button>
-        )}
+        )} */}
       </div>
 
     <div className="relative inline-block w-full lg:hidden">
@@ -177,11 +179,11 @@ export default function Section({ collections, title }) {
 
 
       {/* Product Carousel */}
-      <div className="relative w-full mt-4">
+      <div className="relative w-full pt-5">
         {/* Scrollable area */}
         <div
           ref={scrollRef}
-          className="flex overflow-x-auto pb-3 gap-5 w-full scroll-smooth hide-scrollbar"
+          className="flex overflow-x-auto gap-5 w-full scroll-smooth hide-scrollbar"
         >
           {activeCollection?.products?.map((item, index) => {
             const selectedVariant = item?.variants?.nodes?.[0];
@@ -257,6 +259,8 @@ export default function Section({ collections, title }) {
             <ChevronRight color="#000" size={22} />
           </button>
         )}
+      </div>
+      </div>
       </div>
     </div>
   );

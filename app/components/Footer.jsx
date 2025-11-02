@@ -44,11 +44,7 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
     },
     {
       title: "Company",
-      items: menu.items.map((link) => ({
-        id: link.id,
-        title: link.title,
-        url: link.title === "Authentication" ? "/authentication" : link.url,
-      })),
+      items: PAGES_DATA,
     },
     {
       title: "Resource",
@@ -209,6 +205,35 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
     </footer>
   );
 }
+
+
+const PAGES_DATA = [
+    { 
+      id: 1,
+      title: "About Us",
+      url: "/about"
+    },
+    { 
+      id: 2,
+      title: "Authentication",
+      url: "/authentication"
+    },
+    { 
+      id: 3,
+      title: "FAQs",
+      url: "/faqs"
+    },
+    { 
+      id: 4,
+      title: "Grading Submissions",
+      url: "/grading"
+    },
+    { 
+      id: 5,
+      title: "Live Selling",
+      url: "/live-selling"
+    },
+  ]
 
 
 const FALLBACK_FOOTER_MENU = {

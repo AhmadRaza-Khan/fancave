@@ -2,6 +2,7 @@ import { useId, useState } from "react";
 import { SearchFormPredictive } from "./SearchFormPredictive";
 import { SearchResultsPredictive } from "./SearchResultsPredictive";
 import { Link } from "react-router";
+import { Search } from "lucide-react";
 
 export default function SearchBar({setOpenSearch}) {
   const queriesDatalistId = useId();
@@ -10,27 +11,16 @@ export default function SearchBar({setOpenSearch}) {
 
   return (
     <div
-      className={`w-screen flex justify-center items-center relative bg-black z-50`}
+      className={`w-screen flex justify-center items-center relative z-50`}
     >
       <SearchFormPredictive>
         {({ fetchResults, goToSearch, inputRef }) => (
           
-          <div className="flex items-center bg-black gap-4 w-full">
-            <label className="input bg-black outline-blue-600 border-white">
-            <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="6"
-                fill="none"
-                stroke="white"
-              >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
-            </svg>
+          <div className="flex items-center gap-4 bg-white justify-center w-full">
+            <label className="input outline-blue-600 bg-white border-black border w-[70vw] sm:w-[70vw] md:w-[60vw] lg:w-[40vw] xl:w-[40vw] 2xl:w-[40vw]">
+            <Search />
             <input
-              className="placeholder-gray-300 text-white"
+              className="placeholder-gray-600 text-black bg-white w-full"
               ref={inputRef}
               name="q"
               type="search"
@@ -50,7 +40,7 @@ export default function SearchBar({setOpenSearch}) {
 
               <button
                 onClick={() => setOpenSearch(false)}
-                className="text-gray-500 hover:text-gray-700 font-bold text-xl"
+                className="text-black font-bold text-xl"
               >
                 X
               </button>
@@ -76,7 +66,7 @@ export default function SearchBar({setOpenSearch}) {
               }
 
               return (
-                <div className="flex">
+                <div className="flex flex-col lg:flex-row xl:flex-row 2xl:flex-row">
                   <SearchResultsPredictive.Queries
                     queries={queries}
                     queriesDatalistId={queriesDatalistId}

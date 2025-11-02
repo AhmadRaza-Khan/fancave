@@ -1,16 +1,15 @@
 import { ChevronRight } from 'lucide-react'
 import { useRef, useState, useEffect } from "react";
 import AuthenticationBody from '~/components/AuthenticationBody';
-import AuthenticationCarousel from '~/components/AuthenticationCarousel';
+import PagesCarousel from '~/components/PagesCarousel';
 
 export function loader(){}
-
 
 export default function Authentication() {
   
   return (
    <div>
-    <AuthenticationCarousel />
+    <PagesCarousel />
     <AuthenticationBody />
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

@@ -40,11 +40,21 @@ export function filterCollections(collections){
 
     const giftHandle = ["gift-cards"]
 
-    const autographs = collections.filter((c) =>
+    let autographs = collections.filter((c) =>
         autographHandles.some((kw) =>
         c.handle.includes(kw)
         )
     );
+
+    autographs = autographs.map((item) => {
+      return {
+        ...item,
+        title: item.title
+          .replace(/Autographed/gi, "")
+          .replace(/\s\s+/g, " ")
+          .trim(),
+      };
+    });
 
      const singles = collections.filter((c) =>
         singleHandles.some((kw) =>

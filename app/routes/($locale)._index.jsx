@@ -75,20 +75,20 @@ export default function Homepage() {
   const data = useLoaderData();
   return (
     <div className="home">
-      <Hero />
+      {/* <Hero /> */}
       <VideoSection />
-      <Section collections={data.allCollections} title={"Trading Cards"} />
       <CollectionsCarousel collections={data.allCollections} />
+      <Section collections={data.allCollections} title={"Trading Cards"} />
       <HeroSection2 />
-      <OnSaleProducts collections={data.allCollections} title={"Trading Cards on Sale"} image={'url("/trading.jpg")'} />
+      <OnSaleProducts collections={data.allCollections} title={"Trading Cards on Sale"} image={'url("/trading1.jpg")'} />
       <Section collections={data.allCollections} title={"Autographs"} />
-      <OnSaleProducts collections={data.allCollections} title={"Autographs on Sale"} image={'url("/autographs.jpg")'} />
+      <OnSaleProducts collections={data.allCollections} title={"Autographs on Sale"} image={'url("/autographs1.jpg")'} />
       <Section collections={data.allCollections} title={"Singles"} />
-      <OnSaleProducts collections={data.allCollections} title={"Singles on Sale"} image={'url("/trading.jpg")'} />
+      <OnSaleProducts collections={data.allCollections} title={"Singles on Sale"} image={'url("/boxes1.jpg")'} />
       <Section collections={data.allCollections} title={"Boxes"} />
-      <OnSaleProducts collections={data.allCollections} title={"Boxes on Sale"} image={'url("/boxes.jpg")'} />
+      <OnSaleProducts collections={data.allCollections} title={"Boxes on Sale"} image={'url("/boxes1.jpg")'} />
       <Section collections={data.allCollections} title={"Best Selling"} />
-      <OnSaleProducts collections={data.allCollections} title={"Items on Sale"} image={'url("/trading.jpg")'} />
+      <OnSaleProducts collections={data.allCollections} title={"Items on Sale"} image={'url("/others.jpg")'} />
       <Icons />
       {/* <OnSaleProducts collections={data.allCollections} allowedHandles={boxes} title={"Boxes on Sale"} image={'url("/boxes.jpg")'} /> */}
       {/* <FeaturedCollection collection={data.featuredCollection} />
