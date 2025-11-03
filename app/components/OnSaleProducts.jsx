@@ -92,7 +92,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
           {canScrollLeft && (
             <button
               onClick={() => scroll("left")}
-              className="absolute left-1 top-44 lg:top-[183px] -translate-y-1/2 z-10 bg-black/20 hover:bg-white text-gray-800 shadow-md rounded-full p-2"
+              className="absolute left-1 top-44 lg:top-[183px] -translate-y-1/2 z-10 bg-white hover:scale-105 cursor-pointer text-gray-800 shadow-md rounded-full p-2"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -162,9 +162,13 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
 
                   {/* Right section */}
                   <div className="relative w-[40%] flex justify-end">
-                    <div className="bg-white rounded-2xl border absolute -top-3 right-3 border-black py-1 px-3">
-                      <p className="text-black text-xs font-semibold text-center">
-                        Sale
+                    <div className="bg-red-600 rounded-2xl border absolute -top-3 right-3 text-white py-1 px-3">
+                      <p className="text-xs font-semibold text-center">
+                        -{Math.round(
+                          ((selectedVariant?.compareAtPrice?.amount - selectedVariant?.price?.amount) /
+                            selectedVariant?.compareAtPrice?.amount) * 100
+                        )}%
+
                       </p>
                     </div>
 
@@ -183,7 +187,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
           {canScrollRight && (
             <button
               onClick={() => scroll("right")}
-              className="absolute right-1 top-44 lg:top-[183px] -translate-y-1/2 z-10 bg-black/20 hover:bg-white text-gray-800 shadow-md rounded-full p-2"
+              className="absolute right-1 top-44 lg:top-[183px] -translate-y-1/2 z-10 bg-white hover:scale-105 cursor-pointer text-gray-800 shadow-md rounded-full p-2"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

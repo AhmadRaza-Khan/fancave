@@ -38,14 +38,14 @@ export default function CollectionsCarousel({ collections }) {
 
   return (
     <section className="w-full bg-[#F5F6F6] lg:pt-6 xl:pt-6 2xl:pt-6 pt-3 md:pt-4 relative">
-    <p className="ml-[2.5vw] lg:ml-[2.1vw] xl:ml-[2.1vw] 2xl:ml-[2.1vw] 2xl:text-2xl xl:text-2xl text-start mb-4 lg:text-2xl md:text-xl sm:text-lg xs:text-md text-sm font-bold">Shop by Category </p>
+    <p className="ml-[2.5vw] lg:ml-[2.1vw] xl:ml-[2.1vw] 2xl:ml-[2.1vw] text-start mb-4 2xl:text-3xl xl:text-3xl lg:text-3xl md:text-2xl sm:text-lg xs:text-md text-sm font-bold">Shop by Category </p>
       <div className="max-w-[95vw] mx-auto px-6 bg-linear-to-b from-[#F5F6F6] to-black from-50% to-50%">
 
         {/* Collection cards */}
         <div className="relative w-full">
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar white-scroll relative z-0"
+            className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide relative z-0"
           >
             {allCollections?.map((collection) =>
               collection?.image?.url ||
@@ -53,7 +53,7 @@ export default function CollectionsCarousel({ collections }) {
                 <NavLink
                   key={collection.id}
                   to={`/collections/${collection.handle}`}
-                  className="shrink-0 w-50 h-32 lg:w-80 lg:h-56 xl:w-80 xl:h-56 2xl:w-80 2xl:h-56 overflow-hidden bg-white border flex items-end justify-end relative border-gray-500 rounded-md shadow-sm hover:shadow-md transition-all duration-300"
+                  className="shrink-0 w-50 my-1 h-32 lg:w-80 lg:h-56 xl:w-80 xl:h-56 2xl:w-80 2xl:h-56 overflow-hidden bg-white border flex items-end justify-end relative border-gray-500 rounded-md shadow-sm hover:shadow-md transition-all duration-300"
                 >
                   {/* Image */}
                   <div

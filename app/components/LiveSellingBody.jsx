@@ -44,14 +44,14 @@ const LiveSelling = () => {
       </h1>
 
       {/* Main flex container */}
-      <div className="flex flex-col md:flex-row justify-center items-center gap-6">
+      <div className="flex flex-col md:flex-row justify-center items-center lg:gap-6 xl:gap-6 2xl:gap-6 md:gap-6">
         <canvas
           ref={canvasRef1}
-          className="shadow-md block my-8 rounded-md translate-x-5 md:translate-x-0"
+          className="shadow-md block my-8 rounded-md md:translate-x-0"
         />
         <canvas
           ref={canvasRef2}
-          className="shadow-md block my-8 rounded-md translate-x-5 md:translate-x-0"
+          className="shadow-md block my-8 rounded-md md:translate-x-0"
         />
       </div>
 

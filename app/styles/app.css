@@ -20,13 +20,13 @@
 
 
 /* Global force-sharp scrollbars (WebKit + Firefox) */
-html, body, :root {
+/* html, body, :root {
   scrollbar-width: thin; 
-  scrollbar-color: black transparent; /* firefox - only bar visible */
+  scrollbar-color: black transparent;
 }
 
 /* Reset all scrollbars fully */
-*::-webkit-scrollbar,
+/* *::-webkit-scrollbar,
 *::-webkit-scrollbar-thumb,
 *::-webkit-scrollbar-track,
 *::-webkit-scrollbar-track-piece,
@@ -37,40 +37,40 @@ html, body, :root {
   box-shadow: none !important;
   border: none !important;
   background-clip: padding-box !important;
-}
+} */
 
 /* Size */
-*::-webkit-scrollbar {
-  width: 3px !important;
-  height: 3px !important;
-}
+/* *::-webkit-scrollbar {
+  width: 4px !important;
+  height: 4px !important;
+} */
 
 /* The bar */
-*::-webkit-scrollbar-thumb {
+/* *::-webkit-scrollbar-thumb {
   background-color: black !important;
   border-radius: 0 !important;
   background-clip: padding-box !important;
-}
+} */
 
 /* remove track completely */
-*::-webkit-scrollbar-track {
+/* *::-webkit-scrollbar-track {
   background: transparent !important;
-}
+} */
 
 /* remove corners */
-*::-webkit-scrollbar-corner {
+/* *::-webkit-scrollbar-corner {
   background: transparent !important;
-}
+} */
 
 /* white scrollbar class */
-.white-scroll::-webkit-scrollbar-thumb {
+/* .white-scroll::-webkit-scrollbar-thumb {
   background-color: #F5F6F6 !important;
 }
 
 .white-scroll {
   scrollbar-color: #F5F6F6 transparent;
-}
-
+} */
+ */
 
 /*
 * --------------------------------------------------

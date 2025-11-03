@@ -4,7 +4,7 @@ import { NavLink } from "react-router";
 const HeroSection2 = () => {
   return (
     <div
-      className="relative shadow-[0_8px_10px_-4px_rgba(0,0,0,0.3)] text-black lg:h-[70vh] xl:h-[70vh] 2xl:h-[70vh] h-[50vh] my-8 md:my-10 lg:my-16 xl:my-16 2xl:my-16 w-full mx-auto flex items-center justify-start bg-cover bg-center"
+      className="relative shadow-[0_8px_10px_-4px_rgba(0,0,0,0.3)] text-black lg:h-[70vh] xl:h-[70vh] 2xl:h-[70vh] h-[50vh] my-6 md:my-10 lg:my-16 xl:my-16 2xl:my-16 w-full mx-auto flex items-center justify-start bg-cover bg-center"
       style={{
         backgroundImage: "url('/overlay.jpg')",
         backgroundSize: "cover",

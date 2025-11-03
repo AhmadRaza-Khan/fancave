@@ -57,7 +57,7 @@ export default function Section({ collections, title }) {
   const scroll = (direction) => {
     const container = scrollRef.current;
     if (!container) return;
-    const scrollAmount = container.clientWidth * 0.8;
+    const scrollAmount = container.clientWidth * 1.08;
     container.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
@@ -85,12 +85,12 @@ export default function Section({ collections, title }) {
   
 
   return (
-    <div className="flex flex-col items-start w-[83vw] md:w-[85vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw] lg:my-12 xl:my-12 2xl:my-12 my-6 mx-auto h-auto">
+    <div className="flex flex-col items-start w-full md:w-[85vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw] lg:my-12 xl:my-12 2xl:my-12 my-3 mx-auto h-auto">
       {/* Section Title */}
-      <span className="2xl:text-2xl xl:text-2xl lg:text-2xl md:text-xl sm:text-lg xs:text-md text-sm font-bold mb-3">{title}</span>
+      <span className="2xl:text-3xl xl:text-3xl lg:text-3xl md:text-2xl sm:text-lg text-lg font-bold mb-3 ml-3 md:ml-0 lg:ml-0 xl:ml-0 2xl:ml-0">{title}</span>
 
-      <div className="pr-0 pb-0">
-        <div className="bg-[#F5F6F6] rounded-tl-xl rounded-br-0 p-2 pb-0 flex flex-col items-start w-[70vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw]  mx-auto h-auto relative">
+      <div className="pr-0 pb-0 mx-auto">
+        <div className="bg-[#F5F6F6] rounded-tl-xl rounded-br-0 px-2 pt-2 flex flex-col items-start w-[90vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw]  mx-auto h-auto relative">
         {/* Button Group */}
       <div className="lg:flex hidden gap-4 overflow-x-auto pb-5 px-2 w-fit mx-auto">
         {sortedCollection.slice(0, 5).map((col, index) => (
@@ -111,11 +111,11 @@ export default function Section({ collections, title }) {
         ))}
       </div>
 
-    <div className="relative inline-block w-full lg:hidden">
+    <div className="relative inline-block mb-3 w-full lg:hidden">
           {/* Dropdown Button */}
           <button
             onClick={() => setOpenDrop(!openDrop)}
-            className="w-full flex justify-between items-center border border-gray-500 rounded-md bg-[#F5F6F6] px-4 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
+            className="w-full flex justify-between items-center border border-gray-500 rounded-xs py-1 bg-[#F5F6F6] px-4 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
           >
             {sortedCollection[activeIndex]?.title || "Select Collection"}
             <ChevronDown
@@ -152,17 +152,18 @@ export default function Section({ collections, title }) {
         {/* Scrollable area */}
         <div
           ref={scrollRef}
-          className="flex overflow-x-auto gap-5 w-full scroll-smooth hide-scrollbar"
+          className="flex overflow-x-auto scroll-smooth scrollbar-hide gap-5 w-full"
         >
           {activeCollection?.products?.map((item, index) => {
             const selectedVariant = item?.variants?.nodes?.[0];
             if (!item?.featuredImage?.url) return null;
 
             return (
-              <div
+             <NavLink
+              to={`/products/${item.handle}`}
               key={index}
-              className="flex flex-col cursor-pointer shadow-sm rounded-2xl overflow-hidden group relative
-              min-w-full sm:min-w-full md:min-w-1/2 lg:min-w-1/4 xl:min-w-1/4 2xl:min-w-1/4"
+              className="flex bg-white flex-col cursor-pointer shadow-sm rounded-lg overflow-hidden group relative
+              min-w-1/2 sm:min-w-1/2 md:min-w-1/2 lg:min-w-1/4 xl:min-w-1/4 2xl:min-w-1/4"
             >
               {/* Canvas Image box */}
               <div className="relative w-full aspect-square flex items-center justify-center rounded-lg">
@@ -174,11 +175,11 @@ export default function Section({ collections, title }) {
                 />
               </div>
 
-              <div className="absolute bg-transparent group-hover:flex px-2 hidden top-[5vh] left-[14vw] lg:left-[5vw] xl:left-[5vw] 2xl:left-[5vw] md:left-[8vw]">
+              {/* <div className="absolute bg-transparent group-hover:flex px-2 hidden top-[5vh] left-[14vw] lg:left-[5vw] xl:left-[5vw] 2xl:left-[5vw] md:left-[8vw]">
                 <NavLink to={`/products/${item.handle}`} className="bg-black rounded-full p-2 w-fit h-fit">
                     <Search color="#fff" className="w-5 h-5" />
                   </NavLink>
-              </div>
+              </div> */}
 
               <div className="absolute justify-center hidden items-center group-hover:flex px-2 bottom-28 w-full h-fit">
                   <AddToCartButton
@@ -207,11 +208,11 @@ export default function Section({ collections, title }) {
                   <p className="text-xs text-wrap leading-tight">
                     {item.title}
                   </p>
-                  <p className="text-sm font-bold text-gray-700 pb-2">
+                  <p className="text-xs pt-2 font-bold text-gray-700">
                     ${selectedVariant?.price?.amount || "—"}
                   </p>
                 </div>
-              </div>
+              </NavLink>
             );
           })}
         </div>
