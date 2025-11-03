@@ -101,7 +101,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
           {/* Carousel */}
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto space-x-6 max-w-[90vw] px-6 snap-x snap-mandatory scroll-smooth scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+            className="flex overflow-x-auto space-x-6 max-w-[90vw] px-3 scrollbar-hide"
             style={{
               scrollbarWidth: "thin",
               msOverflowStyle: "none",
