@@ -80,15 +80,15 @@ export default function Homepage() {
       <CollectionsCarousel collections={data.allCollections} />
       <Section collections={data.allCollections} title={"Trading Cards"} />
       <HeroSection2 />
-      <OnSaleProducts collections={data.allCollections} title={"Trading Cards on Sale"} image={'url("/trading1.jpg")'} />
+      <OnSaleProducts collections={data.allCollections} title={"Trading Cards on Sale"} image={'url("/one_image.jpg")'} />
       <Section collections={data.allCollections} title={"Autographs"} />
-      <OnSaleProducts collections={data.allCollections} title={"Autographs on Sale"} image={'url("/autographs1.jpg")'} />
+      <OnSaleProducts collections={data.allCollections} title={"Autographs on Sale"} image={'url("/one_image.jpg")'} />
       <Section collections={data.allCollections} title={"Singles"} />
-      <OnSaleProducts collections={data.allCollections} title={"Singles on Sale"} image={'url("/boxes1.jpg")'} />
+      <OnSaleProducts collections={data.allCollections} title={"Singles on Sale"} image={'url("/one_image.jpg")'} />
       <Section collections={data.allCollections} title={"Boxes"} />
-      <OnSaleProducts collections={data.allCollections} title={"Boxes on Sale"} image={'url("/boxes1.jpg")'} />
+      <OnSaleProducts collections={data.allCollections} title={"Boxes on Sale"} image={'url("/one_image.jpg")'} />
       <Section collections={data.allCollections} title={"Best Selling"} />
-      <OnSaleProducts collections={data.allCollections} title={"Items on Sale"} image={'url("/others.jpg")'} />
+      <OnSaleProducts collections={data.allCollections} title={"Items on Sale"} image={'url("/one_image.jpg")'} />
       <Icons />
       {/* <OnSaleProducts collections={data.allCollections} allowedHandles={boxes} title={"Boxes on Sale"} image={'url("/boxes.jpg")'} /> */}
       {/* <FeaturedCollection collection={data.featuredCollection} />

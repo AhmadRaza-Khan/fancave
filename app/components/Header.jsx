@@ -13,7 +13,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
     const [openSearch, setOpenSearch] = useState(false);
   const {shop, menu} = header;
   return (
-    <header className="navbar px-4 sm:px-10 md:px-16 lg:px-24 xl:px-40 2xl:px-60 border border-b-gray-300">
+    <header className="navbar px-4 sm:px-10 md:px-16 lg:px-24 xl:px-40 2xl:px-60">
       {
         openSearch?  (
           <SearchBar setOpenSearch={setOpenSearch} />
@@ -70,7 +70,7 @@ export function HeaderMenu({ collections = [] }) {
 
   const Dropdown = ({ title, name, items }) => (
   <div
-    className="relative"
+    className="relative cursor-pointer"
     onMouseEnter={() => handleMouseEnter(name)}
     onMouseLeave={handleMouseLeave}
   >
@@ -87,7 +87,7 @@ export function HeaderMenu({ collections = [] }) {
             key={col.id}
             to={`/collections/${col.handle}`}
             onClick={close}
-            className="block px-3 py-2 text-gray-800 font-semibold hover:bg-gray-100 hover:text-blue-500 rounded-md text-sm"
+            className="block px-3 py-2 text-gray-800 hover:bg-black hover:text-white rounded-md text-sm"
           >
             {col.title}
           </NavLink>
@@ -144,11 +144,11 @@ function HeaderCtas({ isLoggedIn, cart , openSearch, setOpenSearch}) {
       <NavLink
         prefetch="intent"
         to="/account"
-        className="px-2 lg:px-4 py-2 transition font-medium"
+        className="px-2 lg:px-4 py-2 transition font-medium cursor-pointer"
       >
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
-            <UserRound color="#969292" />
+            <UserRound color="#000" />
           </Await>
         </Suspense>
       </NavLink>
@@ -164,9 +164,9 @@ function SearchToggle({setOpenSearch}) {
   return (
     <button
       onClick={() => setOpenSearch(true)}
-      className="px-2 lg:px-4 py-2 transition font-medium"
+      className="px-2 lg:px-4 py-2 transition font-medium cursor-pointer"
     >
-      <Search color="#969292" />
+      <Search color="#000" />
     </button>
   );
 }
@@ -187,12 +187,12 @@ function CartBadge({ count }) {
           url: window.location.href || '',
         });
       }}
-      className="px-2 lg:px-4 py-2 rounded-md relative transition font-medium flex items-center gap-2"
+      className="px-2 lg:px-4 py-2 rounded-md relative transition font-medium flex items-center gap-2 cursor-pointer"
     >
-      <ShoppingCart color="#969292" />
+      <ShoppingCart color="#000" />
       {
         count > 0 &&
-        <span className="bg-blue-600 absolute top-0 right-1 h-4 w-4 font-bold rounded-sm text-[11px] -mt-1 -mr-1 ">
+        <span className="bg-black text-white absolute top-0 right-1 h-4 w-4 font-bold rounded-sm text-[11px] -mt-1 -mr-1 ">
         {count}
       </span>
       }

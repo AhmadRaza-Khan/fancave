@@ -4,7 +4,7 @@ import { NavLink } from "react-router";
 import { AddToCartButton } from "./AddToCartButton";
 import { useAside } from "./Aside";
 import { filterCollections } from "~/lib/filterCollections";
-import { CircleArrowLeft, CirclePlus, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { CircleArrowLeft, CirclePlus, ChevronLeft, ChevronRight, ChevronDown, Search, ShoppingCart } from "lucide-react";
 
 export default function Section({ collections, title }) {
   const scrollRef = useRef(null);
@@ -50,7 +50,6 @@ export default function Section({ collections, title }) {
   }
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [showAll, setShowAll] = useState(false);
   const [activeHandle, setActiveHandle] = useState(collections[initialState]?.handle);
   const { open } = useAside();
 
@@ -83,70 +82,40 @@ export default function Section({ collections, title }) {
 
   const activeCollection = collections.find((col) => col.handle === activeHandle);
 
-  const visibleCollections = sortedCollection.slice(0, 5);
-  const remainingCollections = sortedCollection.slice(5);
-  const displayedCollections = showAll ? remainingCollections : visibleCollections;
+  
 
   return (
     <div className="flex flex-col items-start w-[83vw] md:w-[85vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw] lg:my-12 xl:my-12 2xl:my-12 my-6 mx-auto h-auto">
       {/* Section Title */}
-      <span className="2xl:text-2xl xl:text-2xl lg:text-2xl md:text-xl sm:text-lg xs:text-md text-sm font-bold mb-5">{title}</span>
+      <span className="2xl:text-2xl xl:text-2xl lg:text-2xl md:text-xl sm:text-lg xs:text-md text-sm font-bold mb-3">{title}</span>
 
-      <div className="bg-black p-4 pr-0 pb-0">
-        <div className="bg-white rounded-tl-xl rounded-br-0 p-2 pb-0 flex flex-col items-start w-[70vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw]  mx-auto h-auto relative">
+      <div className="pr-0 pb-0">
+        <div className="bg-[#F5F6F6] rounded-tl-xl rounded-br-0 p-2 pb-0 flex flex-col items-start w-[70vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw]  mx-auto h-auto relative">
         {/* Button Group */}
-      <div className="lg:flex hidden gap-4 overflow-x-auto pb-5 px-2 w-[70vw] mx-auto">
-        {displayedCollections.map((col, index) => (
+      <div className="lg:flex hidden gap-4 overflow-x-auto pb-5 px-2 w-fit mx-auto">
+        {sortedCollection.slice(0, 5).map((col, index) => (
           <button
             key={index}
             onClick={() => {
               setActiveIndex(index);
               setActiveHandle(col.handle);
             }}
-            className={`inline-block px-4 py-2 skew-x-[-16deg] ${
+            className={`inline-block px-4 py-2 cursor-pointer skew-x-[-16deg] ${
               activeIndex === index
                 ? "bg-black text-white"
-                : "bg-white text-black"
+                : "bg-[#F5F6F6] text-black"
             }`}
           >
-            <span className="inline-block skew-x-16 font-semibold">{col.title}</span>
+            <span className="inline-block skew-x-16 cursor-pointer hover:text-gray-700">{col.title}</span>
           </button>
         ))}
-        {/* {sortedCollection.length > 5 && (
-          <button
-            onClick={() => {
-              if (showAll) {
-                setShowAll(false);
-                setActiveHandle(sortedCollection[0].handle);
-                setActiveIndex(0);
-              } else {
-                setShowAll(true);
-                setActiveHandle(sortedCollection[5].handle);
-                setActiveIndex(0);
-              }
-            }}
-            className="bg-white text-black border border-black inline-block px-4 py-2 skew-x-[-14deg]"
-          >
-            {showAll ? (
-              <div className="flex justify-center items-center gap-1 skew-x-14 font-semibold">
-                <CircleArrowLeft color="#000" />
-                <p>Back</p>
-              </div>
-            ) : (
-              <div className="flex justify-center items-center gap-1 skew-x-14 font-semibold">
-                <CirclePlus color="#000" />
-                <p>More</p>
-              </div>
-            )}
-          </button>
-        )} */}
       </div>
 
     <div className="relative inline-block w-full lg:hidden">
           {/* Dropdown Button */}
           <button
             onClick={() => setOpenDrop(!openDrop)}
-            className="w-full flex justify-between items-center border border-gray-500 rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
+            className="w-full flex justify-between items-center border border-gray-500 rounded-md bg-[#F5F6F6] px-4 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
           >
             {sortedCollection[activeIndex]?.title || "Select Collection"}
             <ChevronDown
@@ -156,7 +125,7 @@ export default function Section({ collections, title }) {
 
           {/* Dropdown Menu */}
           {openDrop && (
-            <div className="absolute left-0 mt-2 w-full bg-white border border-gray-200 rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+            <div className="absolute left-0 mt-2 w-full bg-[#F5F6F6] border border-gray-200 rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
               {sortedCollection.map((col, index) => (
                 <button
                   key={index}
@@ -179,7 +148,7 @@ export default function Section({ collections, title }) {
 
 
       {/* Product Carousel */}
-      <div className="relative w-full pt-5">
+      <div className="relative w-full">
         {/* Scrollable area */}
         <div
           ref={scrollRef}
@@ -191,48 +160,54 @@ export default function Section({ collections, title }) {
 
             return (
               <div
-                key={index}
-                className="min-w-[180px] max-w-[180px] flex flex-col bg-white shadow-sm rounded-2xl overflow-hidden group relative"
-              >
-                {/* Image */}
-                <div className="relative w-full bg-white/10 overflow-hidden rounded-lg">
-                  <Image
-                    src={item.featuredImage?.url}
-                    alt={item.title}
-                    className={`max-w-[180px] rounded-t-2xl scale-110`}
-                  />
-                  {/* Hover buttons */}
-                  <div className={`absolute bottom-0 left-0 w-fit mx-auto right-0 translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-in-out bg-white/50 backdrop-blur-xs flex flex-col items-center justify-center px-3 py-2 gap-3 opacity-0 group-hover:opacity-100`}>
-                    <NavLink
-                      to={`/products/${item.handle}`}
-                      className="w-full bg-blue-600 text-white py-2 px-3 text-nowrap text-center rounded-md text-sm font-medium hover:bg-blue-700 transition-all"
-                    >
-                      View Product
-                    </NavLink>
-                    <button className="w-full bg-white text-black border border-black py-2 rounded-md text-sm font-medium hover:bg-gray-100 transition-all">
-                      <AddToCartButton
-                        disabled={!selectedVariant?.availableForSale}
-                        onClick={() => open("cart")}
-                        lines={[
+              key={index}
+              className="flex flex-col cursor-pointer shadow-sm rounded-2xl overflow-hidden group relative
+              min-w-full sm:min-w-full md:min-w-1/2 lg:min-w-1/4 xl:min-w-1/4 2xl:min-w-1/4"
+            >
+              {/* Canvas Image box */}
+              <div className="relative w-full aspect-square flex items-center justify-center rounded-lg">
+                <Image
+                  sizes="100vw"
+                  src={item.featuredImage?.url}
+                  alt={item.title}
+                  className={`${objectProp} group-hover:scale-110 transform transition-all ease-out duration-700 w-[85%] h-[85%]`}
+                />
+              </div>
+
+              <div className="absolute bg-transparent group-hover:flex px-2 hidden top-[5vh] left-[14vw] lg:left-[5vw] xl:left-[5vw] 2xl:left-[5vw] md:left-[8vw]">
+                <NavLink to={`/products/${item.handle}`} className="bg-black rounded-full p-2 w-fit h-fit">
+                    <Search color="#fff" className="w-5 h-5" />
+                  </NavLink>
+              </div>
+
+              <div className="absolute justify-center hidden items-center group-hover:flex px-2 bottom-28 w-full h-fit">
+                  <AddToCartButton
+                   onClick={() => open("cart")} 
+                   lines={[
                           {
                             merchandiseId: selectedVariant?.id,
                             quantity: 1,
                           },
-                        ]}
-                      >
-                        {selectedVariant?.availableForSale
-                          ? "Add to Cart"
-                          : "Sold Out"}
-                      </AddToCartButton>
-                    </button>
-                  </div>
-                </div>
+                        ]}>
+                    {selectedVariant?.availableForSale
+                          ? 
+                        <div className="bg-black mx-auto flex text-xs items-center justify-center gap-2 text-white px-6 rounded-4xl py-3">
+                        <ShoppingCart className="w-4 h-4" color="#fff" /> 
+                        <p>Add to cart</p>
+                        </div>
+                          :
+                          <div className="bg-black mx-auto flex text-xs items-center justify-center gap-2 text-white px-6 rounded-4xl py-3">"Sold Out"</div>
+                          }
+
+                  </AddToCartButton>
+              </div>
+
                 {/* Info */}
-                <div className="max-w-[150px] mx-auto">
-                  <p className="text-xs font-semibold text-wrap leading-tight">
+                <div className="max-w-[48vw] md:max-w-[30vw] text-center lg:max-w-[15vw] mx-auto">
+                  <p className="text-xs text-wrap leading-tight">
                     {item.title}
                   </p>
-                  <p className="text-sm font-bold text-gray-700">
+                  <p className="text-sm font-bold text-gray-700 pb-2">
                     ${selectedVariant?.price?.amount || "—"}
                   </p>
                 </div>
@@ -275,3 +250,63 @@ export default function Section({ collections, title }) {
   scrollbar-width: none;
 }
 */
+
+  // const [showAll, setShowAll] = useState(false);
+  // const visibleCollections = sortedCollection.slice(0, 5);
+  // const remainingCollections = sortedCollection.slice(5);
+  // const displayedCollections = showAll ? remainingCollections : visibleCollections;
+
+
+   {/* {sortedCollection.length > 5 && (
+          <button
+            onClick={() => {
+              if (showAll) {
+                setShowAll(false);
+                setActiveHandle(sortedCollection[0].handle);
+                setActiveIndex(0);
+              } else {
+                setShowAll(true);
+                setActiveHandle(sortedCollection[5].handle);
+                setActiveIndex(0);
+              }
+            }}
+            className="bg-white text-black border border-black inline-block px-4 py-2 skew-x-[-14deg]"
+          >
+            {showAll ? (
+              <div className="flex justify-center items-center gap-1 skew-x-14 font-semibold">
+                <CircleArrowLeft color="#000" />
+                <p>Back</p>
+              </div>
+            ) : (
+              <div className="flex justify-center items-center gap-1 skew-x-14 font-semibold">
+                <CirclePlus color="#000" />
+                <p>More</p>
+              </div>
+            )}
+          </button>
+        )} */}
+
+{/* <div className={`absolute bottom-0 left-0 w-fit mx-auto right-0 translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-in-out bg-white/50 backdrop-blur-xs flex flex-col items-center justify-center px-3 py-2 gap-3 opacity-0 group-hover:opacity-100`}>
+                    <NavLink
+                      to={`/products/${item.handle}`}
+                      className="w-full bg-blue-600 text-white py-2 px-3 text-nowrap text-center rounded-md text-sm font-medium hover:bg-blue-700 transition-all"
+                    >
+                      View Product
+                    </NavLink>
+                    <button className="w-full bg-white text-black border border-black py-2 rounded-md text-sm font-medium hover:bg-gray-100 transition-all">
+                      <AddToCartButton
+                        disabled={!selectedVariant?.availableForSale}
+                        onClick={() => open("cart")}
+                        lines={[
+                          {
+                            merchandiseId: selectedVariant?.id,
+                            quantity: 1,
+                          },
+                        ]}
+                      >
+                        {selectedVariant?.availableForSale
+                          ? "Add to Cart"
+                          : "Sold Out"}
+                      </AddToCartButton>
+                    </button>
+                  </div> */}

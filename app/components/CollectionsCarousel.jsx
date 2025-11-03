@@ -37,26 +37,15 @@ export default function CollectionsCarousel({ collections }) {
   const allCollections = filteredAllCollections.reverse();
 
   return (
-    <section className="w-full bg-white lg:py-6 xl:py-6 2xl:py-6 py-3 md:py-4 relative">
-      <div className="max-w-[95vw] mx-auto px-6 bg-linear-to-b from-white to-[#002F6C] from-50% to-50%">
-        {/* Header */}
-        <div className="flex items-center justify-between my-2">
-          <p className="text-gray-600 2xl:text-sm xl:text-sm lg:text-sm text-xs">
-            Browse by your favorite sport and find your next box
-          </p>
-          <NavLink
-            to="/collections"
-            className="border border-blue-800 text-blue-800 hover:border-t border-t-0 lg:text-xs xl:text-xl 2xl:text-xs text-[5px] xl:px-4 2xl:px-4 text-nowrap px-1 lg:px-4 py-2 font-bold hover:bg-gray-100 ease-linear transition-all"
-          >
-            SHOP ALL CATEGORIES
-          </NavLink>
-        </div>
+    <section className="w-full bg-[#F5F6F6] lg:pt-6 xl:pt-6 2xl:pt-6 pt-3 md:pt-4 relative">
+    <p className="ml-[2.5vw] lg:ml-[2.1vw] xl:ml-[2.1vw] 2xl:ml-[2.1vw] 2xl:text-2xl xl:text-2xl text-start mb-4 lg:text-2xl md:text-xl sm:text-lg xs:text-md text-sm font-bold">Shop by Category </p>
+      <div className="max-w-[95vw] mx-auto px-6 bg-linear-to-b from-[#F5F6F6] to-black from-50% to-50%">
 
         {/* Collection cards */}
         <div className="relative w-full">
           <div
             ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar relative z-0"
+            className="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar white-scroll relative z-0"
           >
             {allCollections?.map((collection) =>
               collection?.image?.url ||
@@ -100,7 +89,7 @@ export default function CollectionsCarousel({ collections }) {
 
                   {/* Title */}
                   <div className="p-4 absolute top-1 left-1 lg:top-3 lg:left-3 xl:top-3 xl:left-3 2xl:top-3 2xl:left-3 text-center">
-                    <h3 className="xl:text-md 2xl:text-md lg:text-md text-[8px] md:text-xs font-semibold tracking-wide text-gray-600 uppercase">
+                    <h3 className="xl:text-md 2xl:text-md lg:text-md text-[8px] md:text-xs text-black font-semibold tracking-wide hover:text-gray-600 uppercase">
                       {collection.title}
                     </h3>
                   </div>
@@ -129,6 +118,14 @@ export default function CollectionsCarousel({ collections }) {
           )}
         </div>
       </div>
+    <div className="flex items-center justify-end mr-[2.1vw] my-2">
+      <NavLink
+        to="/collections"
+        className="flex items-center justify-center leading-none border border-black text-black hover:bg-black hover:text-white font-bold text-nowrap text-[7px] md:text-[10px] lg:text-sm xl:text-sm 2xl:text-sm px-1 lg:px-4 xl:px-4 2xl:px-4 py-2 sm:py-2 md:py-3 lg:py-4 xl:py-5 2xl:py-5 duration-100 ease-linear transition-all"
+      >
+        VISIT ALL CATEGORIES
+      </NavLink>
+    </div>
     </section>
   );
 }

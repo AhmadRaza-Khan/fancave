@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 :root {
   --aside-width: 400px;
   --cart-aside-summary-height-with-discount: 300px;
@@ -9,9 +8,6 @@
   --color-light: #fff;
 }
 
-body {
-  font-family: "DM Sans", sans-serif;
-}
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
@@ -19,6 +15,60 @@ body {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+
+
+/* Global force-sharp scrollbars (WebKit + Firefox) */
+html, body, :root {
+  scrollbar-width: thin; 
+  scrollbar-color: black transparent; /* firefox - only bar visible */
+}
+
+/* Reset all scrollbars fully */
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-track-piece,
+*::-webkit-scrollbar-corner,
+*::-webkit-scrollbar-button {
+  border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-clip: padding-box !important;
+}
+
+/* Size */
+*::-webkit-scrollbar {
+  width: 3px !important;
+  height: 3px !important;
+}
+
+/* The bar */
+*::-webkit-scrollbar-thumb {
+  background-color: black !important;
+  border-radius: 0 !important;
+  background-clip: padding-box !important;
+}
+
+/* remove track completely */
+*::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+/* remove corners */
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+}
+
+/* white scrollbar class */
+.white-scroll::-webkit-scrollbar-thumb {
+  background-color: #F5F6F6 !important;
+}
+
+.white-scroll {
+  scrollbar-color: #F5F6F6 transparent;
 }
 
 

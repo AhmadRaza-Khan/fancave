@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { AddToCartButton } from "./AddToCartButton";
 import { filterCollections } from "~/lib/filterCollections";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { NavLink } from "react-router";
 
 export default function OnSaleProducts({ collections, allowedHandles, title, image }) {
   const { autographs, tradingCards, boxes, otherCollections, singles } =
@@ -80,9 +81,10 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
             backgroundPosition: "center",
             width: "100%",
           }}
-          className="relative flex flex-col items-center justify-center w-full h-auto py-5"
+          className="flex flex-col items-center justify-center w-full h-auto my-8"
         >
-          <span className="2xl:text-2xl xl:text-2xl lg:text-2xl md:text-xl sm:text-xl xs:text-lg font-bold mb-5 text-center">
+          <div className="bg-black/40 relative flex flex-col items-center py-5 justify-center w-full h-auto">
+          <span className="2xl:text-2xl text-white xl:text-2xl lg:text-2xl md:text-xl sm:text-xl xs:text-lg font-bold mb-5 text-center">
             {title}
           </span>
 
@@ -117,29 +119,29 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
                   
                   {/* Left section */}
                   <div className="flex flex-col items-start gap-6 w-[55%]">
-                    <h2 className="text-xs font-semibold text-wrap">
+                    <h2 className="text-xs text-wrap">
                       {item.title}
                     </h2>
 
                     <div className="flex flex-col gap-4 items-start">
                       <div className="flex gap-2 items-center">
-                        <span className="text-sm font-medium line-through text-gray-700">
+                        <span className="text-sm line-through text-gray-700">
                           ${selectedVariant?.compareAtPrice?.amount}
                         </span>
-                        <span className="text-sm font-bold text-black">
+                        <span className="text-sm text-black">
                           ${selectedVariant?.price?.amount || "—"}
                         </span>
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <a
-                          href={`/products/${item.handle}`}
-                          className="bg-blue-600 text-white px-3 btn py-1 rounded-lg hover:bg-blue-800 transition text-sm"
+                        <NavLink
+                          to={`/products/${item.handle}`}
+                          className="bg-black font-normal text-white px-3 btn py-1 rounded-lg hover:bg-gray-950 transition text-sm"
                         >
                           View
-                        </a>
+                        </NavLink>
 
-                        <button className="bg-white text-black btn border border-black px-3 py-1 rounded-lg hover:bg-blue-600 hover:text-white transition text-sm">
+                        <button className="bg-white font-normal text-black btn cursor-pointer border border-black px-3 py-1 rounded-lg hover:bg-black hover:text-white transition text-sm">
                           <AddToCartButton
                             disabled={!selectedVariant?.availableForSale}
                             lines={[
@@ -160,8 +162,8 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
 
                   {/* Right section */}
                   <div className="relative w-[40%] flex justify-end">
-                    <div className="bg-white rounded-2xl border absolute -top-2 right-3 border-blue-500 py-1 px-3">
-                      <p className="text-blue-500 text-xs font-semibold text-center">
+                    <div className="bg-white rounded-2xl border absolute -top-3 right-3 border-black py-1 px-3">
+                      <p className="text-black text-xs font-semibold text-center">
                         Sale
                       </p>
                     </div>
@@ -186,6 +188,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
               <ChevronRight className="w-5 h-5" />
             </button>
           )}
+          </div>
         </div>
       )}
     </>

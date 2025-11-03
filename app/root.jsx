@@ -158,7 +158,7 @@ export function Layout({children}) {
         <Meta />
         <Links />
       </head>
-      <body className='bg-white text-black'>
+      <body className='bg-[#F5F6F6] scroll-sharp text-black'>
         {children}
         <ScrollRestoration nonce={nonce} />
         <Scripts nonce={nonce} />
