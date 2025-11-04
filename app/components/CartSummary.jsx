@@ -10,7 +10,7 @@ export function CartSummary({cart, layout}) {
     layout === 'page' ? 'cart-summary-page' : 'cart-summary-aside';
 
   return (
-    <div aria-labelledby="cart-summary" className={`${className} p-4`}>
+    <div aria-labelledby="cart-summary" className={`${className} p-1`}>
       <dl className="flex items-center justify-between my-2">
         <dt>Subtotal</dt>
         <dd>

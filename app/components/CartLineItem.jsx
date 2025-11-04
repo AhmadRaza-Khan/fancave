@@ -20,7 +20,7 @@ export function CartLineItem({layout, line}) {
   const {close} = useAside();
 
   return (
-    <li key={id} className="flex flex-col w-full max-h-[60vh] px-5">
+    <li key={id} className="flex  w-full px-1">
       {image && (
         <Image
           alt={title}
@@ -29,6 +29,7 @@ export function CartLineItem({layout, line}) {
           height={70}
           loading="lazy"
           width={70}
+          className='object-contain max-w-[70px] max-h-[70px]'
         />
       )}
 
@@ -44,7 +45,7 @@ export function CartLineItem({layout, line}) {
           }}
         >
           <p>
-            <p className='text-md'>{product.title}</p>
+            <p className='text-md max-w-[60vw]'>{product.title}</p>
           </p>
         </Link>
         <ProductPrice price={line?.cost?.totalAmount} />

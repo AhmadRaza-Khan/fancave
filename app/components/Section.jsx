@@ -115,7 +115,7 @@ export default function Section({ collections, title }) {
           {/* Dropdown Button */}
           <button
             onClick={() => setOpenDrop(!openDrop)}
-            className="w-full flex justify-between cursor-pointer items-center border border-gray-500 rounded-sm py-2 bg-[#F5F6F6] px-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
+            className="w-full flex justify-between cursor-pointer items-center border border-gray-500 rounded-sm py-2 bg-[#F5F6F6] px-3 text-sm font-medium text-black shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
           >
             {sortedCollection[activeIndex]?.title || "Select Collection"}
             <ChevronDown
@@ -182,12 +182,6 @@ export default function Section({ collections, title }) {
                 />
               </NavLink>
 
-              {/* <div className="absolute bg-transparent group-hover:flex px-2 hidden top-[5vh] left-[14vw] lg:left-[5vw] xl:left-[5vw] 2xl:left-[5vw] md:left-[8vw]">
-                <NavLink to={`/products/${item.handle}`} className="bg-black rounded-full p-2 w-fit h-fit">
-                    <Search color="#fff" className="w-5 h-5" />
-                  </NavLink>
-              </div> */}
-
               <div className="absolute justify-center hidden lg:group-hover:flex xl:group-hover:flex 2xl:group-hover:flex items-center px-2 bottom-32 w-full h-fit">
                   <AddToCartButton
                    onClick={() => open("cart")} 
@@ -213,7 +207,7 @@ export default function Section({ collections, title }) {
                 {/* Info */}
               <NavLink
               to={`/products/${item.handle}`}
-                className="max-w-[22vw] text-start lg:text-center xl:text-center 2xl:text-center md:max-w-[30vw] lg:max-w-[15vw] mx-auto">
+                className="w-full text-start lg:text-center xl:text-center 2xl:text-center mx-auto">
                   <p className="text-xs lg:text-sm xl:text-sm 2xl:text-sm text-wrap leading-tight line-clamp-2 md:line-clamp-none xl:line-clamp-none 2xl:line-clamp-none lg:line-clamp-none">
                     {item.title}
                   </p>
@@ -223,7 +217,7 @@ export default function Section({ collections, title }) {
                 </NavLink>
 
                 {/* add to cart mobile button */}
-              <div className="flex lg:hidden xl:hidden 2xl:hidden border border-black rounded-sm my-1 py-1 justify-center items-center text-[10px] mx-auto font-semibold max-w-[25w] md:w-[30vw] sm:w-[28vw] px-2">
+              <div className="flex lg:hidden xl:hidden 2xl:hidden border border-black rounded-sm my-0.5 py-1 justify-center items-center text-[10px] mx-auto font-semibold w-full px-4">
                   <AddToCartButton
                    onClick={() => open("cart")} 
                    lines={[
@@ -234,12 +228,9 @@ export default function Section({ collections, title }) {
                         ]}>
                     {selectedVariant?.availableForSale
                           ? 
-                        <div className="flex items-center justify-center gap-1">
-                        <ShoppingCart className="w-[18px] h-4" /> 
                         <p>Add to cart</p>
-                        </div>
                           :
-                          <div className="flex items-center justify-center">"Sold Out"</div>
+                          <p>"Sold Out"</p>
                     }
                   </AddToCartButton>
               </div>
@@ -272,73 +263,3 @@ export default function Section({ collections, title }) {
     </div>
   );
 }
-
-/* Hide scrollbar globally (add to your globals.css)
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-*/
-
-  // const [showAll, setShowAll] = useState(false);
-  // const visibleCollections = sortedCollection.slice(0, 5);
-  // const remainingCollections = sortedCollection.slice(5);
-  // const displayedCollections = showAll ? remainingCollections : visibleCollections;
-
-
-   {/* {sortedCollection.length > 5 && (
-          <button
-            onClick={() => {
-              if (showAll) {
-                setShowAll(false);
-                setActiveHandle(sortedCollection[0].handle);
-                setActiveIndex(0);
-              } else {
-                setShowAll(true);
-                setActiveHandle(sortedCollection[5].handle);
-                setActiveIndex(0);
-              }
-            }}
-            className="bg-white text-black border border-black inline-block px-4 py-2 skew-x-[-14deg]"
-          >
-            {showAll ? (
-              <div className="flex justify-center items-center gap-1 skew-x-14 font-semibold">
-                <CircleArrowLeft color="#000" />
-                <p>Back</p>
-              </div>
-            ) : (
-              <div className="flex justify-center items-center gap-1 skew-x-14 font-semibold">
-                <CirclePlus color="#000" />
-                <p>More</p>
-              </div>
-            )}
-          </button>
-        )} */}
-
-{/* <div className={`absolute bottom-0 left-0 w-fit mx-auto right-0 translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-in-out bg-white/50 backdrop-blur-xs flex flex-col items-center justify-center px-3 py-2 gap-3 opacity-0 group-hover:opacity-100`}>
-                    <NavLink
-                      to={`/products/${item.handle}`}
-                      className="w-full bg-blue-600 text-white py-2 px-3 text-nowrap text-center rounded-md text-sm font-medium hover:bg-blue-700 transition-all"
-                    >
-                      View Product
-                    </NavLink>
-                    <button className="w-full bg-white text-black border border-black py-2 rounded-md text-sm font-medium hover:bg-gray-100 transition-all">
-                      <AddToCartButton
-                        disabled={!selectedVariant?.availableForSale}
-                        onClick={() => open("cart")}
-                        lines={[
-                          {
-                            merchandiseId: selectedVariant?.id,
-                            quantity: 1,
-                          },
-                        ]}
-                      >
-                        {selectedVariant?.availableForSale
-                          ? "Add to Cart"
-                          : "Sold Out"}
-                      </AddToCartButton>
-                    </button>
-                  </div> */}
