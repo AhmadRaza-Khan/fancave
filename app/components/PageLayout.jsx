@@ -86,7 +86,7 @@ export function MobileMenuAside({header, publicStoreDomain, collections = []}) {
     header.menu &&
     header.shop.primaryDomain?.url && (
       <Aside type="mobile" heading="MENU">
-        <div className="p-6 text-white h-full space-y-6">
+        <div className="text-white h-fit">
           <HeaderMenu
             menu={header.menu}
             viewport="mobile"
@@ -94,7 +94,7 @@ export function MobileMenuAside({header, publicStoreDomain, collections = []}) {
             publicStoreDomain={publicStoreDomain}
           />
 
-          <div className="mt-6 border-t border-gray-700 pt-4 min-h-screen overflow-y-auto gap-2 flex flex-col">
+          <div className="border-gray-700 min-h-screen overflow-y-auto gap-2 flex flex-col">
             {autographs.length > 0 && (
               <CollectionSection title="Autographs" items={autographs} close={close} />
             )}
@@ -123,16 +123,16 @@ function CollectionSection({title, items, close}) {
         <div className="relative inline-block w-full lg:hidden">
           <button
             onClick={() => setOpenDrop(!openDrop)}
-            className="w-full flex justify-between items-center border border-gray-500 rounded-md bg-black px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-950 focus:outline-none focus:ring-2 focus:ring-gray-300"
+            className="w-full cursor-pointer flex justify-between items-center py-2 text-lg font-bold text-black"
           >
             {title}
             <ChevronDown
-              className={`w-4 h-4 ml-2 transition-transform duration-200 ${openDrop ? "rotate-180" : ""}`}
+             className={`w-6 h-6 ml-2 transition-transform duration-200 ${openDrop ? "rotate-180" : ""}`}
             />
           </button>
 
           {openDrop && (
-            <div className="absolute left-0 mt-2 w-full text-black bg-white border border-gray-200 rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+            <div className="absolute left-0 mt-2 w-full text-black bg-white rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
               {items.map((col, index) => (
                 <NavLink
                   to={`/collections/${col.handle}`}
@@ -141,7 +141,7 @@ function CollectionSection({title, items, close}) {
                     setOpenDrop(false);
                     close()
                   }}
-                  className={`w-full text-left px-4 py-2 block text-sm hover:bg-gray-300 bg-gray-100 font-medium`}
+                  className={`w-full text-left px-4 py-2 block text-sm hover:text-white hover:bg-black font-medium`}
                 >
                   {col.title}
                 </NavLink>

@@ -50,7 +50,7 @@ export default function SearchBar({setOpenSearch}) {
 
       {/* Results Section */}
       {isVisible && hasResults && (
-        <div className="mt-4 max-h-[60vh] overflow-y-auto border-t z-50 absolute top-8 bg-black text-white border-gray-200 pt-3">
+        <div className="mt-4 max-h-[60vh] overflow-y-auto border-t z-50 absolute top-8 border-gray-200 pt-3">
           <SearchResultsPredictive>
             {({ items, total, term, state, closeSearch }) => {
               const { articles, collections, pages, products, queries } = items;
@@ -66,7 +66,7 @@ export default function SearchBar({setOpenSearch}) {
               }
 
               return (
-                <div className="flex flex-col lg:flex-row xl:flex-row 2xl:flex-row">
+                <div className="flex flex-col lg:flex-row xl:flex-row 2xl:flex-row p-3 bg-white text-black">
                   <SearchResultsPredictive.Queries
                     queries={queries}
                     queriesDatalistId={queriesDatalistId}
@@ -95,9 +95,9 @@ export default function SearchBar({setOpenSearch}) {
                     <Link
                       onClick={closeSearch}
                       to={`/search?q=${term.current}`}
-                      className="block text-blue-600 hover:underline mt-3 text-sm"
+                      className="block text-black hover:underline mt-3 text-sm"
                     >
-                      View all results for “{term.current}” →
+                      View all results for <span className="font-bold">“{term.current}”</span>
                     </Link>
                   ) : null}
                 </div>

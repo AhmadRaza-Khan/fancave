@@ -132,7 +132,7 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
             <h5 className="mb-6 text-3xl font-semibold">Fancave Shop</h5>
 
             {/* Contact Info */}
-            <div className="text-white flex justify-center items-center my-1 w-fit gap-1">
+            <div className="text-white flex justify-center items-center my-1 mt-12 w-fit gap-1">
               <Mail color="#fff" />
               <a href="mailto:help@fancave.com">help@fancave.com</a>
             </div>
@@ -142,7 +142,7 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
             </div>
 
             {/* Signup */}
-            <div className="flex flex-col items-start justify-center mt-12 gap-2">
+            <div className="flex flex-col items-start justify-center mt-5 gap-2">
               <p className="xs:text-xs sm:text-xs md:text-sm">
                 Get notified about new releases, sales, and special events:
               </p>
@@ -150,9 +150,9 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
                 <input
                   type="text"
                   placeholder="Email Address"
-                  className="input lg:min-w-[350px] placeholder:text-[#969292]"
+                  className="input lg:min-w-[350px] placeholder:text-gray-600 bg-white"
                 />
-                <button className="btn btn-info text-white font-semibold">
+                <button className="btn bg-blue-600 text-white font-semibold">
                   Signup
                 </button>
               </div>
@@ -160,25 +160,25 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
           </div>
 
           {/* RIGHT SIDE (Mapped) */}
-          <div className="grid justify-between grid-cols-4 gap-4">
+          <div className="grid justify-between xl:grid-cols-4 2xl:grid-cols-4 grid-cols-2 lg:grid-cols-4 gap-5">
             {footerSections.map((section) => (
               <ul key={section.title}>
                 <>
                 {
                   section.title == "Follow Us" ?
-                   <p className="block lg:mb-1 xl:mb-1 2xl:mb-1 text-center lg:text-base xl:text-base 2xl:text-base text-sm font-semibold">{section.title}</p>
+                   <p className="block lg:mb-1 xl:mb-1 2xl:mb-1 lg:text-base xl:text-base 2xl:text-base text-sm font-semibold">{section.title}</p>
                     : 
                    <p className="block lg:mb-1 xl:mb-1 2xl:mb-1 lg:text-base xl:text-base 2xl:text-base text-sm font-semibold">{section.title}</p>
                 }
                 </>
                 {section.title === "Follow Us" ? (
-                  <div className="flex flex-col items-center justify-center my-5 w-full md:flex-row md:justify-between">
-                    <div className="flex gap-3 text-white justify-center items-center mx-auto">
+                  <div className="flex flex-col items-start justify-start my-5 w-full md:flex-row md:justify-between">
+                    <div className="flex gap-3 text-white items-start justify-start">
                       {section.items.map((social) => (
                         <NavLink
                           key={social.title}
                           to="#"
-                          className="block transition-opacity hover:opacity-80 text-center"
+                          className="block"
                         >
                           {social.icon}
                         </NavLink>
@@ -190,7 +190,7 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
                     <li key={item.id || item.title}>
                       <NavLink
                         to={item.url}
-                        className="block 2xl:py-2 xl:py-2 lg:py-2 hover:text-slate-500 text-xs md:text-sm lg:text-sm xl:text-sm 2xl:text-sm"
+                        className="block 2xl:py-2 xl:py-2 lg:py-2 text-xs md:text-sm lg:text-sm xl:text-sm 2xl:text-sm"
                       >
                         {item.title}
                       </NavLink>

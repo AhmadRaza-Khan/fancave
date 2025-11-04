@@ -114,7 +114,7 @@ function SearchResultsProducts({term, products}) {
                     <Image data={image} alt={product.title} width={50} />
                   )}
                   <div>
-                    <p className='text-white'>{product.title}</p>
+                    <p className='text-black'>{product.title}</p>
                     <small>{price && <Money data={price} />}</small>
                   </div>
                 </Link>

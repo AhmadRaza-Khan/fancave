@@ -4,7 +4,7 @@ import { NavLink } from "react-router";
 import { AddToCartButton } from "./AddToCartButton";
 import { useAside } from "./Aside";
 import { filterCollections } from "~/lib/filterCollections";
-import { CircleArrowLeft, CirclePlus, ChevronLeft, ChevronRight, ChevronDown, Search, ShoppingCart } from "lucide-react";
+import { CircleArrowLeft, CirclePlus, ChevronLeft, ChevronRight, ChevronDown, Search, ShoppingCart, Check } from "lucide-react";
 
 export default function Section({ collections, title }) {
   const scrollRef = useRef(null);
@@ -93,7 +93,7 @@ export default function Section({ collections, title }) {
         <div className="bg-[#F5F6F6] rounded-tl-xl rounded-br-0 px-2 pt-2 flex flex-col items-start w-[90vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw]  mx-auto h-auto relative">
         {/* Button Group */}
       <div className="lg:flex hidden gap-4 overflow-x-auto pb-5 px-2 w-fit mx-auto">
-        {sortedCollection.slice(0, 5).map((col, index) => (
+        {sortedCollection.slice(0, 6).filter((_, idx) => idx !== 2).map((col, index) => (
           <button
             key={index}
             onClick={() => {
@@ -106,7 +106,7 @@ export default function Section({ collections, title }) {
                 : "bg-[#F5F6F6] text-black"
             }`}
           >
-            <span className="inline-block skew-x-16 cursor-pointer hover:text-gray-700">{col.title}</span>
+            <span className={`inline-block skew-x-16 cursor-pointer ${ activeIndex === index ? "hover:text-white": "hover:text-gray-700"}`}>{col.title}</span>
           </button>
         ))}
       </div>
@@ -115,11 +115,11 @@ export default function Section({ collections, title }) {
           {/* Dropdown Button */}
           <button
             onClick={() => setOpenDrop(!openDrop)}
-            className="w-full flex justify-between items-center border border-gray-500 rounded-xs py-1 bg-[#F5F6F6] px-4 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
+            className="w-full flex justify-between cursor-pointer items-center border border-gray-500 rounded-sm py-2 bg-[#F5F6F6] px-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300"
           >
             {sortedCollection[activeIndex]?.title || "Select Collection"}
             <ChevronDown
-              className={`w-4 h-4 ml-2 transition-transform duration-200 ${openDrop ? "rotate-180" : ""}`}
+              className={`w-5 h-5 ml-2 transition-transform duration-200 ${openDrop ? "rotate-180" : ""}`}
             />
           </button>
 
@@ -134,11 +134,17 @@ export default function Section({ collections, title }) {
                     setActiveHandle(col.handle);
                     setOpenDrop(false);
                   }}
-                  className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
-                    index === activeIndex ? "bg-gray-100 font-medium" : ""
+                  className={`w-full text-nowrap flex items-center cursor-pointer text-left px-4 py-2 text-sm ${
+                    index === activeIndex ? "bg-black text-white font-medium" : ""
                   }`}
                 >
                   {col.title}
+                  {
+                    index === activeIndex &&
+                    <div className="flex w-full justify-end items-center">
+                    <Check />
+                  </div>
+                  }
                 </button>
               ))}
             </div>
@@ -163,7 +169,7 @@ export default function Section({ collections, title }) {
               to={`/products/${item.handle}`}
               key={index}
               className="flex bg-white flex-col cursor-pointer shadow-sm rounded-lg overflow-hidden group relative
-              min-w-1/2 sm:min-w-1/2 md:min-w-1/2 lg:min-w-1/4 xl:min-w-1/4 2xl:min-w-1/4"
+              min-w-1/2 sm:min-w-1/2 md:min-w-1/2 lg:min-w-1/4 xl:min-w-1/4 2xl:min-w-1/4 mx-auto"
             >
               {/* Canvas Image box */}
               <div className="relative w-full aspect-square flex items-center justify-center rounded-lg">
@@ -171,7 +177,7 @@ export default function Section({ collections, title }) {
                   sizes="100vw"
                   src={item.featuredImage?.url}
                   alt={item.title}
-                  className={`${objectProp} group-hover:scale-110 transform transition-all ease-out duration-700 w-[85%] h-[85%]`}
+                  className={`${objectProp} group-hover:scale-110 transform transition-all ease-out duration-700 max-w-[85%] max-h-[85%]`}
                 />
               </div>
 
@@ -204,11 +210,11 @@ export default function Section({ collections, title }) {
               </div>
 
                 {/* Info */}
-                <div className="max-w-[48vw] md:max-w-[30vw] text-center lg:max-w-[15vw] mx-auto">
-                  <p className="text-xs text-wrap leading-tight">
+                <div className="max-w-[30vw] md:max-w-[30vw] text-center lg:max-w-[15vw] mx-auto">
+                  <p className="text-xs text-wrap leading-tight line-clamp-2 md:line-clamp-none xl:line-clamp-none 2xl:line-clamp-none lg:line-clamp-none">
                     {item.title}
                   </p>
-                  <p className="text-xs pt-2 font-bold text-gray-700">
+                  <p className="text-xs py-2 font-bold text-gray-700">
                     ${selectedVariant?.price?.amount || "—"}
                   </p>
                 </div>
@@ -221,7 +227,7 @@ export default function Section({ collections, title }) {
         {!atStart && (
           <button
             onClick={() => scroll("left")}
-            className="absolute -left-5 top-[45%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-10"
+            className="absolute -left-5 top-[45%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-8"
           >
             <ChevronLeft color="#000" size={22} />
           </button>
@@ -230,7 +236,7 @@ export default function Section({ collections, title }) {
         {!atEnd && (
           <button
             onClick={() => scroll("right")}
-            className="absolute -right-5 top-[45%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-10"
+            className="absolute -right-5 top-[45%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-8"
           >
             <ChevronRight color="#000" size={22} />
           </button>

@@ -1,3 +1,4 @@
+import { X } from 'lucide-react';
 import {createContext, useContext, useEffect, useState} from 'react';
 
 /**
@@ -43,15 +44,12 @@ export function Aside({children, heading, type}) {
       role="dialog"
     >
       <button className="close-outside" onClick={close} />
-      <aside>
-        <header>
-          <h3>{heading}</h3>
-          <button className="close reset" onClick={close} aria-label="Close">
-            &times;
-          </button>
-        </header>
+      <div className='bg-white p-5'>
+        <div className='w-fit h-fit border-black border rounded-md p-2'>
+          <X onClick={close} aria-label="Close"/>
+        </div>
         <main>{children}</main>
-      </aside>
+      </div>
     </div>
   );
 }

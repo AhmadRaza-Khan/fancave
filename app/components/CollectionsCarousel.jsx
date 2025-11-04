@@ -38,7 +38,7 @@ export default function CollectionsCarousel({ collections }) {
 
   return (
     <section className="w-full bg-[#F5F6F6] lg:pt-6 xl:pt-6 2xl:pt-6 pt-3 md:pt-4 relative">
-    <p className="ml-[2.5vw] lg:ml-[2.1vw] xl:ml-[2.1vw] 2xl:ml-[2.1vw] text-start mb-4 2xl:text-3xl xl:text-3xl lg:text-3xl md:text-2xl sm:text-lg xs:text-md text-sm font-bold">Shop by Category </p>
+    <p className="ml-[2.5vw] lg:ml-[2.1vw] xl:ml-[2.1vw] 2xl:ml-[2.1vw] text-start mb-4 2xl:text-3xl xl:text-3xl lg:text-3xl md:text-2xl sm:text-lg text-lg font-bold">Shop by Category </p>
       <div className="max-w-[95vw] mx-auto px-6 bg-linear-to-b from-[#F5F6F6] to-black from-50% to-50%">
 
         {/* Collection cards */}
@@ -102,7 +102,7 @@ export default function CollectionsCarousel({ collections }) {
           {!atStart && (
             <button
               onClick={() => scroll("left")}
-              className="absolute -left-1 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-20 transition"
+              className="absolute -left-1 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-8 transition"
             >
               <ChevronLeft color="#000" size={24} />
             </button>
@@ -111,7 +111,7 @@ export default function CollectionsCarousel({ collections }) {
           {!atEnd && (
             <button
               onClick={() => scroll("right")}
-              className="absolute -right-1 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-20 transition"
+              className="absolute -right-1 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-8 transition"
             >
               <ChevronRight color="#000" size={24} />
             </button>

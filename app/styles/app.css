@@ -93,7 +93,7 @@
   }
 }
 
-aside {
+/* aside {
   background: var(--color-light);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
   height: 100vh;
@@ -148,7 +148,7 @@ aside p:last-child {
 
 aside li {
   margin-bottom: 0.125rem;
-}
+} */
 
 .overlay {
   background: rgba(0, 0, 0, 0.2);
