@@ -57,18 +57,18 @@ export function Aside({children, heading, type}) {
     :
     <div
       aria-modal
-      className={`overlay z-30 ${expanded ? 'expanded' : ''}`}
+      className={`overlay z-50 ${expanded ? 'expanded' : ''}`}
       role="dialog"
     >
       <button className="close-outside" onClick={close} />
-      <aside>
+      <aside className='z-50 relative'>
         <div className='p-6 border-b border-gray-300 flex items-center justify-between'>
           <h3 className='text-2xl font-bold'>{heading}</h3>
           <div className='w-fit h-fit cursor-pointer border-gray-300 border rounded-md p-2'>
           <X onClick={close} aria-label="Close"/>
         </div>
         </div>
-        <main>{children}</main>
+        <main className='z-50'>{children}</main>
       </aside>
     </div>
     }
