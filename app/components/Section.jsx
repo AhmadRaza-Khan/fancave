@@ -126,7 +126,7 @@ export default function Section({ collections, title }) {
           {/* Dropdown Menu */}
           {openDrop && (
             <div className="absolute left-0 mt-2 w-full bg-[#F5F6F6] border border-gray-200 rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
-              {sortedCollection.map((col, index) => (
+              {sortedCollection.slice(0, 6).filter((_, idx) => idx !== 2).map((col, index) => (
                 <button
                   key={index}
                   onClick={() => {
