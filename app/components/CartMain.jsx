@@ -25,7 +25,7 @@ export function CartMain({layout, cart: originalCart}) {
   return (
     <div className="z-50">
       <CartEmpty hidden={linesCount} layout={layout} />
-      <div className="flex flex-col justify-between items-center gap-24 lg:gap-32 md:gap-28 xl:gap-56 2xl:gap-56">
+      <div className="flex flex-col justify-between items-center gap-20 lg:gap-32 md:gap-24 xl:gap-56 2xl:gap-56">
         <div aria-labelledby="cart-lines">
           <ul className='h-[40vh] overflow-y-auto'>
             {(cart?.lines?.nodes ?? []).map((line) => (
