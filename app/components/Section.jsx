@@ -187,7 +187,7 @@ export default function Section({ collections, title }) {
                   </NavLink>
               </div> */}
 
-              <div className="absolute justify-center hidden items-center group-hover:flex px-2 bottom-28 w-full h-fit">
+              <div className="absolute justify-center hidden items-center group-hover:flex px-2 bottom-32 w-full h-fit">
                   <AddToCartButton
                    onClick={() => open("cart")} 
                    lines={[
@@ -210,14 +210,36 @@ export default function Section({ collections, title }) {
               </div>
 
                 {/* Info */}
-                <div className="max-w-[30vw] md:max-w-[30vw] text-center lg:max-w-[15vw] mx-auto">
-                  <p className="text-xs text-wrap leading-tight line-clamp-2 md:line-clamp-none xl:line-clamp-none 2xl:line-clamp-none lg:line-clamp-none">
+                <div className="max-w-[22vw] text-start lg:text-center xl:text-center 2xl:text-center md:max-w-[30vw] lg:max-w-[15vw] mx-auto">
+                  <p className="text-xs lg:text-sm xl:text-sm 2xl:text-sm text-wrap leading-tight line-clamp-2 md:line-clamp-none xl:line-clamp-none 2xl:line-clamp-none lg:line-clamp-none">
                     {item.title}
                   </p>
-                  <p className="text-xs py-2 font-bold text-gray-700">
+                  <p className="text-sm pb-2 lg:pt-1 xl:pt-1 2xl:pt-1 font-bold text-gray-700">
                     ${selectedVariant?.price?.amount || "—"}
                   </p>
                 </div>
+
+                {/* add to cart mobile button */}
+              <div className="flex lg:hidden xl:hidden 2xl:hidden border border-black rounded-sm my-1 py-1 justify-center items-center text-[10px] mx-auto font-semibold max-w-[25w] md:w-[30vw] sm:w-[28vw] px-2">
+                  <AddToCartButton
+                   onClick={() => open("cart")} 
+                   lines={[
+                          {
+                            merchandiseId: selectedVariant?.id,
+                            quantity: 1,
+                          },
+                        ]}>
+                    {selectedVariant?.availableForSale
+                          ? 
+                        <div className="flex items-center justify-center gap-1">
+                        <ShoppingCart className="w-[18px] h-4" /> 
+                        <p>Add to cart</p>
+                        </div>
+                          :
+                          <div className="flex items-center justify-center">"Sold Out"</div>
+                    }
+                  </AddToCartButton>
+              </div>
               </NavLink>
             );
           })}
