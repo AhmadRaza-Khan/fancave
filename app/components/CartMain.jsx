@@ -23,9 +23,9 @@ export function CartMain({layout, cart: originalCart}) {
   const cartHasItems = cart?.totalQuantity ? cart.totalQuantity > 0 : false;
 
   return (
-    <div className={`${className}`}>
+    <div className="z-50">
       <CartEmpty hidden={linesCount} layout={layout} />
-      <div className="cart-details">
+      <div className="flex flex-col justify-between items-center gap-24 lg:gap-32 md:gap-28 xl:gap-56 2xl:gap-56">
         <div aria-labelledby="cart-lines">
           <ul className='h-[40vh] overflow-y-auto'>
             {(cart?.lines?.nodes ?? []).map((line) => (
@@ -33,7 +33,9 @@ export function CartMain({layout, cart: originalCart}) {
             ))}
           </ul>
         </div>
-        {cartHasItems && <CartSummary cart={cart} layout={layout} />}
+        <div className='h-full flex items-end justify-end'>
+          {cartHasItems && <CartSummary cart={cart} layout={layout} />}
+        </div>
       </div>
     </div>
   );
