@@ -165,21 +165,22 @@ export default function Section({ collections, title }) {
             if (!item?.featuredImage?.url) return null;
 
             return (
-             <NavLink
-              to={`/products/${item.handle}`}
+             <div
               key={index}
               className="flex bg-white flex-col cursor-pointer shadow-sm rounded-lg overflow-hidden group relative
               min-w-1/2 sm:min-w-1/2 md:min-w-1/2 lg:min-w-1/4 xl:min-w-1/4 2xl:min-w-1/4 mx-auto"
             >
               {/* Canvas Image box */}
-              <div className="relative w-full aspect-square flex items-center justify-center rounded-lg">
+              <NavLink
+              to={`/products/${item.handle}`}
+              className="relative w-full aspect-square flex items-center justify-center rounded-lg">
                 <Image
                   sizes="100vw"
                   src={item.featuredImage?.url}
                   alt={item.title}
                   className={`${objectProp} group-hover:scale-110 transform transition-all ease-out duration-700 max-w-[85%] max-h-[85%]`}
                 />
-              </div>
+              </NavLink>
 
               {/* <div className="absolute bg-transparent group-hover:flex px-2 hidden top-[5vh] left-[14vw] lg:left-[5vw] xl:left-[5vw] 2xl:left-[5vw] md:left-[8vw]">
                 <NavLink to={`/products/${item.handle}`} className="bg-black rounded-full p-2 w-fit h-fit">
@@ -187,7 +188,7 @@ export default function Section({ collections, title }) {
                   </NavLink>
               </div> */}
 
-              <div className="absolute justify-center hidden items-center group-hover:flex px-2 bottom-32 w-full h-fit">
+              <div className="absolute justify-center hidden lg:group-hover:flex xl:group-hover:flex 2xl:group-hover:flex items-center px-2 bottom-32 w-full h-fit">
                   <AddToCartButton
                    onClick={() => open("cart")} 
                    lines={[
@@ -198,7 +199,7 @@ export default function Section({ collections, title }) {
                         ]}>
                     {selectedVariant?.availableForSale
                           ? 
-                        <div className="bg-black mx-auto flex text-xs items-center justify-center gap-2 text-white px-6 rounded-4xl py-3">
+                        <div className="bg-black mx-auto cursor-pointer flex text-xs items-center justify-center gap-2 text-white px-6 rounded-4xl py-3">
                         <ShoppingCart className="w-4 h-4" color="#fff" /> 
                         <p>Add to cart</p>
                         </div>
@@ -210,14 +211,16 @@ export default function Section({ collections, title }) {
               </div>
 
                 {/* Info */}
-                <div className="max-w-[22vw] text-start lg:text-center xl:text-center 2xl:text-center md:max-w-[30vw] lg:max-w-[15vw] mx-auto">
+              <NavLink
+              to={`/products/${item.handle}`}
+                className="max-w-[22vw] text-start lg:text-center xl:text-center 2xl:text-center md:max-w-[30vw] lg:max-w-[15vw] mx-auto">
                   <p className="text-xs lg:text-sm xl:text-sm 2xl:text-sm text-wrap leading-tight line-clamp-2 md:line-clamp-none xl:line-clamp-none 2xl:line-clamp-none lg:line-clamp-none">
                     {item.title}
                   </p>
                   <p className="text-sm pb-2 lg:pt-1 xl:pt-1 2xl:pt-1 font-bold text-gray-700">
                     ${selectedVariant?.price?.amount || "—"}
                   </p>
-                </div>
+                </NavLink>
 
                 {/* add to cart mobile button */}
               <div className="flex lg:hidden xl:hidden 2xl:hidden border border-black rounded-sm my-1 py-1 justify-center items-center text-[10px] mx-auto font-semibold max-w-[25w] md:w-[30vw] sm:w-[28vw] px-2">
@@ -240,7 +243,7 @@ export default function Section({ collections, title }) {
                     }
                   </AddToCartButton>
               </div>
-              </NavLink>
+              </div>
             );
           })}
         </div>

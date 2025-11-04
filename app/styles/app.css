@@ -1,5 +1,5 @@
 :root {
-  --aside-width: 400px;
+  --aside-width: 500px;
   --cart-aside-summary-height-with-discount: 300px;
   --cart-aside-summary-height: 250px;
   --grid-item-width: 355px;
@@ -93,8 +93,8 @@
   }
 }
 
-/* aside {
-  background: var(--color-light);
+aside {
+  background: #F5F6F6;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
   height: 100vh;
   width: min(var(--aside-width), 100vw);
@@ -148,7 +148,7 @@ aside p:last-child {
 
 aside li {
   margin-bottom: 0.125rem;
-} */
+}
 
 .overlay {
   background: rgba(0, 0, 0, 0.2);
@@ -327,7 +327,7 @@ button.reset:hover:not(:has(> *)) {
 
 .cart-summary-aside {
   background: white;
-  border-top: 1px solid var(--color-dark);
+  border-top: 1px solid #d1d5dc;
   bottom: 0;
   padding-top: 0.75rem;
   position: absolute;

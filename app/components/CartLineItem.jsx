@@ -3,6 +3,7 @@ import {useVariantUrl} from '~/lib/variants';
 import {Link} from 'react-router';
 import {ProductPrice} from './ProductPrice';
 import {useAside} from './Aside';
+import { Minus, Plus, Trash2 } from 'lucide-react';
 
 /**
  * A single line item in the cart. It displays the product image, title, price.
@@ -19,20 +20,21 @@ export function CartLineItem({layout, line}) {
   const {close} = useAside();
 
   return (
-    <li key={id} className="cart-line">
+    <li key={id} className="flex flex-col w-full max-h-[60vh] px-5">
       {image && (
         <Image
           alt={title}
           aspectRatio="1/1"
           data={image}
-          height={100}
+          height={70}
           loading="lazy"
-          width={100}
+          width={70}
         />
       )}
 
       <div>
-        <Link
+        <div className='flex h-fit items-start justify-between'>
+          <Link
           prefetch="intent"
           to={lineItemUrl}
           onClick={() => {
@@ -42,19 +44,11 @@ export function CartLineItem({layout, line}) {
           }}
         >
           <p>
-            <strong>{product.title}</strong>
+            <p className='text-md'>{product.title}</p>
           </p>
         </Link>
         <ProductPrice price={line?.cost?.totalAmount} />
-        <ul>
-          {selectedOptions.map((option) => (
-            <li key={option.name}>
-              <small>
-                {option.name}: {option.value}
-              </small>
-            </li>
-          ))}
-        </ul>
+        </div>
         <CartLineQuantity line={line} />
       </div>
     </li>
@@ -75,18 +69,20 @@ function CartLineQuantity({line}) {
 
   return (
     <div className="cart-line-quantity">
-      <small>Quantity: {quantity} &nbsp;&nbsp;</small>
-      <CartLineUpdateButton lines={[{id: lineId, quantity: prevQuantity}]}>
+     <div className='w-full flex items-center justify-between my-2'>
+      <div className='flex gap-2 text-lg px-2 items-center justify-center border border-gray-300 rounded-md'>
+       <CartLineUpdateButton lines={[{id: lineId, quantity: prevQuantity}]}>
         <button
           aria-label="Decrease quantity"
           disabled={quantity <= 1 || !!isOptimistic}
           name="decrease-quantity"
           value={prevQuantity}
         >
-          <span>&#8722; </span>
+          <Minus className='w-4 h-4 cursor-pointer' color='#6a7282' />
         </button>
       </CartLineUpdateButton>
       &nbsp;
+       <small>{quantity} &nbsp;&nbsp;</small>
       <CartLineUpdateButton lines={[{id: lineId, quantity: nextQuantity}]}>
         <button
           aria-label="Increase quantity"
@@ -94,11 +90,14 @@ function CartLineQuantity({line}) {
           value={nextQuantity}
           disabled={!!isOptimistic}
         >
-          <span>&#43;</span>
+          <Plus className='w-4 h-4 cursor-pointer' color='#6a7282' />
         </button>
       </CartLineUpdateButton>
+     </div>
       &nbsp;
       <CartLineRemoveButton lineIds={[lineId]} disabled={!!isOptimistic} />
+     </div>
+
     </div>
   );
 }
@@ -121,7 +120,7 @@ function CartLineRemoveButton({lineIds, disabled}) {
       inputs={{lineIds}}
     >
       <button disabled={disabled} type="submit">
-        Remove
+        <Trash2 className='h-5 w-5c cursor-pointer' />
       </button>
     </CartForm>
   );

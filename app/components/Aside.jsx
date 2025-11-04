@@ -38,7 +38,10 @@ export function Aside({children, heading, type}) {
   }, [close, expanded]);
 
   return (
-    <div
+    <>
+    {
+      heading == "MENU"? 
+      <div
       aria-modal
       className={`overlay ${expanded ? 'expanded' : ''}`}
       role="dialog"
@@ -51,6 +54,25 @@ export function Aside({children, heading, type}) {
         <main>{children}</main>
       </div>
     </div>
+    :
+    <div
+      aria-modal
+      className={`overlay ${expanded ? 'expanded' : ''}`}
+      role="dialog"
+    >
+      <button className="close-outside" onClick={close} />
+      <aside>
+        <div className='p-6 border-b border-gray-300 flex items-center justify-between'>
+          <h3 className='text-2xl font-bold'>{heading}</h3>
+          <div className='w-fit h-fit cursor-pointer border-gray-300 border rounded-md p-2'>
+          <X onClick={close} aria-label="Close"/>
+        </div>
+        </div>
+        <main>{children}</main>
+      </aside>
+    </div>
+    }
+    </>
   );
 }
 

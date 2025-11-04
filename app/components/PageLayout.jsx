@@ -14,7 +14,7 @@ import {SearchResultsPredictive} from '~/components/SearchResultsPredictive';
 import Section from './Section';
 import { Hero } from './Hero';
 import ProgressBar from './ProgressBar';
-import { ChevronDown } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
 
 /**
  * @param {PageLayoutProps}
@@ -141,9 +141,15 @@ function CollectionSection({title, items, close}) {
                     setOpenDrop(false);
                     close()
                   }}
-                  className={`w-full text-left px-4 py-2 block text-sm hover:text-white hover:bg-black font-medium`}
+                  className={`w-full text-nowrap flex items-center text-left px-4 py-2 text-sm hover:text-white hover:bg-black font-medium`}
                 >
                   {col.title}
+                  {
+                    index === activeIndex &&
+                    <div className="flex w-full justify-end items-center">
+                    <Check />
+                  </div>
+                  }
                 </NavLink>
               ))}
             </div>
