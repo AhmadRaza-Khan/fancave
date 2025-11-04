@@ -326,7 +326,7 @@ button.reset:hover:not(:has(> *)) {
 }
 
 .cart-summary-aside {
-  background: white;
+  background: #F5F6F6;
   border-top: 1px solid #d1d5dc;
   bottom: 0;
   padding-top: 0.75rem;

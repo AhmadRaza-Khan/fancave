@@ -207,7 +207,7 @@ export default function Section({ collections, title }) {
                 {/* Info */}
               <NavLink
               to={`/products/${item.handle}`}
-                className="w-full text-start lg:text-center xl:text-center 2xl:text-center mx-auto">
+                className="max-w-[85%] text-start lg:text-center xl:text-center 2xl:text-center mx-auto">
                   <p className="text-xs lg:text-sm xl:text-sm 2xl:text-sm text-wrap leading-tight line-clamp-2 md:line-clamp-none xl:line-clamp-none 2xl:line-clamp-none lg:line-clamp-none">
                     {item.title}
                   </p>
@@ -217,7 +217,7 @@ export default function Section({ collections, title }) {
                 </NavLink>
 
                 {/* add to cart mobile button */}
-              <div className="flex lg:hidden xl:hidden 2xl:hidden border border-black rounded-sm my-0.5 py-1 justify-center items-center text-[10px] mx-auto font-semibold w-full px-4">
+              <div className="flex lg:hidden xl:hidden mb-2 2xl:hidden border border-black rounded-sm my-0.5 py-1 justify-center items-center text-[10px] font-semibold w-[85%] mx-auto px-4">
                   <AddToCartButton
                    onClick={() => open("cart")} 
                    lines={[
