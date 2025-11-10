@@ -70,7 +70,7 @@ function SearchResultsPredictiveArticles({term, articles, closeSearch}) {
 
           return (
             <li className="predictive-search-result-item text-black" key={article.id}>
-              <Link onClick={closeSearch} to={articleUrl}>
+              <Link onClick={() => { closeSearch(); setOpenSearch(false) }} to={articleUrl}>
                 {article.image?.url && (
                   <Image
                     alt={article.image.altText ?? ''}
@@ -110,7 +110,7 @@ function SearchResultsPredictiveCollections({term, collections, closeSearch}) {
 
           return (
             <li className="predictive-search-result-item text-black" key={collection.id}>
-              <Link onClick={closeSearch} to={collectionUrl}>
+              <Link onClick={() => { closeSearch(); setOpenSearch(false) }} to={collectionUrl}>
                 {collection.image?.url && (
                   <Image
                     alt={collection.image.altText ?? ''}
@@ -143,14 +143,14 @@ function SearchResultsPredictivePages({term, pages, closeSearch}) {
       <ul>
         {pages.map((page) => {
           const pageUrl = urlWithTrackingParams({
-            baseUrl: `/pages/${page.handle}`,
+            baseUrl: `/${page.handle}`,
             trackingParams: page.trackingParameters,
             term: term.current,
           });
 
           return (
             <li className="predictive-search-result-item text-black" key={page.id}>
-              <Link onClick={closeSearch} to={pageUrl}>
+              <Link onClick={() => { closeSearch(); setOpenSearch(false) }} to={pageUrl}>
                 <div>
                   <span className='text-black hover:text-blue-600'>{page.title}</span>
                 </div>
@@ -184,7 +184,7 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
           const image = product?.selectedOrFirstAvailableVariant?.image;
           return (
             <li className="predictive-search-result-item text-black" key={product.id}>
-              <Link to={productUrl} onClick={closeSearch}>
+              <Link to={productUrl} onClick={() => { closeSearch(); setOpenSearch(false) }}>
                 {image && (
                   <Image
                     alt={image.altText ?? ''}

@@ -3,29 +3,46 @@ import {Await, Link, NavLink, useAsyncValue} from 'react-router';
 import {useAnalytics, useOptimisticCart} from '@shopify/hydrogen';
 import {useAside} from '~/components/Aside';
 import { useState, useRef } from "react";
-import { ChevronDown, ChevronUp, Search, ShoppingCart, UserRound } from 'lucide-react';
+import { ChevronDown, ChevronUp, CircleUserRound, Headphones, Search, ShoppingCart, UserRound } from 'lucide-react';
 import SearchBar from './SearchBar';
 import { filterCollections } from '~/lib/filterCollections';
+import HeaderTop from './HeaderTop';
+import HeaderBottom from './HeaderBottom';
 /**
  * @param {HeaderProps}
  */
 export function Header({header, isLoggedIn, cart, publicStoreDomain, collections}) {
-    const [openSearch, setOpenSearch] = useState(false);
+  const [openSearch, setOpenSearch] = useState(false);
   const {shop, menu} = header;
+  
   return (
-    <header className="navbar px-4 sm:px-10 md:px-16 lg:px-24 xl:px-40 2xl:px-60">
-      {
-        openSearch?  (
-          <SearchBar setOpenSearch={setOpenSearch} />
-        )
-          :
-        (
-      <>
+    <header className="w-full h-fit">
+      <HeaderTop />
+      <div className='xl:px-80 2xl:px-80 lg:px-40 px-7 w-full flex 2xl:justify-between xl:justify-between lg:justify-between xl:items-center lg:items-center 2xl:items-center'>
       <HeaderMenuMobileToggle />
-      <NavLink prefetch="intent" to="/" className="navbar-center lg:navbar-start w-fit flex flex-col items-center justify-center gap-1 xl:text-xs lg:text-xs md:text-[10px] sm:text-[8px] text-[8px] 2xl:text-xs font-thin " style={activeLinkStyle} end>
-        <img className='lg:w-60 xl:w-60 2xl:w-60 md:w-52 sm:w-40 w-40 aspect-auto' src="/logo.jpg" alt={shop.name} />
-        <p>Trading Cards & Autographed Collectibles</p>
-      </NavLink>
+
+        <NavLink prefetch="intent" to="/" className="w-fit mr-[22vw] sm:mr-[30vw] md:mr-[32vw] 2xl:mr-0 xl:mr-0 lg:mr-0 flex mx-auto lg:mx-0 xl:mx-0 2xl:mx-0 flex-col items-center justify-center gap-1 xl:text-[10px] lg:text-[8px] md:text-[9px] sm:text-[7px] text-[7px] 2xl:text-[10px] font-thin " style={activeLinkStyle}>
+          <img className='lg:w-52 xl:w-60 2xl:w-60 md:w-48 sm:w-36 w-36 aspect-auto' src="/logo.png" alt={shop.name} />
+          <p className='text-nowrap font-mono hidden lg:block xl:block 2xl:block'>Trading Cards & Autographed Collectibles</p>
+        </NavLink>
+
+      <div className='flex justify-center items-center gap-10 py-4'>
+        <div className='hidden lg:flex xl:flex 2xl:flex'><SearchBar setOpenSearch={setOpenSearch} /></div>
+        <div className='gap-2 justify-center items-center w-fit h-fit hidden lg:flex xl:flex 2xl:flex '>
+          <img className='h-8 w-8' src="/music.png" alt="music_icon" />
+          <div className='flex flex-col items-start justify-center'>
+            <p className='text-[10px] tracking-wider font-semibold text-nowrap'>HOW CAN WE HELP?</p>
+            <a href="tel:+1234567890" className="text-gray-600 text-nowrap text-[11px]">
+              +1 (636) 778-3848
+            </a>
+          </div>
+        </div>
+      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} openSearch={openSearch} setOpenSearch={setOpenSearch} />
+      </div>
+
+      </div>
+
+      <div className='flex lg:hidden xl:hidden 2xl:hidden'><SearchBar setOpenSearch={setOpenSearch} /></div>
       <HeaderMenu
         menu={menu}
         viewport="desktop"
@@ -33,10 +50,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
         publicStoreDomain={publicStoreDomain}
         collections={collections}
       />
-      <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} openSearch={openSearch} setOpenSearch={setOpenSearch} />
-      </>
-          )
-      }
+      <HeaderBottom />
     </header>
   );
 }
@@ -70,12 +84,12 @@ export function HeaderMenu({ collections = [] }) {
 
   const Dropdown = ({ title, name, items }) => (
   <div
-    className="relative cursor-pointer"
+    className="relative cursor-pointer py-3"
     onMouseEnter={() => handleMouseEnter(name)}
     onMouseLeave={handleMouseLeave}
   >
-    <button className="font-sm flex items-center justify-center gap-1">
-      {title} <ChevronDown color="#969292" />
+    <button className="font-light text-sm flex items-center justify-center gap-1">
+      {title} <ChevronDown className='h-5 w-5' />
     </button>
 
     {openDropdown === name && (
@@ -99,7 +113,7 @@ export function HeaderMenu({ collections = [] }) {
 
 
   return (
-    <div className='navbar-center'>
+    <div className='flex justify-center w-full items-center mx-auto'>
       <nav className="items-center gap-3 lg:gap-6 lg:mx-10 md:mx-8 mx-5 hidden xl:flex 2xl:flex lg:flex" role="navigation">
       {autographs.length > 0 && (
         <Dropdown title="Autographs" name="autographs" items={autographs} />
@@ -135,23 +149,23 @@ export function HeaderMenu({ collections = [] }) {
  */
 function HeaderCtas({ isLoggedIn, cart , openSearch, setOpenSearch}) {
   return (
-    <nav className="navbar-end" role="navigation">
+    <nav className="" role="navigation">
 
        {/* Search */}
-      <SearchToggle setOpenSearch={setOpenSearch} openSearch={openSearch} />
+      {/* <SearchToggle setOpenSearch={setOpenSearch} openSearch={openSearch} /> */}
 
       {/* Sign In / Account */}
-      <NavLink
+      {/* <NavLink
         prefetch="intent"
         to="/account"
         className="px-2 lg:px-4 py-2 transition font-medium cursor-pointer"
       >
         <Suspense fallback="Sign in">
           <Await resolve={isLoggedIn} errorElement="Sign in">
-            <UserRound color="#000" />
+            <UserRound className='h-4 w-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-7 xl:h-7 2xl:w-7 2xl:h-7' color="#000" />
           </Await>
         </Suspense>
-      </NavLink>
+      </NavLink> */}
 
       {/* Cart */}
       <CartToggle cart={cart} />
@@ -166,7 +180,7 @@ function SearchToggle({setOpenSearch}) {
       onClick={() => setOpenSearch(true)}
       className="px-2 lg:px-4 py-2 transition font-medium cursor-pointer"
     >
-      <Search color="#000" />
+      <Search className='h-4 w-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-7 xl:h-7 2xl:w-7 2xl:h-7' color="#000" />
     </button>
   );
 }
@@ -189,7 +203,7 @@ function CartBadge({ count }) {
       }}
       className="px-2 lg:px-4 py-2 rounded-md relative transition font-medium flex items-center gap-2 cursor-pointer"
     >
-      <ShoppingCart color="#000" />
+      <ShoppingCart className='w-6 h-6' color="#000" />
       {
         count > 0 &&
         <span className="bg-black text-white absolute top-0 right-1 h-4 w-4 font-bold rounded-sm text-[11px] -mt-1 -mr-1 ">
@@ -208,7 +222,7 @@ function HeaderMenuMobileToggle() {
       className="flex lg:hidden xl:hidden 2xl:hidden navbar-start"
       onClick={() => open('mobile')}
     >
-      <h3 className='text-[#969292]'>☰</h3>
+      <h3 className='text-black text-xl'>☰</h3>
     </button>
   );
 }

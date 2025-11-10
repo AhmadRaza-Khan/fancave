@@ -1,6 +1,7 @@
 import {Link} from 'react-router';
 import {Image, Money} from '@shopify/hydrogen';
 import {useVariantUrl} from '~/lib/variants';
+import { AddToCartButton } from './AddToCartButton';
 
 /**
  * @param {{
@@ -12,11 +13,12 @@ import {useVariantUrl} from '~/lib/variants';
  * }}
  */
 export function ProductItem({product, loading}) {
+  console.log(product)
   const variantUrl = useVariantUrl(product.handle);
   const image = product.featuredImage;
   return (
     <Link
-      className="product-item"
+      className="product-item rounded-2xl"
       key={product.id}
       prefetch="intent"
       to={variantUrl}
@@ -30,10 +32,10 @@ export function ProductItem({product, loading}) {
           sizes="(min-width: 45em) 400px, 100vw"
         />
       )}
-      <h4>{product.title}</h4>
-      <small>
+      <h4 className='max-w-56 mx-auto'>{product.title}</h4>
+      <p className='max-w-56 mx-auto text-start text-gray-700 py-2'>
         <Money data={product.priceRange.minVariantPrice} />
-      </small>
+      </p>
     </Link>
   );
 }

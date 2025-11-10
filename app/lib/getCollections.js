@@ -1,8 +1,8 @@
 export async function getAllCollectionsWithProducts(storefront) {
   try {
-    const data = await storefront.query(`
+   const data = await storefront.query(`
       query {
-        collections(first: 50) {
+        collections(first: 50, sortKey: UPDATED_AT, reverse: true) {
           nodes {
             id
             handle

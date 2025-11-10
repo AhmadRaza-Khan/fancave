@@ -7,6 +7,7 @@ import { filterCollections } from "~/lib/filterCollections";
 import { CircleArrowLeft, CirclePlus, ChevronLeft, ChevronRight, ChevronDown, Search, ShoppingCart, Check } from "lucide-react";
 
 export default function Section({ collections, title }) {
+  console.log(collections)
   const scrollRef = useRef(null);
   const [atStart, setAtStart] = useState(true);
   const [openDrop , setOpenDrop] = useState(false)
@@ -19,22 +20,22 @@ export default function Section({ collections, title }) {
   let sortedCollection;
   let objectProp;
   switch (title) {
-    case "Trading Cards":
+    case "Trading Cards Singles":
       initialState = 7;
       sortedCollection = tradingCards;
       objectProp = "object-cover"
       break;
     case "Autographs":
       initialState = 18;
-      sortedCollection = [...autographs].reverse();
+      sortedCollection = autographs;
       objectProp = "object-contain"
       break;
-    case "Boxes":
+    case "TCG CARDS":
       initialState = 29;
       sortedCollection = boxes;
       objectProp = "object-contain"
       break;
-    case "Singles":
+    case "Sealed Wax Boxes":
       initialState = 34;
       sortedCollection = singles;
       objectProp = "object-contain"
@@ -48,9 +49,27 @@ export default function Section({ collections, title }) {
       initialState = 0;
       sortedCollection = collections;
   }
+  sortedCollection[0].title = "New Arrivals";
+  // console.log(collections)
+
+  // function findCollectionsByWord(collections, word) {
+//   const lower = word.toLowerCase();
+
+//   return collections
+//     .filter(col =>
+//       col.products?.some(prod =>
+//         prod.title?.toLowerCase().includes(lower)
+//       )
+//     )
+//     .map(col => col.title);
+// }
+//   const collectionTitles = findCollectionsByWord(collections, "victor");
+//   console.log(collectionTitles)
+
+
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeHandle, setActiveHandle] = useState(collections[initialState]?.handle);
+  const [activeHandle, setActiveHandle] = useState(sortedCollection[0]?.handle);
   const { open } = useAside();
 
   // Scroll controls
@@ -85,15 +104,15 @@ export default function Section({ collections, title }) {
   
 
   return (
-    <div className="flex flex-col items-start w-full md:w-[85vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw] lg:my-12 xl:my-12 2xl:my-12 my-3 mx-auto h-auto">
+    <div className="flex flex-col items-start w-full md:w-[85vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw] mx-auto h-auto 2xl:mb-20 xl:mb-20 md:mb-[60px] sm:mb-10 mb-10">
       {/* Section Title */}
-      <span className="2xl:text-3xl xl:text-3xl lg:text-3xl md:text-2xl sm:text-lg text-lg font-bold mb-3 ml-3 md:ml-0 lg:ml-0 xl:ml-0 2xl:ml-0">{title}</span>
+      <span className="2xl:text-4xl xl:text-4xl lg:text-4xl md:text-[28px] sm:text-[28px] text-[28px] font-semibold lg:font-bold 2xl:font-bold xl:font-bold ml-3 md:ml-0 lg:ml-0 xl:ml-0 2xl:ml-0 mb-6 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-10 2xl:mb-10">{title}</span>
 
       <div className="pr-0 pb-0 mx-auto">
         <div className="bg-[#F5F6F6] rounded-tl-xl rounded-br-0 px-2 pt-2 flex flex-col items-start w-[90vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw]  mx-auto h-auto relative">
         {/* Button Group */}
-      <div className="lg:flex hidden gap-4 overflow-x-auto pb-5 px-2 w-fit mx-auto">
-        {sortedCollection.slice(0, 6).filter((_, idx) => idx !== 2).map((col, index) => (
+      <div className="lg:flex hidden gap-4 overflow-x-auto pb-10 px-2 w-fit mx-auto">
+        {sortedCollection.map((col, index) => (
           <button
             key={index}
             onClick={() => {
@@ -126,7 +145,7 @@ export default function Section({ collections, title }) {
           {/* Dropdown Menu */}
           {openDrop && (
             <div className="absolute left-0 mt-2 w-full bg-[#F5F6F6] border border-gray-200 rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
-              {sortedCollection.slice(0, 6).filter((_, idx) => idx !== 2).map((col, index) => (
+              {sortedCollection.map((col, index) => (
                 <button
                   key={index}
                   onClick={() => {
@@ -175,7 +194,7 @@ export default function Section({ collections, title }) {
               to={`/products/${item.handle}`}
               className="relative w-full aspect-square flex items-center justify-center rounded-lg">
                 <Image
-                  sizes="100vw"
+                  sizes="85vw"
                   src={item.featuredImage?.url}
                   alt={item.title}
                   className={`${objectProp} group-hover:scale-110 transform transition-all ease-out duration-700 max-w-[85%] max-h-[85%]`}
@@ -208,10 +227,10 @@ export default function Section({ collections, title }) {
               <NavLink
               to={`/products/${item.handle}`}
                 className="max-w-[85%] text-start lg:text-center xl:text-center 2xl:text-center mx-auto">
-                  <p className="text-xs lg:text-sm xl:text-sm 2xl:text-sm text-wrap leading-tight line-clamp-2 md:line-clamp-none xl:line-clamp-none 2xl:line-clamp-none lg:line-clamp-none">
+                  <p className="text-[15px] lg:text-[17px] xl:text-[17px] 2xl:text-[17px] font-medium text-wrap leading-tight line-clamp-2 xl:line-clamp-none 2xl:line-clamp-none lg:line-clamp-none">
                     {item.title}
                   </p>
-                  <p className="text-sm pb-2 lg:pt-1 xl:pt-1 2xl:pt-1 font-bold text-gray-700">
+                  <p className="text-[17px] lg:text-[19px] xl:text-[19px] 2xl:text-[19px] pb-2 lg:pt-1 xl:pt-1 2xl:pt-1 font-bold text-gray-700">
                     ${selectedVariant?.price?.amount || "—"}
                   </p>
                 </NavLink>

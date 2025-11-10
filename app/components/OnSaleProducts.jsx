@@ -17,10 +17,10 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
     case "Autographs on Sale":
       sortedCollection = autographs;
       break;
-    case "Boxes on Sale":
+    case "TCG CARDS":
       sortedCollection = boxes;
       break;
-    case "Singles on Sale":
+    case "Boxes on Sale":
       sortedCollection = singles;
       break;
     case "Items on Sale":
@@ -72,8 +72,12 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
   };
 
   return (
-    <>
+    <div className="2xl:mb-20 xl:mb-20 md:mb-[60px] sm:mb-10 mb-10 w-full h-auto">
       {discountedAll.length > 0 && (
+        <>
+      <h3 className="2xl:text-4xl xl:text-4xl lg:text-4xl md:text-[28px] sm:text-[28px] text-[28px] font-semibold lg:font-bold 2xl:font-bold xl:font-bold ml-3 md:ml-16 lg:ml-10 xl:ml-10 2xl:ml-10 mb-6 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-10 2xl:mb-10">
+            {title}
+      </h3>
         <div
           style={{
             backgroundImage: image,
@@ -81,13 +85,9 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
             backgroundPosition: "center",
             width: "100%",
           }}
-          className="flex flex-col items-center justify-center w-full h-auto my-8"
+          className="flex flex-col items-center justify-center w-full h-auto"
         >
           <div className="bg-black/40 relative flex flex-col items-center py-5 justify-center w-full h-auto">
-          <span className="2xl:text-2xl text-white xl:text-2xl lg:text-2xl md:text-xl sm:text-xl xs:text-lg font-bold mb-5 text-center">
-            {title}
-          </span>
-
           {/* Scroll Left Button */}
           {canScrollLeft && (
             <button
@@ -194,7 +194,8 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
           )}
           </div>
         </div>
+        </>
       )}
-    </>
+    </div>
   );
 }

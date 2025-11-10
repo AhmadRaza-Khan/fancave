@@ -1,90 +1,81 @@
 export function filterCollections(collections){
 
   const autographHandles = [
-      'autographed-baseball', 
-      'autographed-basketball', 
-      'autographed-bat', 
-      'autographed-framed-item', 
-      'autographed-funko', 
-      'game-used', 
-      'autographed-helmets', 
-      'autographed-jersey', 
-      'autographed-photo', 
-      'autographed-puck'
-    ]
-  const cardHandles = [
-  "trading-cards",
-  "bgs-graded-cards",
-  "pokemon",
-  "graded-cards",
-  "sgc-graded-cards",
-  "single-packs",
-];
-  
-  const singleHandles = [
-  "singles",
-  "single-packs",
-  "ungraded-cards",
-  "pokemon-singles",
-  "football-singles",
-  "baseball-singles",
-  "basketball-singles"
-]
+    'autographs',
+    'football-singles',
+    'autographed-baseball', 
+    'autographed-bat',
+    'autographed-basketball', 
+  ]
 
+  const cardHandles = [
+    "trading-cards",
+    "case-hit",
+    "graded-cards",
+    "sgc-graded-cards",
+    "pokemon",
+  ]
+
+  const singleHandles = [
+    "singles",
+    "sealed-boxes",
+    "retail-boxes",
+    "single-packs",
+    "blaster-boxes",
+  ]
 
   const boxeHandles = [
-  "blaster-boxes",
-  "sealed-boxes",
-  "retail-boxes",
-];
+    "graded-cards",
+    "pokemon",
+    "singles",
+  ]
 
-    const giftHandle = ["gift-cards"]
+  const giftHandle = ["gift-cards"]
 
-    let autographs = collections.filter((c) =>
-        autographHandles.some((kw) =>
-        c.handle.includes(kw)
-        )
-    );
+  const orderByHandles = (list, handles) =>
+    list.sort((a,b) => handles.indexOf(a.handle) - handles.indexOf(b.handle))
 
-    autographs = autographs.map((item) => {
-      return {
-        ...item,
-        title: item.title
-          .replace(/Autographed/gi, "")
-          .replace(/\s\s+/g, " ")
-          .trim(),
-      };
-    });
+  let autographs = collections.filter((c) => autographHandles.includes(c.handle))
 
-     const singles = collections.filter((c) =>
-        singleHandles.some((kw) =>
-        c.handle.includes(kw)
-        )
-    );
+  autographs = autographs.map((item) => ({
+    ...item,
+    title: item.title
+      .replace(/Autographed/gi, "")
+      .replace(/\s\s+/g, " ")
+      .trim()
+  }))
 
-    const giftCards = collections.filter((c) =>
-        giftHandle.some((kw) =>
-        c.handle.includes(kw)
-        )
-    );
+  autographs = orderByHandles(autographs, autographHandles)
 
-    const tradingCards = collections.filter((c) => 
-    cardHandles.includes(c.handle)
-    );
+  const singles = orderByHandles(
+    collections.filter((c) => singleHandles.includes(c.handle)),
+    singleHandles
+  )
 
-    const boxes = collections.filter((c) => 
-    boxeHandles.includes(c.handle)
-    );
+  const giftCards = collections.filter((c) => giftHandle.includes(c.handle))
 
+  const tradingCards = orderByHandles(
+    collections.filter((c) => cardHandles.includes(c.handle)),
+    cardHandles
+  )
 
-    const otherCollections = collections.filter(
-        (c) => !autographs.includes(c) && !tradingCards.includes(c) && !boxes.includes(c) && !singles.includes(c) && !giftCards.includes(c)
-    );
+  const boxes = orderByHandles(
+    collections.filter((c) => boxeHandles.includes(c.handle)),
+    boxeHandles
+  )
 
-    const filteredAllCollections = collections.filter(
-        (c) => !giftCards.includes(c)
-    );
+  const otherCollections = collections.filter(
+    (c) =>
+      !autographs.includes(c) &&
+      !tradingCards.includes(c) &&
+      !boxes.includes(c) &&
+      !singles.includes(c) &&
+      !giftCards.includes(c)
+  )
 
-    return {autographs, tradingCards, otherCollections, boxes, singles, filteredAllCollections}
+  const filteredAllCollections = collections.filter(
+    (c) => !giftCards.includes(c)
+  )
 
+  return { autographs, tradingCards, otherCollections, boxes, singles, filteredAllCollections }
 }

@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, MoveRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router";
 import { filterCollections } from "~/lib/filterCollections";
@@ -36,73 +36,70 @@ export default function CollectionsCarousel({ collections }) {
 
   const allCollections = filteredAllCollections.reverse();
 
+  const fallbackImages = [
+  '/collection/Baseball_singles.png',
+  '/collection/Basket_ball_singles.png',
+  '/collection/Case_hitss.png',
+  '/collection/football_singles.png',
+  '/collection/pokemon_singles.png',
+  '/collection/St_Louis_Blues.png',
+];
+
+function getFallbackImage(index) {
+  const totalFallbacks = fallbackImages.length;
+  return fallbackImages[index % totalFallbacks];
+}
+
   return (
-    <section className="w-full bg-[#F5F6F6] lg:pt-6 xl:pt-6 2xl:pt-6 pt-3 md:pt-4 relative">
-    <p className="ml-[2.5vw] lg:ml-[2.1vw] xl:ml-[2.1vw] 2xl:ml-[2.1vw] text-start mb-4 2xl:text-3xl xl:text-3xl lg:text-3xl md:text-2xl sm:text-lg text-lg font-bold">Shop by Category </p>
-      <div className="max-w-[95vw] mx-auto px-6 bg-linear-to-b from-[#F5F6F6] to-black from-50% to-50%">
+    <section className="w-full bg-[#F5F6F6] relative 2xl:mb-20 xl:mb-20 md:mb-[60px] sm:mb-10 mb-10">
+    <p className="ml-[2.5vw] lg:ml-[2.1vw] xl:ml-[2.1vw] 2xl:ml-[2.1vw] text-start mb-6 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-10 2xl:mb-10 2xl:text-4xl xl:text-4xl lg:text-4xl md:text-[28px] sm:text-[28px] text-[28px] font-semibold lg:font-bold 2xl:font-bold xl:font-bold">Shop by Category </p>
 
         {/* Collection cards */}
-        <div className="relative w-full">
+        <div className="relative w-full px-10">
           <div
             ref={scrollRef}
             className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide relative z-0"
           >
-            {allCollections?.map((collection) =>
-              collection?.image?.url ||
-              collection?.products?.[0]?.variants?.nodes?.[0]?.image?.url ? (
-                <NavLink
-                  key={collection.id}
-                  to={`/collections/${collection.handle}`}
-                  className="shrink-0 w-50 my-1 h-32 lg:w-80 lg:h-56 xl:w-80 xl:h-56 2xl:w-80 2xl:h-56 overflow-hidden bg-white border flex items-end justify-end relative border-gray-500 rounded-md shadow-sm hover:shadow-md transition-all duration-300"
-                >
-                  {/* Image */}
-                  <div
-                    style={{
-                      transform: `rotate(-45deg) scale(1.05)`,
-                    }}
-                    className="absolute -bottom-11 -right-8 w-fit h-fit overflow-hidden rounded-t-md z-10"
-                  >
-                    <img
-                      src={
-                        collection?.image?.url ||
-                        collection?.products?.[0]?.variants?.nodes?.[0]?.image?.url
-                      }
-                      alt={collection.title}
-                      className="w-32 lg:w-52 xl:w-52 2xl:w-52 object-contain transition-transform duration-500 hover:scale-105"
-                    />
-                  </div>
+            {allCollections?.map((collection, idx) => {
+  
+            const imageUrl = collection?.image?.url || getFallbackImage(idx);
 
-                  <div
-                    style={{
-                      transform: `rotate(-45deg) scale(1.05)`,
-                    }}
-                    className="absolute -bottom-8 -right-14 w-fit h-fit overflow-hidden rounded-t-md"
-                  >
-                    <img
-                      src={
-                        collection?.products?.[1]?.variants?.nodes?.[0]?.image?.url
-                      }
-                      alt={collection.title}
-                      className="w-32 lg:w-52 xl:w-52 2xl:w-52 object-contain transition-transform duration-500 hover:scale-105"
-                    />
-                  </div>
+            return (
+              <NavLink
+                key={collection.id}
+                to={`/collections/${collection.handle}`}
+                className="flex bg-white flex-col cursor-pointer shadow-sm rounded-lg overflow-hidden group relative
+                          min-w-2/3 sm:min-w-1/2 md:min-w-1/4 lg:min-w-1/5 xl:min-w-1/5 h-fit 2xl:min-w-1/5 mx-auto"
+              >
+                {/* Image */}
+                <div className="w-full aspect-square bg-white flex items-center justify-center overflow-hidden">
+                  <img
+                    src={imageUrl}
+                    alt={collection.title}
+                    className="w-full h-full object-contain opacity-80"
+                  />
+                </div>
 
-                  {/* Title */}
-                  <div className="p-4 absolute top-1 left-1 lg:top-3 lg:left-3 xl:top-3 xl:left-3 2xl:top-3 2xl:left-3 text-center">
-                    <h3 className="xl:text-md 2xl:text-md lg:text-md text-[8px] md:text-xs text-black font-semibold tracking-wide hover:text-gray-600 uppercase">
-                      {collection.title}
-                    </h3>
-                  </div>
-                </NavLink>
-              ) : null
-            )}
+                <div className="flex flex-col gap-3 text-white items-start justify-center h-fit w-fit absolute bottom-5 left-5">
+                  <h3 className="text-sm 2xl:text-base xl:text-base">{collection.title}</h3>
+                  <p className="text-xs">Discover premium collection</p>
+                  <NavLink to={`/collections/${collection.handle}`} className="flex gap-2 text-xs lg:text-sm xl:text-sm 2xl:text-sm px-4 py-1 xl:py-2 2xl:py-2 items-center justify-center rounded-lg text-black bg-white">
+                    <p>Explore</p> <MoveRight size={14} />
+                  </NavLink>
+                </div>
+              </NavLink>
+            );
+          })}
+
+            
           </div>
+
 
           {/* Navigators */}
           {!atStart && (
             <button
               onClick={() => scroll("left")}
-              className="absolute -left-1 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-8 transition"
+              className="absolute left-5 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-8 transition"
             >
               <ChevronLeft color="#000" size={24} />
             </button>
@@ -111,17 +108,17 @@ export default function CollectionsCarousel({ collections }) {
           {!atEnd && (
             <button
               onClick={() => scroll("right")}
-              className="absolute -right-1 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-8 transition"
+              className="absolute right-5 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-8 transition"
             >
               <ChevronRight color="#000" size={24} />
             </button>
           )}
         </div>
-      </div>
-    <div className="flex items-center justify-end mr-[2.1vw] my-2">
+
+    <div className="flex items-center justify-end mr-10 mt-0.5">
       <NavLink
         to="/collections"
-        className="flex items-center justify-center leading-none border border-black text-black hover:bg-black hover:text-white font-bold text-nowrap text-[7px] md:text-[10px] lg:text-sm xl:text-sm 2xl:text-sm px-1 lg:px-4 xl:px-4 2xl:px-4 py-2 sm:py-2 md:py-3 lg:py-4 xl:py-5 2xl:py-5 duration-100 ease-linear transition-all"
+        className="flex items-center justify-center leading-none border border-black text-black hover:bg-black hover:text-white font-bold text-nowrap xl:text-[16px] lg:text-[16px] 2xl:text-[16px] text-sm lg:text-sm px-1 lg:px-4 xl:px-4 2xl:px-4 py-2 sm:py-2 md:py-3 lg:py-4 xl:py-5 2xl:py-5 duration-100 ease-linear transition-all"
       >
         VISIT ALL CATEGORIES
       </NavLink>
