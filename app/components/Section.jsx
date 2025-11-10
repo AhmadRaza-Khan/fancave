@@ -106,7 +106,7 @@ export default function Section({ collections, title }) {
   return (
     <div className="flex flex-col items-start w-full md:w-[85vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw] mx-auto h-auto 2xl:mb-20 xl:mb-20 md:mb-[60px] sm:mb-10 mb-10">
       {/* Section Title */}
-      <span className="2xl:text-4xl xl:text-4xl lg:text-4xl md:text-[28px] sm:text-[28px] text-[28px] font-semibold lg:font-bold 2xl:font-bold xl:font-bold ml-3 md:ml-0 lg:ml-0 xl:ml-0 2xl:ml-0 mb-6 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-10 2xl:mb-10">{title}</span>
+      <span className="2xl:text-4xl xl:text-4xl lg:text-4xl md:text-[28px] sm:text-[28px] text-[22px] font-semibold lg:font-bold 2xl:font-bold xl:font-bold ml-6 md:ml-0 lg:ml-0 xl:ml-0 2xl:ml-0 mb-6 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-10 2xl:mb-10">{title}</span>
 
       <div className="pr-0 pb-0 mx-auto">
         <div className="bg-[#F5F6F6] rounded-tl-xl rounded-br-0 px-2 pt-2 flex flex-col items-start w-[90vw] md:w-[80vw] lg:w-[90vw] xl:w-[95vw] 2xl:[98vw]  mx-auto h-auto relative">
@@ -187,7 +187,7 @@ export default function Section({ collections, title }) {
              <div
               key={index}
               className="flex bg-white flex-col cursor-pointer shadow-sm rounded-lg overflow-hidden group relative
-              min-w-1/2 sm:min-w-1/2 md:min-w-1/2 lg:min-w-1/4 xl:min-w-1/4 2xl:min-w-1/4 mx-auto"
+              min-w-1/2 sm:min-w-1/2 md:min-w-1/2 lg:min-w-1/4 xl:min-w-1/4 2xl:min-w-1/4 mx-auto border border-black"
             >
               {/* Canvas Image box */}
               <NavLink

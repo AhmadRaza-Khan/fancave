@@ -57,7 +57,7 @@ export default function VideoSection() {
           {/* overlay */}
           <div className="absolute bottom-[8vh] md:bottom-[16vh] sm:bottom-[12vh] lg:bottom-[30vh] xl:bottom-[32vh] 2xl:bottom-[33vh] left-0 right-0 inset flex items-center justify-center">
             <div className="flex flex-col gap-8 items-center justify-center mx-auto">
-              <h1 className="text-white text-center text-wrap text-[32px] font-semibold md:text-[48px] md:font-extrabold lg:text-[48px] lg:font-extrabold 2xl:text-[48px] 2xl:font-extrabold xl:text-[48px] xl:font-extrabold pointer-events-none">
+              <h1 className="text-white text-center text-wrap text-6 font-semibold md:text-[48px] md:font-extrabold lg:text-[48px] lg:font-extrabold 2xl:text-[48px] 2xl:font-extrabold xl:text-[48px] xl:font-extrabold pointer-events-none">
                 Alec Burleson Exclusive Collection
               </h1>
               <NavLink

@@ -40,7 +40,7 @@ const HeaderTop = () => {
 
   return (
     <div className={`w-full h-fit py-3 flex text-sm items-center justify-between
-        2xl:px-80 xl:px-80 lg:px-80 
+        xl:px-10 2xl:px-20 lg:px-20 
         ${current.bg} ${current.textColor}
         component-wrapper ${animate ? "slide-in" : "slide-out"}
     `}>

@@ -18,7 +18,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
   return (
     <header className="w-full h-fit">
       <HeaderTop />
-      <div className='xl:px-80 2xl:px-80 lg:px-40 px-7 w-full flex 2xl:justify-between xl:justify-between lg:justify-between xl:items-center lg:items-center 2xl:items-center'>
+      <div className='xl:px-10 2xl:px-20 lg:px-20 px-7 w-full flex 2xl:justify-between xl:justify-between lg:justify-between xl:items-center lg:items-center 2xl:items-center'>
       <HeaderMenuMobileToggle />
 
         <NavLink prefetch="intent" to="/" className="w-fit mr-[22vw] sm:mr-[30vw] md:mr-[32vw] 2xl:mr-0 xl:mr-0 lg:mr-0 flex mx-auto lg:mx-0 xl:mx-0 2xl:mx-0 flex-col items-center justify-center gap-1 xl:text-[10px] lg:text-[8px] md:text-[9px] sm:text-[7px] text-[7px] 2xl:text-[10px] font-thin " style={activeLinkStyle}>
@@ -26,7 +26,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
           <p className='text-nowrap font-mono hidden lg:block xl:block 2xl:block'>Trading Cards & Autographed Collectibles</p>
         </NavLink>
 
-      <div className='flex justify-center items-center gap-10 py-4'>
+      <div className='flex justify-center items-center gap-10 pb-2 pt-3'>
         <div className='hidden lg:flex xl:flex 2xl:flex'><SearchBar setOpenSearch={setOpenSearch} /></div>
         <div className='gap-2 justify-center items-center w-fit h-fit hidden lg:flex xl:flex 2xl:flex '>
           <img className='h-8 w-8' src="/music.png" alt="music_icon" />
@@ -42,7 +42,7 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
 
       </div>
 
-      <div className='flex lg:hidden xl:hidden 2xl:hidden'><SearchBar setOpenSearch={setOpenSearch} /></div>
+      <div className='flex lg:hidden xl:hidden 2xl:hidden mb-3'><SearchBar setOpenSearch={setOpenSearch} /></div>
       <HeaderMenu
         menu={menu}
         viewport="desktop"

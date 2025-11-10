@@ -34,7 +34,7 @@ const iconsData = [
 
 const HeaderBottom = () => {
   return (
-    <div className="w-full bg-[#2277c7] 2xl:px-[350px] xl:px-[400px] lg:px-60 px-10 max-lg:px-4 max-xl:px-4 max-2xl:px-4">
+    <div className="w-full bg-[#2277c7] 2xl:px-[350px] xl:px-[220px] lg:px-32 px-10 max-lg:px-4 max-xl:px-4 max-2xl:px-4">
         <ul
             className="
             flex items-center justify-between
