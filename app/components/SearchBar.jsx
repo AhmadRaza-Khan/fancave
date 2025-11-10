@@ -34,7 +34,7 @@ export default function SearchBar({setOpenSearch}) {
       <SearchFormPredictive>
         {({ fetchResults, goToSearch, inputRef }) => (
           
-          <div className="flex items-center justify-center border border-gray-200 2xl:w-[350px] xl:w-[350px] lg:w-80 w-[92vw] md:w-[95vw] mx-auto lg:mx-0 xl:mx-0 2xl:mx-0 px-5 h-fit relative">
+          <div className="flex items-center justify-center border shadow-sm border-gray-200 2xl:w-[350px] xl:w-[350px] lg:w-80 w-[92vw] md:w-[95vw] mx-auto lg:mx-0 xl:mx-0 2xl:mx-0 px-5 h-fit relative">
             <input
               className="placeholder-black placeholder:text-sm text-black w-full h-12 border-none outline-none focus:ring-0"
               ref={inputRef}

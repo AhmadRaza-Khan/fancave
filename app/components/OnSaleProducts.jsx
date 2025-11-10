@@ -75,7 +75,7 @@ export default function OnSaleProducts({ collections, allowedHandles, title, ima
     <div className="2xl:mb-20 xl:mb-20 md:mb-[60px] sm:mb-10 mb-10 w-full h-auto">
       {discountedAll.length > 0 && (
         <>
-      <h3 className="2xl:text-4xl xl:text-4xl lg:text-4xl md:text-[28px] sm:text-[28px] text-[28px] font-semibold lg:font-bold 2xl:font-bold xl:font-bold ml-3 md:ml-16 lg:ml-10 xl:ml-10 2xl:ml-10 mb-6 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-10 2xl:mb-10">
+      <h3 className="2xl:text-4xl xl:text-4xl ml-6 lg:text-4xl md:text-[28px] sm:text-[28px] text-[22px] font-semibold lg:font-bold 2xl:font-bold xl:font-bold md:ml-16 lg:ml-10 xl:ml-10 2xl:ml-10 mb-6 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-10 2xl:mb-10">
             {title}
       </h3>
         <div

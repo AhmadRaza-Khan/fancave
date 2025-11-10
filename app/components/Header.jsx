@@ -18,7 +18,8 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
   return (
     <header className="w-full h-fit">
       <HeaderTop />
-      <div className='max-w-7xl mx-auto px-6 flex 2xl:justify-between xl:justify-between lg:justify-between xl:items-center lg:items-center 2xl:items-center'>
+      <div className='w-full h-[0.5px] bg-gray-200'></div>
+      <div className='max-w-7xl mx-auto px-6 lg:px-0 xl:px-0 2xl:px-0  flex 2xl:justify-between xl:justify-between lg:justify-between xl:items-center lg:items-center 2xl:items-center'>
       <HeaderMenuMobileToggle />
 
         <NavLink prefetch="intent" to="/" className="w-fit mr-[22vw] sm:mr-[30vw] md:mr-[32vw] 2xl:mr-0 xl:mr-0 lg:mr-0 flex mx-auto lg:mx-0 xl:mx-0 2xl:mx-0 flex-col items-center justify-center gap-1 xl:text-[10px] lg:text-[8px] md:text-[9px] sm:text-[7px] text-[7px] 2xl:text-[10px] font-thin " style={activeLinkStyle}>
@@ -39,8 +40,8 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
         </div>
       <HeaderCtas isLoggedIn={isLoggedIn} cart={cart} openSearch={openSearch} setOpenSearch={setOpenSearch} />
       </div>
-
       </div>
+      <div className='w-full h-[0.5px] bg-gray-200'></div>
 
       <div className='flex lg:hidden xl:hidden 2xl:hidden mb-3'><SearchBar setOpenSearch={setOpenSearch} /></div>
       <HeaderMenu
@@ -79,7 +80,7 @@ export function HeaderMenu({ collections = [] }) {
   const handleMouseLeave = () => {
     closeTimeout.current = setTimeout(() => {
       setOpenDropdown(null);
-    }, 200);
+    }, 100);
   };
 
   const Dropdown = ({ title, name, items }) => (
