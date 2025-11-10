@@ -34,22 +34,12 @@ const iconsData = [
 
 const HeaderBottom = () => {
   return (
-    <div className="w-full bg-[#2277c7] 2xl:px-[350px] xl:px-[220px] lg:px-32 px-10 max-lg:px-4 max-xl:px-4 max-2xl:px-4">
-        <ul
-            className="
-            flex items-center justify-between
-            overflow-x-auto
-            max-lg:gap-4
-            max-lg:justify-start
-            max-lg:max-w-full
-            scrollbar-hide
-            "
-        >
+    <div className="w-full bg-[#2277c7]">
+        <div className='max-w-7xl mx-auto'>
+          <ul
+            className="flex items-center justify-between overflow-x-auto w-full scrollbar-hide">
             {iconsData.map((item, idx) => (
-            <li
-                key={idx}
-                className="text-white flex items-center justify-center gap-2 flex-none max-lg:w-1/2"
-            >
+            <li key={idx} className="text-white flex items-center justify-center gap-2 flex-none max-lg:w-1/2">
                 <div className="flex items-center justify-center w-11 h-11">
                 {item.svg}
                 </div>
@@ -59,6 +49,7 @@ const HeaderBottom = () => {
             </li>
             ))}
         </ul>
+        </div>
     </div>
 
   );

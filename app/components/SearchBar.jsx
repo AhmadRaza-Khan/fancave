@@ -80,10 +80,10 @@ export default function SearchBar({setOpenSearch}) {
 
      {/* Results Section */}
 {isVisible && (
-  <div className="mt-4 w-full max-h-[60vh] bg-white rounded-b-xl overflow-y-auto scrollbar-minimal border-t z-50 absolute top-8 border-gray-200">
+  <div className="mt-4 2xl:w-full xl:w-full lg:w-full md:w-full w-[92vw]  max-h-[60vh] bg-white rounded-b-xl overflow-y-auto scrollbar-minimal border-t z-50 absolute top-8 border-gray-200">
     {/* Static Popular Searches Text */}
     {!hasResults && (
-      <div className="px-5 py-4 gap-5 bg-white rounded-xl flex flex-col w-full h-32 items-start justify-center">
+      <div className="px-5 py-4 gap-5 bg-white flex flex-col w-[92vw] mx-auto h-32 items-start justify-center">
         <p className="text-sm">Popular searches</p>
         <p className="text-xs">Most searched for product</p>
       </div>
