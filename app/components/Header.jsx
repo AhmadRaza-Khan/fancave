@@ -88,7 +88,13 @@ export function HeaderMenu({ collections = [] }) {
     onMouseLeave={handleMouseLeave}
   >
     <button className="font-light text-sm cursor-pointer flex items-center justify-center gap-1">
-      {title} <ChevronDown className='h-5 w-5' />
+      {title}
+    <ChevronDown
+  className={`h-5 w-5 ml-2 transition-transform duration-300 ${
+    openDropdown === name ? "rotate-180" : "rotate-0"
+  }`}
+/>
+
     </button>
 
     {openDropdown === name && (

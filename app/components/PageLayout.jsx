@@ -78,9 +78,16 @@ function CartAside({cart}) {
  */
 
 
-export function MobileMenuAside({header, publicStoreDomain, collections = []}) {
-  const {close} = useAside();
-  const {autographs, tradingCards, otherCollections, boxes, singles} = filterCollections(collections);
+export function MobileMenuAside({ header, publicStoreDomain, collections = [] }) {
+  const { close } = useAside();
+  const { autographs, tradingCards, otherCollections, boxes, singles } =
+    filterCollections(collections);
+
+  const [openKey, setOpenKey] = useState(null);
+
+  const handleToggle = (key) => {
+    setOpenKey(openKey === key ? null : key);
+  };
 
   return (
     header.menu &&
@@ -96,19 +103,49 @@ export function MobileMenuAside({header, publicStoreDomain, collections = []}) {
 
           <div className="border-gray-700 min-h-screen overflow-y-auto gap-2 flex flex-col">
             {autographs.length > 0 && (
-              <CollectionSection title="Autographs" items={autographs} close={close} />
+              <CollectionSection
+                title="Autographs"
+                isOpen={openKey === "autographs"}
+                onToggle={() => handleToggle("autographs")}
+                items={autographs}
+                close={close}
+              />
             )}
             {tradingCards.length > 0 && (
-              <CollectionSection title="Trading Cards" items={tradingCards} close={close} />
+              <CollectionSection
+                title="Trading Cards"
+                isOpen={openKey === "tradingCards"}
+                onToggle={() => handleToggle("tradingCards")}
+                items={tradingCards}
+                close={close}
+              />
             )}
             {singles.length > 0 && (
-              <CollectionSection title="Singles" items={singles} close={close} />
+              <CollectionSection
+                title="Singles"
+                isOpen={openKey === "singles"}
+                onToggle={() => handleToggle("singles")}
+                items={singles}
+                close={close}
+              />
             )}
             {boxes.length > 0 && (
-              <CollectionSection title="Boxes" items={boxes} close={close} />
+              <CollectionSection
+                title="Boxes"
+                isOpen={openKey === "boxes"}
+                onToggle={() => handleToggle("boxes")}
+                items={boxes}
+                close={close}
+              />
             )}
             {otherCollections.length > 0 && (
-              <CollectionSection title="More" items={otherCollections} close={close} />
+              <CollectionSection
+                title="More"
+                isOpen={openKey === "more"}
+                onToggle={() => handleToggle("more")}
+                items={otherCollections}
+                close={close}
+              />
             )}
           </div>
         </div>
@@ -117,40 +154,40 @@ export function MobileMenuAside({header, publicStoreDomain, collections = []}) {
   );
 }
 
-function CollectionSection({title, items, close}) {
-    const [openDrop , setOpenDrop] = useState(false)
-  return (
-        <div className="relative inline-block w-full lg:hidden">
-          <button
-            onClick={() => setOpenDrop(!openDrop)}
-            className="w-full cursor-pointer flex justify-between items-center py-2 text-lg font-bold text-black"
-          >
-            {title}
-            <ChevronDown
-             className={`w-6 h-6 ml-2 transition-transform duration-200 ${openDrop ? "rotate-180" : ""}`}
-            />
-          </button>
 
-          {openDrop && (
-            <div className="absolute left-0 mt-2 w-full text-black bg-white rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
-              {items.map((col, index) => (
-                <NavLink
-                  to={`/collections/${col.handle}`}
-                  key={index}
-                  onClick={() => {
-                    setOpenDrop(false);
-                    close()
-                  }}
-                  className={`w-full text-nowrap flex items-center text-left px-4 py-2 text-sm hover:text-white hover:bg-black font-medium`}
-                >
-                  {col.title}
-                </NavLink>
-              ))}
-            </div>
-          )}
+function CollectionSection({ title, items, isOpen, onToggle, close }) {
+  return (
+    <div className="relative inline-block w-full lg:hidden">
+      <button
+        onClick={onToggle}
+        className="w-full cursor-pointer flex justify-between items-center py-2 text-lg font-bold text-black"
+      >
+        {title}
+        <ChevronDown
+          className={`w-6 h-6 ml-2 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {isOpen && (
+        <div className="absolute left-0 mt-2 w-full text-black bg-white rounded-md shadow-lg z-10 max-h-60 overflow-y-auto">
+          {items.map((col, index) => (
+            <NavLink
+              to={`/collections/${col.handle}`}
+              key={index}
+              onClick={() => {
+                close();
+              }}
+              className="w-full text-nowrap flex items-center text-left px-4 py-2 text-sm hover:text-white hover:bg-black font-medium"
+            >
+              {col.title}
+            </NavLink>
+          ))}
         </div>
+      )}
+    </div>
   );
 }
+
 
 
 /**
