@@ -7,7 +7,6 @@ import { ChevronDown, ChevronUp, CircleUserRound, Headphones, Search, ShoppingCa
 import SearchBar from './SearchBar';
 import { filterCollections } from '~/lib/filterCollections';
 import HeaderTop from './HeaderTop';
-import HeaderBottom from './HeaderBottom';
 /**
  * @param {HeaderProps}
  */
@@ -51,7 +50,6 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
         publicStoreDomain={publicStoreDomain}
         collections={collections}
       />
-      <HeaderBottom />
     </header>
   );
 }
@@ -89,7 +87,7 @@ export function HeaderMenu({ collections = [] }) {
     onMouseEnter={() => handleMouseEnter(name)}
     onMouseLeave={handleMouseLeave}
   >
-    <button className="font-light text-sm flex items-center justify-center gap-1">
+    <button className="font-light text-sm cursor-pointer flex items-center justify-center gap-1">
       {title} <ChevronDown className='h-5 w-5' />
     </button>
 

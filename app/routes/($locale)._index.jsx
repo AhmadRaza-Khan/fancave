@@ -10,6 +10,8 @@ import VideoSection from '~/components/VideoSection';
 import CollectionsCarousel from '~/components/CollectionsCarousel';
 import HeroSection2 from '~/components/HeroSection2';
 import Icons from '~/components/Icons';
+import NewsLetter from '~/components/NewsLetter';
+import HeaderBottom from '~/components/HeaderBottom';
 
 /**
  * @type {Route.MetaFunction}
@@ -75,6 +77,7 @@ export default function Homepage() {
   const data = useLoaderData();
   return (
     <div className="home">
+      <HeaderBottom />
       {/* <Hero /> */}
       <VideoSection />
       <CollectionsCarousel collections={data.allCollections} />
@@ -93,6 +96,7 @@ export default function Homepage() {
       {/* <OnSaleProducts collections={data.allCollections} allowedHandles={boxes} title={"Boxes on Sale"} image={'url("/boxes.jpg")'} /> */}
       {/* <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} /> */}
+      <NewsLetter />
     </div>
   );
 }

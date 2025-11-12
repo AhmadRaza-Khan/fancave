@@ -50,23 +50,6 @@ export default function Section({ collections, title }) {
       sortedCollection = collections;
   }
   sortedCollection[0].title = "New Arrivals";
-  // console.log(collections)
-
-  // function findCollectionsByWord(collections, word) {
-//   const lower = word.toLowerCase();
-
-//   return collections
-//     .filter(col =>
-//       col.products?.some(prod =>
-//         prod.title?.toLowerCase().includes(lower)
-//       )
-//     )
-//     .map(col => col.title);
-// }
-//   const collectionTitles = findCollectionsByWord(collections, "victor");
-//   console.log(collectionTitles)
-
-
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeHandle, setActiveHandle] = useState(sortedCollection[0]?.handle);
@@ -76,7 +59,7 @@ export default function Section({ collections, title }) {
   const scroll = (direction) => {
     const container = scrollRef.current;
     if (!container) return;
-    const scrollAmount = container.clientWidth * 1.08;
+    const scrollAmount = container.clientWidth * 0.78;
     container.scrollBy({
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
@@ -262,7 +245,7 @@ export default function Section({ collections, title }) {
         {!atStart && (
           <button
             onClick={() => scroll("left")}
-            className="absolute -left-5 top-[45%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-8"
+            className="absolute -left-5 cursor-pointer top-[45%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-8"
           >
             <ChevronLeft color="#000" size={22} />
           </button>
@@ -271,7 +254,7 @@ export default function Section({ collections, title }) {
         {!atEnd && (
           <button
             onClick={() => scroll("right")}
-            className="absolute -right-5 top-[45%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-8"
+            className="absolute -right-5 cursor-pointer top-[45%] -translate-y-1/2 bg-black/20 hover:bg-white shadow-md p-3 rounded-full z-8"
           >
             <ChevronRight color="#000" size={22} />
           </button>

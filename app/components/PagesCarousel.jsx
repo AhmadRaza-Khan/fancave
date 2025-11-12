@@ -92,7 +92,7 @@ export default function PagesCarousel() {
         {canScrollLeft && (
           <button
             onClick={() => scroll("left")}
-            className="absolute left-1 md:left-5 xl:left-20 2xl:left-20 lg:left-20 top-1/2 -translate-y-1/2 bg-[#0e0d0d] bg-opacity-70 hover:bg-opacity-90 text-white rounded-full p-2 z-10"
+            className="absolute cursor-pointer left-1 md:left-5 xl:left-20 2xl:left-20 lg:left-20 top-1/2 -translate-y-1/2 bg-[#0e0d0d] bg-opacity-70 hover:bg-opacity-90 text-white rounded-full p-2 z-10"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,7 @@ export default function PagesCarousel() {
         {canScrollRight && (
           <button
             onClick={() => scroll("right")}
-            className="absolute right-1 md:right-5 xl:right-20 2xl:right-20 lg:right-20 top-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-70 hover:bg-opacity-90 text-white rounded-full p-2 z-10"
+            className="absolute right-1 cursor-pointer md:right-5 xl:right-20 2xl:right-20 lg:right-20 top-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-70 hover:bg-opacity-90 text-white rounded-full p-2 z-10"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

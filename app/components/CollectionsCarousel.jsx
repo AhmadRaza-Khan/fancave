@@ -71,15 +71,19 @@ function getFallbackImage(index) {
                 className="flex bg-white flex-col cursor-pointer shadow-sm rounded-lg overflow-hidden group relative
                           min-w-2/3 sm:min-w-1/2 md:min-w-1/4 lg:min-w-1/5 xl:min-w-1/5 h-fit 2xl:min-w-1/5 mx-auto"
               >
-                <div className="absolute inset-0 hover:scale-105 bg-black/40"></div>
-                {/* Image */}
-                <div className="w-full aspect-square bg-white flex items-center justify-center overflow-hidden">
-                  <img
-                    src={imageUrl}
-                    alt={collection.title}
-                    className="w-full h-full object-contain hover:scale-105 transition-all ease-in-out duration-300"
-                  />
-                </div>
+                
+                {/* Image wrapper */}
+              <div className="w-full aspect-square bg-white flex items-center justify-center overflow-hidden relative group">
+                <img
+                  src={imageUrl}
+                  alt={collection.title}
+                  className="w-full h-full object-contain transition-transform duration-300 ease-in-out group-hover:scale-110"
+                />
+                
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/40"></div>
+              </div>
+
 
                 <div className="flex flex-col gap-3 text-white items-start justify-center h-fit w-fit absolute bottom-5 left-5">
                   <h3 className="text-sm 2xl:text-base font-semibold xl:text-base">{collection.title}</h3>
@@ -100,7 +104,7 @@ function getFallbackImage(index) {
           {!atStart && (
             <button
               onClick={() => scroll("left")}
-              className="absolute left-5 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-8 transition"
+              className="absolute left-5 cursor-pointer top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-8 transition"
             >
               <ChevronLeft color="#000" size={24} />
             </button>
@@ -109,7 +113,7 @@ function getFallbackImage(index) {
           {!atEnd && (
             <button
               onClick={() => scroll("right")}
-              className="absolute right-5 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-8 transition"
+              className="absolute right-5 top-1/2 cursor-pointer -translate-y-1/2 bg-white/80 hover:bg-white shadow-lg p-2 rounded-full z-8 transition"
             >
               <ChevronRight color="#000" size={24} />
             </button>

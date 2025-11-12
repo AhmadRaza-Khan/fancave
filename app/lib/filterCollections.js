@@ -27,7 +27,6 @@ export function filterCollections(collections){
   const boxeHandles = [
     "graded-cards",
     "pokemon",
-    "singles",
   ]
 
   const giftHandle = ["gift-cards"]

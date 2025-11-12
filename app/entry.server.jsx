@@ -1,7 +1,7 @@
-import {ServerRouter} from 'react-router';
-import {isbot} from 'isbot';
-import {renderToReadableStream} from 'react-dom/server';
-import {createContentSecurityPolicy} from '@shopify/hydrogen';
+import { ServerRouter } from 'react-router';
+import { isbot } from 'isbot';
+import { renderToReadableStream } from 'react-dom/server';
+import { createContentSecurityPolicy } from '@shopify/hydrogen';
 
 /**
  * @param {Request} request
@@ -17,11 +17,20 @@ export default async function handleRequest(
   reactRouterContext,
   context,
 ) {
-  const {nonce, header, NonceProvider} = createContentSecurityPolicy({
+  const { nonce, header, NonceProvider } = createContentSecurityPolicy({
     shop: {
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
+    fontSrc: [
+      "'self'",
+      'https://fonts.gstatic.com',
+    ],
+    styleSrc: [
+      "'self'",
+      "'unsafe-inline'",
+      'https://fonts.googleapis.com'
+    ],
   });
 
   const body = await renderToReadableStream(
@@ -42,10 +51,12 @@ export default async function handleRequest(
     },
   );
 
+  // Wait for bots to finish rendering fully
   if (isbot(request.headers.get('user-agent'))) {
     await body.allReady;
   }
 
+  // Set headers including CSP
   responseHeaders.set('Content-Type', 'text/html');
   responseHeaders.set('Content-Security-Policy', header);
 
