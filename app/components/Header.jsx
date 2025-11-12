@@ -21,9 +21,9 @@ export function Header({header, isLoggedIn, cart, publicStoreDomain, collections
       <div className='max-w-7xl mx-auto px-6 lg:px-0 xl:px-0 2xl:px-0  flex 2xl:justify-between xl:justify-between lg:justify-between xl:items-center lg:items-center 2xl:items-center'>
       <HeaderMenuMobileToggle />
 
-        <NavLink prefetch="intent" to="/" className="w-fit mr-[22vw] sm:mr-[30vw] md:mr-[32vw] 2xl:mr-0 xl:mr-0 lg:mr-0 flex mx-auto lg:mx-0 xl:mx-0 2xl:mx-0 flex-col items-center justify-center gap-1 xl:text-[10px] lg:text-[8px] md:text-[9px] sm:text-[7px] text-[7px] 2xl:text-[10px] font-thin " style={activeLinkStyle}>
+        <NavLink prefetch="intent" to="/" className="w-fit mr-[22vw] sm:mr-[30vw] md:mr-[32vw] 2xl:mr-0 xl:mr-0 lg:mr-0 flex mx-auto lg:mx-0 xl:mx-0 2xl:mx-0 flex-col items-center justify-center gap-1 xl:text-xs lg:text-[11px] 2xl:text-xs font-thin " style={activeLinkStyle}>
           <img className='lg:w-52 xl:w-60 2xl:w-60 md:w-48 sm:w-36 w-36 aspect-auto' src="/logo.png" alt={shop.name} />
-          <p className='text-nowrap font-mono hidden lg:block xl:block 2xl:block'>Trading Cards & Autographed Collectibles</p>
+          <p className='text-nowrap font-medium hidden lg:block xl:block 2xl:block'>Trading Cards & Autographed Collectibles</p>
         </NavLink>
 
       <div className='flex justify-center items-center gap-10 pb-2 pt-3'>

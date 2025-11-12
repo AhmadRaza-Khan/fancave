@@ -80,7 +80,7 @@ export default function SearchBar({setOpenSearch}) {
 
      {/* Results Section */}
 {isVisible && (
-  <div className="mt-4 2xl:w-full xl:w-full lg:w-full md:w-full w-[92vw] max-h-[60vh] bg-white rounded-b-xl overflow-y-auto scrollbar-minimal border-t z-50 absolute top-8 border-gray-200">
+  <div className="mt-4 2xl:w-full xl:w-full lg:w-full md:w-full w-[92vw] max-h-[60vh] bg-white overflow-y-auto scrollbar-minimal border-t z-50 absolute top-8 border-gray-200">
     {/* Static Popular Searches Text */}
     {!hasResults && (
       <div className="px-5 py-4 gap-5 bg-white flex flex-col w-full lg:w-full xl:w-full 2xl:w-full mx-auto h-32 items-start justify-center">
